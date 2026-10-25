@@ -2,7 +2,7 @@
 
 Die regulären Frontend-/Backendläufe auf main, Commit 33527bb, waren erfolgreich. Die neuen Fehlermeldungen betrafen Dependabot:
 
-1. Backend-CI auf dem reinen Vite-PR scheiterte bei Validate package token: PACKAGES_TOKEN fehlte. Dependabot kann normale Actions-Secrets nicht verwenden. Der Backendworkflow filtert nun auch Pull Requests nach Backend-/Builddateien. Maven verwendet bei fehlendem bisherigen PACKAGES_TOKEN den bereits vorhandenen kurzlebigen github.token mit der bestehenden packages:read-Berechtigung. Keine zusätzlichen langfristigen Secrets, kein pull_request_target und keine neuen Tokenrechte. Dependency-Submission läuft nur auf main-Push, nicht auf Bot-PRs.
+1. Backend-CI auf dem reinen Vite-PR scheiterte bei Validate package token: PACKAGES_TOKEN fehlte. Dependabot kann normale Actions-Secrets nicht verwenden. Der Backendjob prüft nun die geänderten PR-Dateien und führt Maven-Schritte nur bei Backend-/Buildänderungen aus. Der Check build-jar bleibt auch für Frontend-PRs erfolgreich vorhanden, damit Branchschutz keine dauerhaft wartenden Pflichtchecks erhält. Fehler beim Lesen der Dateiliste brechen ab und überspringen die Prüfung nicht stillschweigend. Maven verwendet bei fehlendem bisherigen PACKAGES_TOKEN den bereits vorhandenen kurzlebigen github.token mit der bestehenden packages:read-Berechtigung. Keine zusätzlichen langfristigen Secrets, kein pull_request_target und keine neuen Tokenrechte. Dependency-Submission läuft nur auf main-Push, nicht auf Bot-PRs.
 2. Der Maven-Sicherheitsupdater meldete security_update_dependency_not_found für jackson-core. Die betroffene Anwendung löste 2.22.1 über den BOM auf. Jackson-BOM und direkte Databind/Core-Versionen sind nun einheitlich 2.22.4. Core ist ausdrücklich deklariert, damit Dependabot das Koordinatenziel findet. Keine automatische Schliessung/Unterdrückung von Sicherheitswarnungen.
 
 ## Noch zu beachten
@@ -16,3 +16,4 @@ Offizielle Grundlagen:
 - [Maven-Paketberechtigungen](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)
 
 Lokal geprüft: Maven verify mit 74 erfolgreichen isolierten Tests, JAR-Build und vorhandene Deployment-/Workflow-Vertragsprüfung. Echte E-Mails und produktive Datenbanken wurden nicht verwendet. Der Zugriff eines zukünftigen Dependabot-Tokens auf das private Parent-Paket ist damit noch nicht nachgewiesen.
+
