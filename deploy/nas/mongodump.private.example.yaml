@@ -1,0 +1,4 @@
+# MongoDB Database Tools config for backup; real copy private, mode 0600.
+# Use a separate backup identity with read ONLY on basel_homefixer; no URI on command line.
+uri: ""
+

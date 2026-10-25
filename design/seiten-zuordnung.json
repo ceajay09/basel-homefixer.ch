@@ -1,0 +1,44 @@
+[
+  {
+    "file": "01-startseite.html",
+    "route": "/ und /blog",
+    "source": "My-App_Frontend/src/home/Home.tsx",
+    "status": "Bestehende Seitenstruktur; dynamische Inhalte als Platzhalter."
+  },
+  {
+    "file": "02-ueber-uns.html",
+    "route": "/aboutUs",
+    "source": "My-App_Frontend/src/home/AboutUs.tsx",
+    "status": "Bestehende Seitenstruktur und deutsche Texte; fehlendes Porträt ersetzt."
+  },
+  {
+    "file": "03-dienstleistungen.html",
+    "route": "/services",
+    "source": "My-App_Frontend/src/home/Services.tsx",
+    "status": "Enthält derzeit technische Website-Informationen. Fachliche Inhalte bitte festlegen."
+  },
+  {
+    "file": "04-kontakt.html",
+    "route": "/contactUs",
+    "source": "My-App_Frontend/src/home/ContactUs.tsx",
+    "status": "Bisherige Platzhalterseite, für die Vorlage ins Deutsche übertragen."
+  },
+  {
+    "file": "05-vermietung.html",
+    "route": "/realEstateForRent",
+    "source": "My-App_Frontend/src/home/RealEstateForRent.tsx",
+    "status": "Lokale Route enthält derzeit Kontaktinformationen; Menü der echten Website führt zu Airbnb."
+  },
+  {
+    "file": "06-tech-insights.html",
+    "route": "/techInsights",
+    "source": "My-App_Frontend/src/home/TechInsights.tsx",
+    "status": "Vorhandene Platzhalterroute, derzeit nicht im Hauptmenü."
+  },
+  {
+    "file": "07-aktuelle-beitraege.html",
+    "route": "/latestPosts",
+    "source": "My-App_Frontend/src/home/LatestPosts.tsx",
+    "status": "Vorhandene Platzhalterroute, derzeit nicht im Hauptmenü."
+  }
+]

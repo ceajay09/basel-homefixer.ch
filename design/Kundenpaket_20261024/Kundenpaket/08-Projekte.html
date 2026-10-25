@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="design-source" content="My-App_Frontend/src/home/Projects.tsx">
+    <title>Projekte – Basel Home Fixer</title>
+    <style>
+        /* DESIGNWERTE: Farben, Schrift, Breite und Abstände hier ändern. Alle Werte sind CSS, keine MUI-Abstandseinheiten. */
+        :root {
+            --farbe-akzent: #2d5a3d;
+            --farbe-text: #202124;
+            --farbe-nebentext: #5f6368;
+            --farbe-hintergrund: #fff;
+            --farbe-box: #fff;
+            --farbe-flaeche: #f2f3f5;
+            --farbe-linie: #dadce0;
+            --farbe-gold: #d4a574;
+            --schrift: Arial, Helvetica, sans-serif;
+            --schrift-basis: 16px;
+            --seitenbreite: 1152px;
+            --abstand: 24px;
+            --box-innenabstand: 16px;
+            --rundung: 6px;
+            --schatten: 0 3px 10px #00000020;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background: var(--farbe-hintergrund);
+            color: var(--farbe-text);
+            font: var(--schrift-basis)/1.6 var(--schrift);
+        }
+        a {
+            color: var(--farbe-akzent);
+            text-underline-offset: 3px;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            color: var(--farbe-gold);
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        h1, h2, h3, p {
+            margin-top: 0;
+        }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+        h3 {
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+        .container {
+            width: min(var(--seitenbreite), calc(100% - 40px));
+            margin-inline: auto;
+        }
+        /* ===== HEADER - STICKY MIT SCROLL-HIDE ===== */
+        header {
+            background-color: var(--farbe-hintergrund);
+            border-bottom: 1px solid var(--farbe-linie);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-out;
+            width: 100%;
+        }
+        header.hide {
+            transform: translateY(-100%);
+        }
+        body {
+            padding-top: 85px;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--farbe-akzent);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .navigation {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .navigation a {
+            color: var(--farbe-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .navigation a[aria-current=page] {
+            color: var(--farbe-akzent);
+            font-weight: 700;
+        }
+        .navigation a:hover {
+            color: var(--farbe-gold);
+        }
+        .language {
+            font-size: 0.8rem;
+            color: var(--farbe-nebentext);
+            white-space: nowrap;
+        }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--farbe-akzent) 0%, #4a7f5a 100%);
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 500;
+        }
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            background: var(--farbe-hintergrund);
+            padding: 56px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--farbe-linie);
+        }
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .about-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--farbe-text);
+            margin-bottom: 24px;
+        }
+        .about-title .accent {
+            color: var(--farbe-akzent);
+        }
+        .about-text {
+            color: var(--farbe-nebentext);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: left;
+            margin: 0;
+        }
+        main {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .box {
+            background: var(--farbe-box);
+            padding: var(--box-innenabstand);
+            border-radius: var(--rundung);
+            box-shadow: var(--schatten);
+            min-width: 0;
+        }
+        .stack > * + * {
+            margin-top: var(--abstand);
+        }
+        .center {
+            text-align: center;
+        }
+        .muted {
+            color: var(--farbe-nebentext);
+        }
+        /* ===== PROJECT GRID ===== */
+        .grid-projekte {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--abstand);
+            margin-bottom: var(--abstand);
+        }
+        .projekt-karte {
+            background: var(--farbe-box);
+            border-radius: var(--rundung);
+            overflow: hidden;
+            box-shadow: var(--schatten);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .projekt-karte:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+        .projekt-bild {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--farbe-akzent) 0%, #4a7f5a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 64px;
+            overflow: hidden;
+            position: relative;
+        }
+        .projekt-bild img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .projekt-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: var(--farbe-akzent);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .projekt-inhalt {
+            padding: var(--box-innenabstand);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .projekt-meta {
+            font-size: 0.8rem;
+            color: var(--farbe-nebentext);
+            margin-bottom: 10px;
+        }
+        .projekt-jahr {
+            color: var(--farbe-gold);
+            font-weight: 600;
+        }
+        .projekt-titel {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--farbe-text);
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+        .projekt-beschreibung {
+            color: var(--farbe-nebentext);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: var(--box-innenabstand);
+            flex: 1;
+        }
+        .projekt-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: var(--box-innenabstand);
+            padding-bottom: var(--box-innenabstand);
+            border-bottom: 1px solid var(--farbe-linie);
+        }
+        .projekt-stat {
+            text-align: center;
+        }
+        .projekt-stat-wert {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--farbe-gold);
+        }
+        .projekt-stat-label {
+            font-size: 0.75rem;
+            color: var(--farbe-nebentext);
+            text-transform: uppercase;
+        }
+        .projekt-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .projekt-tag {
+            background-color: var(--farbe-flaeche);
+            color: var(--farbe-akzent);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .projekt-tag:hover {
+            background-color: var(--farbe-gold);
+            color: var(--farbe-text);
+        }
+        .projekt-link {
+            color: var(--farbe-akzent);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding-bottom: 2px;
+            border-bottom: 2px solid var(--farbe-gold);
+            display: inline-block;
+        }
+        .projekt-link:hover {
+            color: var(--farbe-gold);
+        }
+        /* ===== FILTER ===== */
+        .projekt-filter {
+            background: var(--farbe-flaeche);
+            padding: var(--box-innenabstand);
+            border-radius: var(--rundung);
+            margin-bottom: var(--abstand);
+            box-shadow: var(--schatten);
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 14px;
+            border: 1px solid var(--farbe-linie);
+            background: var(--farbe-box);
+            color: var(--farbe-text);
+            border-radius: var(--rundung);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--farbe-akzent);
+            color: #fff;
+            border-color: var(--farbe-akzent);
+        }
+        /* ===== STATS ===== */
+        .grid-three {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: var(--abstand);
+        }
+        .stat-card {
+            text-align: center;
+            padding: var(--box-innenabstand);
+            background: var(--farbe-flaeche);
+            border-radius: var(--rundung);
+            box-shadow: var(--schatten);
+        }
+        .stat-wert {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--farbe-gold);
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            color: var(--farbe-nebentext);
+            font-weight: 500;
+        }
+        /* ===== BOOKING SECTION ===== */
+        .booking-section {
+            background: linear-gradient(135deg, var(--farbe-akzent) 0%, #4a7f5a 100%);
+            padding: 60px 0;
+            text-align: center;
+            margin: 60px 0 0 0;
+        }
+        .booking-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .booking-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .booking-content p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 0 32px 0;
+        }
+        .booking-btn {
+            display: inline-block;
+            background-color: var(--farbe-gold);
+            color: var(--farbe-akzent);
+            padding: 14px 32px;
+            border-radius: var(--rundung);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--farbe-gold);
+        }
+        .booking-btn:hover {
+            background-color: transparent;
+            color: #fff;
+        }
+        /* ===== FOOTER ===== */
+        .site-footer {
+            background: #2a2a2a;
+            color: #e8e8e8;
+            padding: 60px 0;
+            margin-top: 0;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-column h3 {
+            color: var(--farbe-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+        }
+        .footer-column p {
+            margin: 0 0 12px 0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .footer-column a {
+            color: #e8e8e8;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .footer-column a:hover {
+            color: var(--farbe-gold);
+        }
+        .footer-divider {
+            border-top: 1px solid #444;
+            margin-bottom: 30px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        .footer-bottom a {
+            color: #999;
+            margin: 0 8px;
+        }
+        .footer-bottom a:hover {
+            color: var(--farbe-gold);
+        }
+        /* ===== TEMPLATE NOTE ===== */
+        .template-note {
+            background: #eef5ff;
+            color: #243f64;
+            border-bottom: 1px solid #cfdef3;
+            padding: 10px 20px;
+            font: 13px/1.5 Arial, sans-serif;
+        }
+        .template-note a {
+            color: inherit;
+        }
+        /* ===== MOBIL ===== */
+        @media (max-width: 899px) {
+            .grid-projekte,
+            .grid-three {
+                grid-template-columns: 1fr;
+            }
+            .grid-three {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .header-content {
+                gap: 20px;
+            }
+            .navigation {
+                gap: 20px;
+                order: 3;
+                width: 100%;
+                margin-top: 12px;
+                justify-content: flex-start;
+            }
+            header .container {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .brand {
+                order: 1;
+            }
+            .language {
+                order: 2;
+            }
+            .container {
+                width: calc(100% - 32px);
+            }
+            .filter-buttons {
+                justify-content: flex-start;
+            }
+            .hero {
+                padding: 60px 0 30px;
+            }
+            .about-section {
+                padding: 40px 0;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .booking-section {
+                padding: 40px 0;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding-top: 75px;
+            }
+            header {
+                padding: 16px 0;
+            }
+            .container {
+                width: calc(100% - 16px);
+            }
+            .box, .projekt-filter {
+                padding: var(--abstand);
+            }
+            .projekt-bild {
+                height: 160px;
+                font-size: 48px;
+            }
+            .projekt-stats {
+                grid-template-columns: 1fr;
+            }
+            .filter-buttons {
+                flex-direction: column;
+            }
+            .filter-btn {
+                width: 100%;
+            }
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .navigation a {
+                padding: 8px 0;
+            }
+            .hero {
+                padding: 40px 0 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .about-section {
+                padding: 32px 0;
+            }
+            .about-title {
+                font-size: 1.1rem;
+            }
+            .booking-content h2 {
+                font-size: 1.3rem;
+            }
+            .booking-content p {
+                font-size: 0.9rem;
+            }
+        }
+        @media print {
+            .template-note {
+                display: none;
+            }
+            .box {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="template-note">
+        Designvorlage · Projekte · <a href="index.html">Zur Übersicht</a> · <a href="ANLEITUNG.html">Anleitung</a><br>
+        Diese Hinweisleiste gehört nicht zum Website-Design.
+    </aside>
+    <!-- BEREICH: shared.header | React: Header.tsx + Layout.tsx -->
+    <header id="shared-header" data-design-id="shared.header">
+        <div class="container">
+            <div class="header-content">
+                <a class="brand" href="01-startseite.html">Basel Home Fixer</a>
+                <nav class="navigation" aria-label="Hauptnavigation">
+                    <a href="01-startseite.html">Startseite</a>
+                    <a href="03-dienstleistungen.html">Dienstleistungen</a>
+                    <a href="02-ueber-uns.html">Über Uns</a>
+                    <a href="08-projekte.html" aria-current="page">Projekte</a>
+                    <a href="07-blog.html">Blog</a>
+                    <a href="04-kontakt.html">Kontakt</a>
+                </nav>
+                <span class="language">DE / EN</span>
+            </div>
+        </div>
+    </header>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero" data-design-id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Projekte</h1>
+                <p>Von Planung bis Umsetzung – wir realisieren Ihre Wohnträume mit Handwerk und Innovation.</p>
+            </div>
+        </div>
+    </section>
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about-section" id="about" data-design-id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="about-title">Über unsere <span class="accent">Projekte</span></h2>
+                <p class="about-text">Hier präsentieren wir eine Auswahl unserer erfolgreichsten Renovierungs- und Immobilienmanagement-Projekte. Von modernen Küchenumbauten bis zu intelligenten Smart-Home-Integrationen – entdecken Sie, wie wir Wohnträume Realität werden lassen. Jedes Projekt erzählt eine Geschichte von Handwerk, Planung und unserem Engagement für höchste Qualität.</p>
+            </div>
+        </div>
+    </section>
+    <main class="container" id="projects-main" data-design-id="projects.main">
+        <div class="stack">
+            <!-- BEREICH: projects.filter -->
+            <section id="projects-filter" data-design-id="projects.filter" class="projekt-filter">
+                <h3 style="margin: 0 0 12px 0; font-size: 0.9rem; color: var(--farbe-nebentext);">Nach Kategorie filtern:</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">Alle</button>
+                    <button class="filter-btn" data-category="kueche">Küchen</button>
+                    <button class="filter-btn" data-category="elektrik">Elektrik</button>
+                    <button class="filter-btn" data-category="fenster">Fenster</button>
+                    <button class="filter-btn" data-category="balkon">Balkon</button>
+                    <button class="filter-btn" data-category="heizung">Heizung</button>
+                </div>
+            </section>
+            <!-- BEREICH: projects.grid -->
+            <div id="projects-grid" data-design-id="projects.grid" class="grid-projekte">
+
+                <!-- PROJEKT 1: KÜCHENMODERNISIERUNG ===== -->
+                <article class="projekt-karte" data-category="kueche">
+                    <div class="projekt-bild">
+                        <img src="assets/Küche.jpg" alt="Küchenmodernisierung Projekt">
+                        <span class="projekt-badge">2026</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">Juni 2026</span> · 📍 Unteres Birstal (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Küchenmodernisierung – Gas zu Elektrizität</h3>
+                        <p class="projekt-beschreibung">
+                            Komplette Renovierung einer 25 m² Küche mit Umstellung von Gas auf Elektrizität. Neue Elektroinstallation, Wasseranschlüsse und aufwendige Gips-Schlitzarbeiten. Die Küche mit zwei Bereichen (4,5 Meter) wurde mit elegantem schwarzem Stein optimiert, um maximale Funktionalität in einem engen Raum zu erreichen.
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">25 m²</div>
+                                <div class="projekt-stat-label">Fläche</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">4-6 Mo.</div>
+                                <div class="projekt-stat-label">Dauer</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Küche</span>
+                            <span class="projekt-tag">Licht</span>
+                            <span class="projekt-tag">Design</span>
+                            <span class="projekt-tag">Elektrik</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+                <!-- PROJEKT 2: BALKONVERGLASUNG ===== -->
+                <article class="projekt-karte" data-category="balkon">
+                    <div class="projekt-bild">
+                        <img src="assets/Balcony.jpg" alt="Balkonverglasung Projekt">
+                        <span class="projekt-badge">2023</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">August 2023</span> · 📍 Allschwil (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Balkonverglasung – Nahtlose Ausführung</h3>
+                        <p class="projekt-beschreibung">
+                            Umwandlung eines offenen Balkons in einen wettergeschützten Raum. Falt-/Slap Schiebebalkonglas mit 8mm Extrastärke aufgrund der windexponierten Fläche. Fliesenboden mit 40mm XPS-Isolation. Gesamtkonzept und Projektplanung in Zusammenarbeit mit Hersteller in Riga, Lettland. Vergrösserter nutzbarer Wohnraum mit professionellen Ergebnissen.
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">12 m²</div>
+                                <div class="projekt-stat-label">Fläche</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">2-4 Mon</div>
+                                <div class="projekt-stat-label">Dauer</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Balkon</span>
+                            <span class="projekt-tag">Fenster</span>
+                            <span class="projekt-tag">Design</span>
+                            <span class="projekt-tag">Erweiterung</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+                <!-- PROJEKT 3: HEIZSYSTEMMODERNISIERUNG ===== -->
+                <article class="projekt-karte" data-category="heizung">
+                    <div class="projekt-bild">
+                        <img src="assets/Moderne_Heizung.jpg" alt="Heizsystemmodernisierung Projekt">
+                        <span class="projekt-badge">2024</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">September 2024</span> · 📍 Allschwil (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Heizsystemmodernisierung – Technische Exzellenz</h3>
+                        <p class="projekt-beschreibung">
+                            Umfassende Modernisierung der Heizsysteme über 2 Wohnhäuser mit insgesamt 18 Wohnungen. Ersatz alter Heizsysteme durch moderne Wärmepumpen mit Wärmespeicher und Heizverteilern. Nachrüstung von Wärmezählern in allen Wohnungen für Abrechnung nach dem Verursacherprinzip. Spezielle technische Herausforderungen durch Wärmemängebedarfs-Kalkulation für Warmwasser gelöst. Komplexe Mehrfamilienhaus-Koordination mit STWEG-Verwaltung.
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">18 Whg.</div>
+                                <div class="projekt-stat-label">Wohnungen</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">4-8 Mo.</div>
+                                <div class="projekt-stat-label">Dauer</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Heizung</span>
+                            <span class="projekt-tag">Energie</span>
+                            <span class="projekt-tag">Mehrfamilienhaus</span>
+                            <span class="projekt-tag">Modernisierung</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+                <!-- PROJEKT 4: ELEKTRORENOVATION + SMART HOME ===== -->
+                <article class="projekt-karte" data-category="elektrik">
+                    <div class="projekt-bild">
+                        <img src="assets/Elektro.jpg" alt="Elektrorenovation Smart Home Projekt">
+                        <span class="projekt-badge">2022</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">Januar 2022</span> · 📍 Allschwil (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Komplette Elektrorenovation + Smart Home</h3>
+                        <p class="projekt-beschreibung">
+                            Vollständige Erneuerung der Elektroinstallation in einer 80 m² Wohnung mit modernem Smart-Home-System. Neue hochwertige Elektroverteilung, intelligente Schalter (Feller Edizio Due), Lichtsteuersystem und Smart-Home-Integration. Alle Steckdosen auf Doppeldosen aufgespritzt. Zusätzliche Nachrüstung von elektrischen Raumthermostaten für zimmerindividuelle Steuerung. Bewältigung der erhöhten Anforderungen moderner Elektroinstallationen (deutlich mehr Kabel als früher erforderlich).
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">80 m²</div>
+                                <div class="projekt-stat-label">Fläche</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">CHF 15k</div>
+                                <div class="projekt-stat-label">Investition</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Elektrik</span>
+                            <span class="projekt-tag">Smart Home</span>
+                            <span class="projekt-tag">Modernisierung</span>
+                            <span class="projekt-tag">Umbau</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+                <!-- PROJEKT 5: ENERGIESPARENDE HAUSEINGANGS-TÜREN ===== -->
+                <article class="projekt-karte" data-category="fenster">
+                    <div class="projekt-bild">
+                        <img src="assets/Gaustüre.jpg" alt="Energiesparende Hauseingangs-Tür Projekt">
+                        <span class="projekt-badge">2022</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">März 2022</span> · 📍 Münchenstein (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Energiesparende Hauseingangs-Türen</h3>
+                        <p class="projekt-beschreibung">
+                            Einbau einer 3-fach verglasten Eingangstür in einer denkmalgeschützten Altbauwohnung. Bezug direkt beim Hersteller für optimale Anpassung. Einbau in massive Steinwand unter Berücksichtigung der Denkmalschutz-Anforderungen. Moderne Energieeffizienz trifft auf historische Architektur – eine anspruchsvolle Kombination, die erfolgreich bewältigt wurde.
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">1 Tür</div>
+                                <div class="projekt-stat-label">3-Fach Verglasung</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">6 Wo.</div>
+                                <div class="projekt-stat-label">Dauer</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Fenster</span>
+                            <span class="projekt-tag">Türen</span>
+                            <span class="projekt-tag">Energiesparen</span>
+                            <span class="projekt-tag">Altbau</span>
+                            <span class="projekt-tag">Denkmalschutz</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+                <!-- PROJEKT 6: RAUMTHERMOSTATE BODENHEIZUNG + SMART HOME ===== -->
+                <article class="projekt-karte" data-category="heizung">
+                    <div class="projekt-bild">
+                        <img src="assets/Bodenheizung.jpg" alt="Raumthermostate Bodenheizung Smart Home Projekt">
+                        <span class="projekt-badge">2026</span>
+                    </div>
+                    <div class="projekt-inhalt">
+                        <div class="projekt-meta">
+                            <span class="projekt-jahr">Februar 2026 & April 2024</span> · 📍 Binningen & Allschwil (Baselland)
+                        </div>
+                        <h3 class="projekt-titel">Nachrüsten Raumthermostate für Bodenheizung + Smart Home</h3>
+                        <p class="projekt-beschreibung">
+                            Nachrüstung von 15 Funk-Raumthermostaten mit Smart-Home-Schnittstelle über zwei Objekte: Objekt 1 (Haus mit 2 Stockwerken, 2 Heizverteiler, 9 Heizkreisläufe) und Objekt 2 (Wohnung mit 6 Heizkreisläufen). Stromanschluss für Heizverteiler unterputz ohne sichtbare Kabel installiert – eine anspruchsvolle Herausforderung. Smart-Home-Integration bietet hohen Mehrwert durch Automatisierung und Vernetzung mit anderen Smart-Home-Systemen. Zimmerindividuelle Temperatursteuerung für optimale Energieeffizienz.
+                        </p>
+                        <div class="projekt-stats">
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">15 Therm.</div>
+                                <div class="projekt-stat-label">Raumthermostate</div>
+                            </div>
+                            <div class="projekt-stat">
+                                <div class="projekt-stat-wert">CHF 1.6k</div>
+                                <div class="projekt-stat-label">Investition</div>
+                            </div>
+                        </div>
+                        <div class="projekt-tags">
+                            <span class="projekt-tag">Heizung</span>
+                            <span class="projekt-tag">Raumthermostat</span>
+                            <span class="projekt-tag">Bodenheizung</span>
+                            <span class="projekt-tag">Smart Home</span>
+                            <span class="projekt-tag">Energiesparen</span>
+                            <span class="projekt-tag">Modernisierung</span>
+                        </div>
+                        <a href="#" class="projekt-link">Details ansehen →</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- BEREICH: projects.stats -->
+            <section id="projects-stats" data-design-id="projects.stats" class="box">
+                <h2 class="center">Zahlen & Erfolge</h2>
+                <div class="grid-three" style="margin-top: var(--abstand);">
+                    <div class="stat-card">
+                        <div class="stat-wert">20+</div>
+                        <div class="stat-label">Projekte abgeschlossen</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-wert">40+</div>
+                        <div class="stat-label">Zufriedene Kunden</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-wert">16</div>
+                        <div class="stat-label">Jahre Erfahrung</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- ===== BOOKING SECTION ===== -->
+    <section class="booking-section" id="booking" data-design-id="booking">
+        <div class="container">
+            <div class="booking-content">
+                <h2>Bereit für Ihr nächstes Projekt?</h2>
+                <p>Kontaktieren Sie uns für eine kostenlose, personalisierte Beratung – unverbindlich, ohne versteckte Kosten.</p>
+                <a href="04-kontakt.html" class="booking-btn">Kostenlose Erstberatung buchen</a>
+            </div>
+        </div>
+    </section>
+    <!-- BEREICH: shared.footer | React: Footer.tsx -->
+    <footer id="shared-footer" class="site-footer" data-design-id="shared.footer">
+        <div class="container">
+            <div class="footer-container">
+                <!-- Spalte 1: Über uns -->
+                <div class="footer-column">
+                    <h3>Basel Home Fixer</h3>
+                    <p><strong>Projektmanager & Zertifizierter Elektroinstallateur</strong></p>
+                    <p>16 Jahre Erfahrung in Wohnungsrenovationen</p>
+                    <p style="margin-top: 16px;">Spezialgebiete: Heizsysteme, Küchen, Bodenbeläge, Badezimmer, Smart Home</p>
+                </div>
+                <!-- Spalte 2: Kontakt -->
+                <div class="footer-column">
+                    <h3>Kontakt</h3>
+                    <p><strong>Pascal Jaquiéry</strong></p>
+                    <p><strong>Divine Mon</strong></p>
+                    <a href="mailto:baselhomefixer@gmail.com">📧 baselhomefixer@gmail.com</a>
+                    <p style="margin: 12px 0 0 0;">📞 +41 76 205 92 85</p>
+                    <p style="margin: 8px 0 0 0;">📍 Basel, Schweiz</p>
+                </div>
+                <!-- Spalte 3: Folgen Sie uns -->
+                <div class="footer-column">
+                    <h3>Folgen Sie uns</h3>
+                    <p>Instagram: @basel-homefixer</p>
+                    <a href="#">🌐 www.basel-homefixer.ch</a>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                © 2026 Basel Home Fixer. Alle Rechte vorbehalten. |
+                <a href="#">Datenschutz</a> |
+                <a href="#">Impressum</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // ===== HEADER SCROLL HIDE LOGIC =====
+        const header = document.getElementById('shared-header');
+        const aboutSection = document.getElementById('about');
+        let lastScrollTop = 0;
+        let headerHidden = false;
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Prüfe ob wir im About-Bereich sind
+            const aboutRect = aboutSection.getBoundingClientRect();
+            const isInAboutSection = aboutRect.top < 100;
+            // Header verstecken wenn:
+            // 1. Wir nach unten scrollen UND
+            // 2. Wir im About-Bereich sind UND
+            // 3. Header ist nicht bereits versteckt
+            if (scrollTop > lastScrollTop && isInAboutSection && !headerHidden) {
+                header.classList.add('hide');
+                headerHidden = true;
+            }
+            // Header zeigen wenn wir nach oben scrollen
+            else if (scrollTop < lastScrollTop && headerHidden) {
+                header.classList.remove('hide');
+                headerHidden = false;
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+        // ===== FILTER-FUNKTIONALITÄT =====
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projektKarten = document.querySelectorAll('.projekt-karte');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const category = button.getAttribute('data-category');
+
+                projektKarten.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (category === 'all' || cardCategory === category) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

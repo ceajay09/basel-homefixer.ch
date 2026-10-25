@@ -16,6 +16,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: '127.0.0.1',
+    proxy: { '^/api/(admin|login|logout|dashboard)(/|[?]|$)': { target: process.env.ADMIN_DEV_API_TARGET || 'http://127.0.0.1:8081', changeOrigin: true }, '^/api/(projects|blog|media|content)(/|[?]|$)': { target: process.env.CONTENT_DEV_API_TARGET || 'http://127.0.0.1:8081', changeOrigin: true }, '/api/contact': { target: process.env.CONTACT_DEV_API_TARGET || 'http://127.0.0.1:8081', changeOrigin: true } },
   },
   build: {
     rollupOptions: {

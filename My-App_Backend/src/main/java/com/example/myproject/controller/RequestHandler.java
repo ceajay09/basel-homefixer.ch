@@ -1,94 +1,49 @@
 package com.example.myproject.controller;
 
-import com.example.myproject.model.Account;
 import com.example.myproject.model.Blogpost;
 import com.example.myproject.model.HomepageConfig;
-import com.example.myproject.repository.AccountRepository;
-import com.example.myproject.repository.BlogRepository;
-import com.example.myproject.service.AccountService;
+
 import com.example.myproject.service.BlogService;
 import com.example.myproject.service.HomepageConfigService;
 import com.example.myproject.service.PDFService;
 
 import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Queue;
 
-/**
- * Handles incoming HTTP requests for account management, blog operations,
- * and PDF downloads. This controller provides endpoints for registering,
- * logging in and out of accounts, retrieving account and blog information,
- * and downloading PDF resources.
- */
+/** Public legacy blog, homepage and PDF integrations. Authentication is handled by AuthController. */
 @RestController
 @CrossOrigin(origins = { "https://basel-homefixer.ch", "http://localhost:5173" })
 @PropertySource("classpath:application.properties")
 public class RequestHandler {
 
-    private static final Logger logger = LogManager.getLogger(RequestHandler.class);
-    private final AccountRepository accountRepository;
-    private final AccountService accountService;
-    private final BlogRepository blogRepository;
     private final PDFService pdfService;
     private final BlogService blogService;
     private final HomepageConfigService homepageConfigService;
 
-    public RequestHandler(AccountRepository accountRepository,
-            AccountService accountService,
-            BlogRepository blogRepository,
-            PDFService pdfService,
+    public RequestHandler(PDFService pdfService,
             BlogService blogService,
             HomepageConfigService homepageConfigService) {
-        this.accountRepository = accountRepository;
-        this.accountService = accountService;
-        this.blogRepository = blogRepository;
+
         this.pdfService = pdfService;
         this.blogService = blogService;
         this.homepageConfigService = homepageConfigService;
     }
 
-    @PostMapping(path = "api/register", produces = "application/json")
-    public ResponseEntity<String> registerUser(@RequestBody Map<String, String> request) {
-        logger.info("Registering new user.");
-        return accountService.registerUser(request);
-    }
-
-    @PostMapping(path = "api/login", produces = "application/json")
-    public ResponseEntity<String> loginUser(@RequestBody Map<String, String> request) {
-        return accountService.loginUser(request);
-    }
-
-    @PostMapping(path = "api/logout", produces = "application/json")
-    public ResponseEntity<Map<String, Object>> logoutUser(@RequestHeader("Authorization") String token) {
-        return accountService.logoutUser(token);
-    }
-
-    @GetMapping(path = "api/account/{id}", produces = "application/json") // TODO: in getaccount umbenennen
-    public Account getAccountById(@PathVariable String id) { // TODO: Logger?
-        return accountRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping(path = "api/dashboard", produces = "application/json")
-    public ResponseEntity<Account> getAccountInfoByToken(Authentication authentication) {
-        return accountService.getAccountInfoByToken(authentication);
-    }
-
     @GetMapping(path = "api/blogpost/{id}", produces = "application/json") // TODO: Logger? //TODO: in getblog
                                                                            // umbenennen
     public Blogpost getBlogpostById(@PathVariable String id) {
-        return blogRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return blogService.getPublishedById(id);
     }
 
     @GetMapping(path = "api/getBlogposts", produces = "application/json") // TODO: Logger? TODO: Errorhandling

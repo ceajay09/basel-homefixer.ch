@@ -1,0 +1,7 @@
+*
+!Dockerfile
+!target/
+target/*
+!target/release/
+target/release/*
+!target/release/app.jar

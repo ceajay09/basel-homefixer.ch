@@ -1,0 +1,24 @@
+Ich möchte das Design meiner Website überarbeiten. Im Anhang ist eine HTML-Designvorlage der betreffenden Seite.
+
+Meine Wünsche:
+- Stil / Wirkung: [z. B. freundlich, hochwertig, übersichtlich]
+- Farben: [Wunsch oder „bitte vorschlagen“]
+- Schrift: [Wunsch oder „bitte vorschlagen“]
+- Anordnung / Bilder / Abstände: [meine Wünsche]
+- Texte: [behalten oder gewünschte Änderungen]
+- Auf dem Handy: [Wünsche oder „sinnvoll untereinander anordnen“]
+
+Bitte bearbeite die angehängte HTML-Datei und gib mir die VOLLSTÄNDIGE geänderte Datei als herunterladbare .html-Datei zurück, keine einzelnen Codeausschnitte.
+Wenn du keine Datei bereitstellen kannst, gib den vollständigen HTML-Code in genau einem Codeblock aus und erkläre kurz, wie ich ihn als .html speichere.
+
+Vorgaben:
+1. Die Datei muss sich ohne Installation direkt im Browser öffnen lassen. CSS bleibt in der HTML-Datei. Keine Frameworks, externen Schriften, CDNs, API-Aufrufe oder Build-Schritte hinzufügen.
+2. Erhalte Dateinamen, lokale Navigationslinks und die Zuordnung über data-design-id nach Möglichkeit. Neue Bereiche dürfen eigene eindeutige IDs bekommen. Benenne entfernte oder neu hinzugefügte Bereiche in deiner Antwort.
+3. Farben, Schrift, Abstände, Rundungen und Breiten möglichst über die vorhandenen CSS-Variablen am Dateianfang einstellen. Anordnung mit Grid oder Flexbox statt fester Bildschirmkoordinaten umsetzen.
+4. Desktop und Handy berücksichtigen. Auf 390px Bildschirmbreite sollen Texte und Bilder lesbar sein und die Seite nicht seitlich überlaufen.
+5. Vorhandene Bilder liegen im Unterordner assets/. Nutze relative Pfade wie assets/kueche.jpg. Liefere zusätzliche Bilddateien mit oder kennzeichne sie als noch zu ersetzende Platzhalter.
+6. Texte, Preise, Qualifikationen und Kontaktangaben nur ändern oder ergänzen, wenn ich diese angebe. Fehlende Angaben bleiben deutlich als Platzhalter erkennbar.
+7. Die Hinweisleiste mit „Designvorlage“ und inhaltliche Statushinweise sind nur Arbeitshilfen. Behalte sie erkennbar getrennt vom eigentlichen Website-Design. Instagram, Sprache und dynamische Funktionen bleiben Vorschau/Platzhalter.
+8. Teile mir kurz mit, ob du gemeinsame Elemente wie Navigation, Fusszeile, Farben oder Schrift geändert hast. Ich entscheide, ob dies für alle Seiten gelten soll.
+
+Die Vorlage ist eine Designreferenz. Der Entwickler überträgt sie später auf die bestehende React-/Material-UI-Website.

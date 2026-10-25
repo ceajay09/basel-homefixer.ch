@@ -1,0 +1,9 @@
+# Use only the isolated context produced by prepare-release.ps1. Never the repository root.
+ARG RUNTIME_IMAGE
+FROM ${RUNTIME_IMAGE}
+RUN dnf install -y curl-minimal && dnf clean all
+WORKDIR /app
+COPY app.jar /app/app.jar
+USER 10001:10001
+EXPOSE 8081
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "/app/app.jar"]

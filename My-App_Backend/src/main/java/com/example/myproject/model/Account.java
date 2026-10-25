@@ -16,10 +16,15 @@ public class Account {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String password; //TODO: Hash password before!
+	@com.fasterxml.jackson.annotation.JsonIgnore
+	private String password;
 	private String company;
 	private String phoneNumber;
 	private boolean admin;
+	@com.fasterxml.jackson.annotation.JsonIgnore
+	private String authRevision;
+	public String getAuthRevision() { return authRevision; }
+	public void setAuthRevision(String value) { authRevision = value; }
 
 	public String getID() {
 		return id;

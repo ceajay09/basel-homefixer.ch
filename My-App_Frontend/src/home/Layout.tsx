@@ -1,58 +1,48 @@
-import React, { ReactNode } from 'react';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ReactNode, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { useTranslation } from 'react-i18next';
+import theme from './theme';
+import { siteConfig } from './siteConfig';
 
-interface LayoutProps {
-  children: ReactNode;
-}
+interface LayoutProps { children: ReactNode; }
 
-// TODO: Passen Sie theme nach Bedarf an
-const defaultTheme = createTheme();
-
-const Layout = ({ children }: LayoutProps) => {
+export default function Layout({ children }: LayoutProps) {
   const { t } = useTranslation();
+  const { pathname, hash, key } = useLocation();
 
+  useEffect(() => {
+    if (!hash) return;
+    // React Router changes the URL; scroll after the destination page has mounted.
+    const frame = requestAnimationFrame(() => {
+      let id: string;
+      try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+      const target = document.getElementById(id);
+      target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      if (target?.hasAttribute('tabindex')) target.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash, key]);
   const sections = [
     { title: t('layout.sections.home'), url: '/' },
-    { title: 'Contact Us', url: '/contactUs' },
-    { title: t('layout.sections.aboutUs'), url: '/aboutUs' },
     { title: t('layout.sections.services'), url: '/services' },
-    // { title: 'Tech Insights (Coming soon)', url: '/techInsights' },
-    // { title: 'Latest Posts (Coming soon)', url: '/latestPosts' },
-    { title: t('layout.sections.realEstateForRent'), url: 'https://www.airbnb.ch/rooms/1599354106232235267?guests=1&adults=1&s=67&unique_share_id=79e58c73-d11a-4a7d-ba30-175443eedd98&source_impression_id=p3_1771681794_P3cvUeg8zLQbKYm_' },
+    { title: t('layout.sections.projects'), url: siteConfig.projectsHref },
+    { title: t('layout.sections.aboutUs'), url: '/aboutUs' },
+    { title: t('layout.sections.blog'), url: '/blog' },
+    { title: t('layout.sections.contactUs'), url: '/contactUs' },
+    { title: t('layout.sections.realEstateForRent'), url: siteConfig.airbnbUrl },
   ];
-  
-  let GitHub = {
-    name: 'GitHub',
-    icon: GitHubIcon,
-    url: 'https://github.com/ceajay09'
-  }
-  
-  let LinkedIn = {
-    name: 'LinkedIn',
-    icon: LinkedInIcon,
-    url: 'https://linkedin.com/in/cesar-jaquiéry-9215aa179'
-  }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Header title={t('layout.headerTitle')} sections={sections} />
-        <main>{children}</main>
-        <Footer
-          title={t('layout.footer.title')}
-          description={t('layout.footer.description')}
-        />
-      </Container>
+      <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Header title={siteConfig.name} sections={sections} />
+        <Box component="main" id="main-content" sx={{ flex: 1 }}>{children}</Box>
+        <Footer title={t('layout.footer.title')} description={t('layout.footer.description')} />
+      </Box>
     </ThemeProvider>
   );
-};
-
-export default Layout;
+}

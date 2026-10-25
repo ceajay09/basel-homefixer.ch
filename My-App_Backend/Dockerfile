@@ -1,12 +1,9 @@
-FROM amazoncorretto:17-alpine3.16
-MAINTAINER c.jaquiery
-RUN apk --no-cache add curl
-COPY target/my-app*.jar my-app.jar
-ENV DB_USER=null
-ENV DB_INSTANCE=null
-ENV DB_PASS=null
-ENV PROFILE=default
-ENV SPRING_LOG_LEVEL=INFO
-ENV APP_PORT=8091
-EXPOSE ${APP_PORT}/tcp
-ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar","/my-app.jar"]
+FROM amazoncorretto:17-al2023
+RUN dnf install -y curl-minimal && dnf clean all
+WORKDIR /app
+# Only the validated release copy, never target/my-app*.jar.
+COPY target/release/app.jar /app/app.jar
+ENV SPRING_CONFIG_LOCATION=file:/etc/basel-homefixer/application-production.properties
+USER 10001:10001
+EXPOSE 8081
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "/app/app.jar"]

@@ -1,0 +1,11 @@
+{
+  "targetDatabase": "basel_homefixer",
+  "source": "Reviewed repository manifests and customer originals; NOT a preview database dump",
+  "projects": ["kitchen", "balcony", "heating", "electrical", "entrance-door", "thermostats"],
+  "blogs": ["blog-kitchen-gas-electricity", "blog-heating-apartment-buildings", "blog-thermostats-underfloor-smart-home"],
+  "initialStatus": "draft",
+  "publishedAt": null,
+  "publishApproved": false,
+  "accountsFromPreview": false,
+  "reviewRequired": "Confirm facts, images and selection before a separately approved import; publication is a separate admin action"
+}

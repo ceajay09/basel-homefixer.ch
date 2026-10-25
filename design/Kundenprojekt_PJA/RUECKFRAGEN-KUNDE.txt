@@ -1,0 +1,23 @@
+Hallo Pascal
+
+Danke für die Entwürfe und Bilder! Die Designrichtung ist gut erkennbar. Ein Teil der Seiten öffnet sich über die Übersicht nicht, weil Dateinamen geändert wurden. Die Entwürfe für Startseite und Über uns sind trotzdem vorhanden. Du musst die Wünsche-Datei nicht nachträglich ausfüllen; eine kurze Antwort auf diese Punkte reicht:
+
+1. Sollen wir 01-startseite2.html und 02-ueber-uns2.html als gewünschten Stand nehmen? Die Datei „Über uns3 (corrupt)“ und Tech Insights sind unvollständig.
+
+2. Welche Seiten möchtest du veröffentlichen? Vorschlag: Startseite, Über uns, Dienstleistungen, Kontakt und Blog. Vermietung weiter als Link zu Airbnb; Tech Insights vorerst weglassen. Passt das?
+
+3. Was soll beim Klicken passieren?
+   - „Kostenlose Erstberatung buchen“: Kontaktformular, E-Mail oder eine Terminbuchung?
+   - „Projekte“: zu den Projekten auf der Startseite oder zu einer eigenen Projektseite?
+   - „Mehr erfahren“ bei einer Dienstleistung: weitere Informationen oder direkt Kontakt aufnehmen?
+
+4. Soll das Kontaktformular wirklich Nachrichten versenden? In der Vorlage wird nur eine Erfolgsmeldung angezeigt, aber nichts verschickt. Falls gewünscht: an baselhomefixer@gmail.com oder eine andere Adresse?
+
+5. Sind die sechs Blog-Karten nur Beispiele, oder sollen diese Artikel erscheinen? Die vollständigen Artikeltexte fehlen. Sollen wir zunächst die bestehenden Beiträge verwenden oder den neuen Blog erst später aufschalten?
+
+Für die spätere Veröffentlichung noch wichtig:
+- Sind Texte, Rollen, Kontaktdaten, Öffnungszeiten, Antwort innerhalb von 24 Stunden, kostenlose Beratung, Projektkosten/-dauern sowie Garantie- und Versicherungsaussagen so korrekt?
+- Darf Englisch anhand der deutschen Texte übersetzt und dir zur Prüfung geschickt werden?
+- Welche Instagram-Adresse und welche Inhalte für Impressum/Datenschutz sollen verwendet werden? Soll Instagram nur verlinkt sein oder weiterhin als Beitrag auf der Startseite erscheinen?
+
+Kurze Antworten reichen; die technischen Verlinkungen und die Vereinheitlichung des Designs kann der Entwickler übernehmen.

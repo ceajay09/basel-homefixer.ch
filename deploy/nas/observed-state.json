@@ -1,0 +1,24 @@
+{
+  "observedAt": "2026-10-25",
+  "source": "Read-only Docker metadata and public HTTPS probe; no secret values",
+  "composeProject": "basel-homefixer_portainer",
+  "composePathInsidePortainer": "/data/compose/3/docker-compose.yml",
+  "database": "DEMO",
+  "databaseOverrideKey": "spring.data.mongodb.database",
+  "legacyDbInstanceVariable": "mywebapp",
+  "previewDatabase": "basel_homefixer_preview",
+  "existingContentMount": "/volume1/webdata/basel-homefixer/data/content",
+  "plannedPrivateContentMount": "/volume1/docker/basel-homefixer/content",
+  "traefikBackendAddress": "172.21.0.2",
+  "hostWebAddress": "192.168.178.38:8095",
+  "unusedExistingSecureBinding": "192.168.178.38:8444 -> 8443",
+  "composeVersion": "2.20.1-6047-g6817716",
+  "publicHttps": "200 with authorised certificate",
+  "cloudflared": "Existing token-managed container, host networking; no configuration files mounted",
+  "notConfirmed": ["Cloudflare dashboard hostname service URL", "Exact socket peer/forwarded chain for rate limits"],
+  "oldImages": {
+    "backend": "471112833916.dkr.ecr.eu-central-1.amazonaws.com/basel-homefixer-backend@sha256:e6ccaddff8d048ba04198f6f4996823f0d0986e73d366e52fa2c1e692c38ae3c",
+    "frontend": "471112833916.dkr.ecr.eu-central-1.amazonaws.com/basel-homefixer-frontend@sha256:4ca9c72de360e357397a83d87ea280f254fd567266867628cdf464255a8f1e22",
+    "traefik": "traefik@sha256:c8a121e4bb1347e8fd52657fab12f2cb70b68f8a018895e2068f92c9e519b9c2"
+  }
+}

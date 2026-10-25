@@ -1,0 +1,53 @@
+[
+  {
+    "id": "blog-kitchen-gas-electricity",
+    "slug": "kuechenmodernisierung-gas-elektrizitaet",
+    "categories": [
+      "kitchen",
+      "renovation"
+    ],
+    "media": "kitchen-cover",
+    "title": {
+      "de": "Küchenmodernisierung: von Gas zu Elektrizität",
+      "en": "Kitchen modernisation: from gas to electricity"
+    },
+    "excerpt": {
+      "de": "Ein Projekt im Unteren Birstal verbindet die Erneuerung einer 25 m² grossen Küche mit neuen Elektro- und Wasseranschlüssen.",
+      "en": "A project in the Lower Birs Valley combines the renewal of a 25 m² kitchen with new electrical and water connections."
+    }
+  },
+  {
+    "id": "blog-heating-apartment-buildings",
+    "slug": "heizungsmodernisierung-mehrfamilienhaus",
+    "categories": [
+      "energy",
+      "renovation"
+    ],
+    "media": "heating-cover",
+    "title": {
+      "de": "Heizungsmodernisierung im Mehrfamilienhaus",
+      "en": "Heating modernisation in apartment buildings"
+    },
+    "excerpt": {
+      "de": "Zwei Wohnhäuser mit insgesamt 18 Wohnungen in Allschwil: Einblick in die Heizungsmodernisierung und die Koordination mit der STWEG-Verwaltung.",
+      "en": "Two residential buildings with 18 apartments in Allschwil: an insight into heating modernisation and coordination with the condominium management."
+    }
+  },
+  {
+    "id": "blog-thermostats-underfloor-smart-home",
+    "slug": "raumthermostate-bodenheizung-smart-home",
+    "categories": [
+      "smart-home",
+      "energy"
+    ],
+    "media": "thermostats-cover",
+    "title": {
+      "de": "Raumthermostate, Bodenheizung und Smart Home",
+      "en": "Room thermostats, underfloor heating and smart home"
+    },
+    "excerpt": {
+      "de": "15 Funk-Raumthermostate in zwei Objekten: Einblick in die Nachrüstung einer Bodenheizung und die Einbindung einer Smart-Home-Schnittstelle.",
+      "en": "15 wireless room thermostats across two properties: an insight into retrofitting underfloor heating controls with a smart home interface."
+    }
+  }
+]

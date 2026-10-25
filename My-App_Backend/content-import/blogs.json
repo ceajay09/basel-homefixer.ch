@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "projects": [],
+  "blogs": [
+    {
+      "id": "blog-kitchen-gas-electricity",
+      "slug": "kuechenmodernisierung-gas-elektrizitaet",
+      "title": {
+        "de": "Küchenmodernisierung: von Gas zu Elektrizität",
+        "en": "Kitchen modernisation: from gas to electricity"
+      },
+      "excerpt": {
+        "de": "Ein Projekt im Unteren Birstal verbindet die Erneuerung einer 25 m² grossen Küche mit neuen Elektro- und Wasseranschlüssen.",
+        "en": "A project in the Lower Birs Valley combines the renewal of a 25 m² kitchen with new electrical and water connections."
+      },
+      "description": {
+        "de": "## Ausgangslage\n\nBei diesem Projekt im Unteren Birstal (Baselland) wurde eine ältere Wohnungsküche vollständig renoviert. Die Umstellung von Gas auf Elektrizität war Teil des Vorhabens. Die Kundenunterlagen beschreiben eine Küchenfläche von 25 m².\n\n## Mehr als neue Küchenmöbel\n\nZum beschriebenen Umfang gehörten eine neue Elektroinstallation, Wasseranschlüsse sowie Gips- und Schlitzarbeiten. Die Modernisierung betraf damit auch die Infrastruktur hinter der sichtbaren Küchenausstattung.\n\nDie Küche besteht aus zwei Bereichen mit einer in den Unterlagen genannten Länge von 4,5 Metern. Schwarzer Stein ist Teil der gelieferten Gestaltungsbeschreibung. Die Gestaltung und die technischen Arbeiten gehörten zum selben Renovationsprojekt.\n\n## Einordnung der Zeitangabe\n\nDie neuere Kundenreferenz nennt 4–6 Monate. Wir bezeichnen diese Angabe als **Gesamtprojektdauer**. Sie ist keine Zusage zur Ausführungszeit eines anderen Küchenprojekts.\n\n## Einblick in das Projekt\n\nDas Titelbild stammt aus dem gelieferten Kundenpaket und zeigt die modernisierte Küche. Der Beitrag beschreibt dieses konkrete Vorhaben; Messwerte zu Energieverbrauch oder Einsparungen liegen uns dafür nicht vor.\n\n[Weitere Projekte ansehen](/projects#kitchen) · [Eigenes Vorhaben besprechen](/contactUs?service=kitchen#contact-form)\n",
+        "en": "> Translation draft for customer review. Please review the English wording before publication.\n\n## Starting point\n\nThis project in the Lower Birs Valley (Basel-Landschaft) involved the complete renovation of an older apartment kitchen. Converting from gas to electricity was part of the work. The supplied customer information describes a kitchen area of 25 m².\n\n## More than new kitchen furniture\n\nThe described scope included a new electrical installation, water connections, plaster work and wall chasing. The renovation therefore also addressed the infrastructure behind the visible kitchen fittings.\n\nThe kitchen has two sections, with a length of 4.5 metres mentioned in the supplied information. Black stone is part of the design description. The design and technical work belonged to the same renovation project.\n\n## Understanding the duration\n\nThe newer customer reference states 4–6 months. We describe this as the **total project duration**. It is not a commitment about the installation time of another kitchen project.\n\n## A project insight\n\nThe cover photograph comes from the supplied customer package and shows the modernised kitchen. This article describes that particular project. No measured energy-consumption or savings figures have been supplied.\n\n[View more projects](/projects#kitchen) · [Discuss your project](/contactUs?service=kitchen#contact-form)\n"
+      },
+      "categories": [
+        "kitchen",
+        "renovation"
+      ],
+      "coverImageId": "kitchen-cover",
+      "coverAlt": {
+        "de": "Modernisierte Küche mit neuer Ausstattung",
+        "en": "Modernised kitchen with new fittings"
+      },
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null
+    },
+    {
+      "id": "blog-heating-apartment-buildings",
+      "slug": "heizungsmodernisierung-mehrfamilienhaus",
+      "title": {
+        "de": "Heizungsmodernisierung im Mehrfamilienhaus",
+        "en": "Heating modernisation in apartment buildings"
+      },
+      "excerpt": {
+        "de": "Zwei Wohnhäuser mit insgesamt 18 Wohnungen in Allschwil: Einblick in die Heizungsmodernisierung und die Koordination mit der STWEG-Verwaltung.",
+        "en": "Two residential buildings with 18 apartments in Allschwil: an insight into heating modernisation and coordination with the condominium management."
+      },
+      "description": {
+        "de": "## Ein Vorhaben über zwei Wohnhäuser\n\nDie Kundenreferenz beschreibt eine Heizungsmodernisierung in Allschwil (Baselland). Das Projekt betraf zwei Wohnhäuser mit insgesamt 18 Wohnungen.\n\n## Technik und Wärmeverteilung\n\nDie alten Heizsysteme wurden laut Projektbeschreibung durch Wärmepumpen mit Wärmespeicher und Heizverteilern ersetzt. In allen Wohnungen wurden Wärmezähler nachgerüstet. In der Kundenbeschreibung wird dies mit einer verbrauchsbezogenen Abrechnung verbunden.\n\nEin weiterer genannter Bestandteil war die Berechnung des Wärmebedarfs für Warmwasser. Diese Angabe beschreibt den Umfang des konkreten Projekts; sie enthält keine allgemeine Dimensionierungsempfehlung für andere Gebäude.\n\n## Koordination mit der Verwaltung\n\nBei einem Vorhaben über mehrere Wohnungen gehört die Abstimmung mit der Verwaltung zum Projekt. Die gelieferten Angaben nennen ausdrücklich die Koordination mit der STWEG-Verwaltung.\n\n## Gesamtprojektdauer\n\nDie neuere Kundenreferenz nennt 4–8 Monate. Wir ordnen diese Angabe als **Gesamtprojektdauer** ein. Daraus lässt sich weder die Dauer eines Heizungsunterbruchs noch eine verbindliche Zeit für ein anderes Objekt ableiten.\n\nDas Titelbild zeigt die gelieferte Aufnahme der modernisierten Heizungsanlage. Konkrete Verbrauchsvergleiche oder gemessene Einsparungen wurden für diesen Artikel nicht bereitgestellt.\n\n[Projektübersicht öffnen](/projects#heating) · [Heizungsprojekt besprechen](/contactUs?service=heating#contact-form)\n",
+        "en": "> Translation draft for customer review. Please review the English wording before publication.\n\n## A project across two residential buildings\n\nThe supplied customer reference describes a heating modernisation in Allschwil (Basel-Landschaft). It covered two residential buildings with 18 apartments in total.\n\n## Equipment and heat distribution\n\nAccording to the project description, the old heating systems were replaced with heat pumps, thermal storage and distribution manifolds. Heat meters were retrofitted in every apartment. The customer information associates this with consumption-based billing.\n\nCalculating the heat demand for hot water was another stated part of the work. This describes the scope of this particular project and is not a sizing recommendation for other buildings.\n\n## Coordination with the management\n\nFor a project involving several apartments, coordination with the management forms part of the work. The supplied information explicitly mentions coordination with the condominium owners’ association management.\n\n## Total project duration\n\nThe newer customer reference states 4–8 months. We describe this as the **total project duration**. It does not state how long heating was interrupted or establish a binding duration for another property.\n\nThe cover image is the supplied photograph of the modernised heating system. No specific consumption comparisons or measured savings were provided for this article.\n\n[Open the project overview](/projects#heating) · [Discuss a heating project](/contactUs?service=heating#contact-form)\n"
+      },
+      "categories": [
+        "energy",
+        "renovation"
+      ],
+      "coverImageId": "heating-cover",
+      "coverAlt": {
+        "de": "Modernisierte Heizungsanlage mit Rohrleitungen",
+        "en": "Modernised heating system with pipework"
+      },
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null
+    },
+    {
+      "id": "blog-thermostats-underfloor-smart-home",
+      "slug": "raumthermostate-bodenheizung-smart-home",
+      "title": {
+        "de": "Raumthermostate, Bodenheizung und Smart Home",
+        "en": "Room thermostats, underfloor heating and smart home"
+      },
+      "excerpt": {
+        "de": "15 Funk-Raumthermostate in zwei Objekten: Einblick in die Nachrüstung einer Bodenheizung und die Einbindung einer Smart-Home-Schnittstelle.",
+        "en": "15 wireless room thermostats across two properties: an insight into retrofitting underfloor heating controls with a smart home interface."
+      },
+      "description": {
+        "de": "## Zwei Objekte, unterschiedliche Heizkreise\n\nDie gelieferten Projektinformationen beschreiben die Nachrüstung von 15 Funk-Raumthermostaten mit einer Smart-Home-Schnittstelle. Die beiden Objekte liegen in Binningen und Allschwil (Baselland).\n\nBeim ersten Objekt handelt es sich um ein Haus mit zwei Stockwerken, zwei Heizverteilern und neun Heizkreisläufen. Das zweite Objekt ist eine Wohnung mit sechs Heizkreisläufen.\n\n## Anschluss und Steuerung\n\nAls Bestandteil der Arbeiten nennen die Unterlagen einen unterputz ausgeführten Stromanschluss für die Heizverteiler ohne sichtbare Kabel. Hinzu kamen die Funk-Raumthermostate und die Smart-Home-Anbindung.\n\nDie gelieferte Beschreibung nennt die raumindividuelle Temperatursteuerung sowie die Möglichkeit der Automatisierung und Vernetzung. Welche Funktionen in einem anderen Gebäude möglich sind, muss für dessen vorhandene Installation gesondert geklärt werden. Der Beitrag enthält keine Zusage zur Kompatibilität beliebiger Systeme.\n\n## Was sich aus dem Beispiel ableiten lässt\n\nDas Projekt zeigt die Verbindung von bestehender Bodenheizung, nachgerüsteter Raumregelung und Smart-Home-Schnittstelle. Das Titelbild aus dem Kundenpaket zeigt einen Heizverteiler mit Stellgliedern und Steuerung.\n\nFür dieses Vorhaben ist in den gelieferten Angaben keine Gesamtprojektdauer hinterlegt. Deshalb nennen wir hier keine geschätzte Dauer. Ebenso liegen keine Messwerte vor, aus denen eine bestimmte Energieeinsparung abgeleitet werden könnte.\n\n[Referenzprojekt ansehen](/projects#thermostats) · [Smart-Home-Vorhaben besprechen](/contactUs?service=smart-home#contact-form)\n",
+        "en": "> Translation draft for customer review. Please review the English wording before publication.\n\n## Two properties with different heating circuits\n\nThe supplied project information describes the retrofit of 15 wireless room thermostats with a smart home interface. The two properties are in Binningen and Allschwil (Basel-Landschaft).\n\nThe first is a two-storey house with two heating manifolds and nine heating circuits. The second is an apartment with six heating circuits.\n\n## Connections and controls\n\nThe described work included concealed power connections for the heating manifolds without visible cabling. Wireless room thermostats and the smart home connection were also part of the scope.\n\nThe supplied description mentions individual room temperature control and the possibility of automation and integration. The functions available in another building must be assessed against its existing installation. This article does not promise compatibility with arbitrary systems.\n\n## What the example illustrates\n\nThe project combines existing underfloor heating, retrofitted room controls and a smart home interface. The cover photograph from the customer package shows a heating manifold with actuators and control equipment.\n\nNo total project duration was supplied for this project, so no estimated duration is stated here. No measurements were provided from which a specific energy saving could be inferred.\n\n[View the reference project](/projects#thermostats) · [Discuss smart home plans](/contactUs?service=smart-home#contact-form)\n"
+      },
+      "categories": [
+        "smart-home",
+        "energy"
+      ],
+      "coverImageId": "thermostats-cover",
+      "coverAlt": {
+        "de": "Heizverteiler der Bodenheizung mit Stellgliedern und Steuerung",
+        "en": "Underfloor heating manifold with actuators and smart control equipment"
+      },
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null
+    }
+  ],
+  "media": {
+    "kitchen-cover": {
+      "filename": "Küche.jpg",
+      "alt": {
+        "de": "Modernisierte Küche mit neuer Ausstattung",
+        "en": "Modernised kitchen with new fittings"
+      }
+    },
+    "heating-cover": {
+      "filename": "Moderne_Heizung.jpg",
+      "alt": {
+        "de": "Modernisierte Heizungsanlage mit Rohrleitungen",
+        "en": "Modernised heating system with pipework"
+      }
+    },
+    "thermostats-cover": {
+      "filename": "Bodenheizung.jpg",
+      "alt": {
+        "de": "Heizverteiler der Bodenheizung mit Stellgliedern und Steuerung",
+        "en": "Underfloor heating manifold with actuators and smart control equipment"
+      }
+    }
+  }
+}

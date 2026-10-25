@@ -1,0 +1,142 @@
+# Prepared only. Existing Portainer project name; no container is changed by this file.
+name: basel-homefixer_portainer
+services:
+  backend:
+    image: ${BACKEND_IMAGE:?Set reviewed backend commit tag or digest}
+    restart: unless-stopped
+    user: "10001:10001"
+    read_only: true
+    mem_limit: 768m
+    tmpfs:
+      - /tmp:rw,nosuid,noexec,size=128m,mode=1777
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    environment:
+      SPRING_CONFIG_LOCATION: file:/etc/basel-homefixer/application-production.properties
+      SPRING_PROFILES_ACTIVE: production
+      SPRING_DATA_MONGODB_DATABASE: basel_homefixer
+      MONGODB_URI: ${MONGODB_URI:?Set new MongoDB user restricted to basel_homefixer}
+      AUTH_JWT_SECRET_BASE64: ${AUTH_JWT_SECRET_BASE64:?Set stable private signing key}
+      AUTH_TOKEN_TTL_SECONDS: "900"
+      AUTH_PUBLIC_REGISTRATION_ENABLED: "false"
+      CONTENT_MEDIA_ROOT: /data/content/media
+      ADMIN_MEDIA_MAX_BYTES: "15728640"
+      ADMIN_MEDIA_CONCURRENT_UPLOADS: "1"
+      CONTACT_MAIL_ENABLED: ${CONTACT_MAIL_ENABLED:-false}
+      CONTACT_SMTP_HOST: smtp.gmail.com
+      CONTACT_SMTP_PORT: "587"
+      CONTACT_SMTP_SSL: "false"
+      CONTACT_SMTP_PASSWORD: ${CONTACT_SMTP_PASSWORD:-}
+      CONTACT_TRUSTED_PROXIES: ${CONTACT_TRUSTED_PROXIES:-}
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70.0 -Djava.io.tmpdir=/tmp
+    volumes:
+      - type: bind
+        source: ${OPS_RELEASE_DIR:?Set private release directory}/application-production.properties
+        target: /etc/basel-homefixer/application-production.properties
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${NAS_CONTENT_ROOT:?Set private persistent content directory}
+        target: /data/content
+        bind: {create_host_path: false}
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: basel-homefixer_portainer_backend
+      traefik.http.routers.basel-homefixer-backend.rule: Host(`basel-homefixer.ch`) && (Path(`/api`) || PathPrefix(`/api/`))
+      traefik.http.routers.basel-homefixer-backend.entrypoints: web
+      traefik.http.routers.basel-homefixer-backend.priority: "100"
+      traefik.http.services.basel-homefixer-backend.loadbalancer.server.port: "8081"
+    networks: [backend]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--max-time", "5", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "3"}}
+  frontend:
+    image: ${FRONTEND_IMAGE:?Set reviewed frontend commit tag or digest}
+    restart: unless-stopped
+    user: "101:101"
+    read_only: true
+    mem_limit: 128m
+    tmpfs: ["/tmp:rw,nosuid,noexec,size=32m,mode=1777"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: basel-homefixer_portainer_frontend
+      traefik.http.routers.basel-homefixer-frontend.rule: Host(`basel-homefixer.ch`)
+      traefik.http.routers.basel-homefixer-frontend.entrypoints: web
+      traefik.http.routers.basel-homefixer-frontend.priority: "10"
+      traefik.http.services.basel-homefixer-frontend.loadbalancer.server.port: "8082"
+    networks: [frontend]
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8082/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "3"}}
+  traefik:
+    image: traefik@sha256:c8a121e4bb1347e8fd52657fab12f2cb70b68f8a018895e2068f92c9e519b9c2
+    restart: unless-stopped
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:8095
+      - --entrypoints.web.forwardedHeaders.trustedIPs=${EDGE_TRUSTED_IPS:?Confirm exact trusted local tunnel peer addresses}
+      - --ping=true
+      - --log.level=ERROR
+      - --accesslog=true
+      - --accesslog.format=json
+      - --accesslog.fields.headers.defaultmode=drop
+    ports: ["192.168.178.38:8095:8095"]
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock:ro"]
+    networks: [traefik, frontend, backend]
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "3"}}
+  admin-setup:
+    profiles: [tools]
+    image: ${BACKEND_IMAGE:?Set reviewed backend commit tag or digest}
+    user: "10001:10001"
+    read_only: true
+    tmpfs: ["/tmp:rw,nosuid,noexec,size=32m,mode=1777"]
+    stdin_open: true
+    tty: true
+    entrypoint: ["java", "-Dloader.main=com.example.myproject.auth.AdminAccountSetupCli", "-cp", "/app/app.jar", "org.springframework.boot.loader.launch.PropertiesLauncher"]
+    command: ["--mode", "create-admin", "--database", "basel_homefixer"]
+    environment:
+      AUTH_SETUP_MONGO_URI: ${MONGODB_URI:?Set restricted basel_homefixer URI}
+    networks: [backend]
+    labels: {traefik.enable: "false"}
+  content-import:
+    profiles: [tools]
+    image: ${BACKEND_IMAGE:?Set reviewed backend commit tag or digest}
+    user: "10001:10001"
+    read_only: true
+    tmpfs: ["/tmp:rw,nosuid,noexec,size=128m,mode=1777"]
+    entrypoint: ["java", "-Djava.awt.headless=true", "-Dloader.main=com.example.myproject.content.ContentImportCli", "-cp", "/app/app.jar", "org.springframework.boot.loader.launch.PropertiesLauncher"]
+    command: ["--manifest", "/imports/reviewed.json", "--source-root", "/imports/assets", "--media-root", "/data/content/media", "--database", "basel_homefixer", "--confirm-database", "basel_homefixer"]
+    environment:
+      CONTENT_IMPORT_MONGO_URI: ${MONGODB_URI:?Set restricted basel_homefixer URI}
+    volumes:
+      - type: bind
+        source: ${OPS_RELEASE_DIR:?Set private release directory}/transfer
+        target: /imports
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${NAS_CONTENT_ROOT:?Set private content directory}
+        target: /data/content
+        bind: {create_host_path: false}
+    networks: [backend]
+    labels: {traefik.enable: "false"}
+networks:
+  frontend: {external: true, name: basel-homefixer_portainer_frontend}
+  backend: {external: true, name: basel-homefixer_portainer_backend}
+  traefik: {external: true, name: basel-homefixer_portainer_traefik}
+

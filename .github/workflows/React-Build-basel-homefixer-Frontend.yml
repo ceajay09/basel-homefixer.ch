@@ -7,13 +7,17 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
     paths:
       - 'My-App_Frontend/**'
       - '.github/workflows/React-Build-basel-homefixer-Frontend.yml'
+      - 'deploy/nas/validate.mjs'
+      - 'deploy/nas/nginx.production.conf'
+      - 'deploy/nas/compose*.yaml'
+      - 'deploy/nas/transfer/review.json'
 
 jobs:
 
@@ -37,11 +41,18 @@ jobs:
     - name: Install dependencies
       run: npm ci
       working-directory: My-App_Frontend
+    - name: Check types and run frontend tests
+      working-directory: My-App_Frontend
+      run: |
+        npm run typecheck
+        npx --no-install vitest run src/admin/admin.test.tsx src/home/blog.test.ts
+    - name: Validate deployment contracts
+      run: node deploy/nas/validate.mjs
     - name: Build frontend
-      run: npm run build --if-present
+      run: npm run build
       working-directory: My-App_Frontend
       env:
-        REACT_APP_API_URL: ${{ '' }} #Empty String
+        VITE_API_URL: ''
 
     - name: Archive Frontend Build Artefact
       uses: actions/upload-artifact@v4
@@ -50,6 +61,7 @@ jobs:
         path: My-App_Frontend/dist
 
   push-to-aws:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-react
     runs-on: ubuntu-latest
     steps:
@@ -86,14 +98,22 @@ jobs:
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: basel-homefixer-frontend
-          #IMAGE_TAG: ${{ github.sha }}
           IMAGE_TAG: dev
         run: |
+          set -euo pipefail
           cd My-App_Frontend
-          ls -la
-          echo $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-    
-
- 
+          IMAGE="$REGISTRY/$REPOSITORY"
+          COMMIT_TAG="sha-$GITHUB_SHA"
+          docker build -t "$IMAGE:$IMAGE_TAG" -t "$IMAGE:$COMMIT_TAG" .
+          docker run --rm --read-only --tmpfs /tmp:rw,nosuid,noexec,size=32m "$IMAGE:$COMMIT_TAG" -t
+          docker run -d --name frontend-ci --read-only --tmpfs /tmp:rw,nosuid,noexec,size=32m -p 127.0.0.1:18082:8082 "$IMAGE:$COMMIT_TAG"
+          trap 'docker rm -f frontend-ci >/dev/null 2>&1 || true' EXIT
+          curl --retry 10 --retry-connrefused --retry-delay 1 --fail --silent --show-error http://127.0.0.1:18082/ >/dev/null
+          for route in projects admin blog/ci-route-check; do
+            curl --fail --silent --show-error "http://127.0.0.1:18082/$route" | grep -qi '<html'
+          done
+          curl --fail --silent --show-error -D - -o /dev/null http://127.0.0.1:18082/admin | grep -qi 'cache-control: no-store'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:18082/api/projects)" = "404"
+          docker push "$IMAGE:$COMMIT_TAG"
+          docker push "$IMAGE:$IMAGE_TAG"
+          printf 'Frontend image: %s:%s\n' "$IMAGE" "$COMMIT_TAG" >> "$GITHUB_STEP_SUMMARY"

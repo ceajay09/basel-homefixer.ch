@@ -6,7 +6,7 @@ Im Projekt-Hauptordner `start-backend.bat` ausführen. Sie baut das JAR mit `mvn
 
 Der Maven-Parent `ch.cesarjaquiery:shared-backend-parent:1.0.0` muss wie bisher verfügbar sein: entweder über eine lokale Maven-Einstellung für GitHub Packages oder bereits im lokalen Maven-Repository. GitHub Actions konfiguriert diesen Zugang über `PACKAGES_TOKEN`.
 
-Wenn das originale Nachbarprojekt `shared-backend-parent` neben `Demo-Website` vorhanden ist, kann dessen Parent einmalig installiert werden. Im Backend-Ordner:
+Wenn das originale Nachbarprojekt `shared-backend-parent` neben `basel-homefixer.ch` vorhanden ist, kann dessen Parent einmalig installiert werden. Im Backend-Ordner:
 
 ```powershell
 .\mvnw.cmd -f ../../shared-backend-parent/pom.xml install -N
@@ -118,3 +118,11 @@ Our GitHub Actions workflow, defined in `build-maven.yml`, automates the process
 ## Summary
 
 My personal website is crafted to demonstrate sophisticated software development skills using state-of-the-art technologies and best practices. It aims to provide a secure, robust, and responsive user experience, showcasing my capabilities as a software developer ready to tackle challenges in the tech industry.
+
+Gemeinsame MongoDB-/Medienbasis und dynamische Projekte: siehe [CONTENT.md](CONTENT.md) für Architektur, lokalen Dry-Run, private Medienablage und die noch fehlende geschützte Kundenverwaltung.
+
+Anmeldung und Vorbereitung eines späteren Verwaltungszugangs: [AUTH.md](AUTH.md). Standardmässig keine öffentliche Registrierung und ohne serverseitigen Signaturschlüssel keine Anmeldung. Keine automatische Änderung bestehender Konten.
+
+Geschützte Backend-Verwaltung für Projekte, Blog, Medien und Startseitenauswahl: [ADMIN.md](ADMIN.md). Enthält API-Verträge, Versionskonflikte, Veröffentlichung und Uploadkonfiguration; noch keine Verwaltungsoberfläche oder NAS-Bereitstellung.
+
+Öffentliche Blogoberfläche /blog und /blog/:slug samt drei unveröffentlichten Artikelentwürfen: siehe [CONTENT.md](CONTENT.md) und content-import/blog-drafts/README.md. Anleitung zur eigenen Einrichtung eines dauerhaften Verwaltungszugangs: design/Kundenprojekt_PJA/ADMIN-ZUGANG.md.

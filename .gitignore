@@ -1,41 +1,58 @@
-# Backend
-application-dev.properties
-src/main/resources/environment-variables.env
-target
-docker-compose.yml
-docker-compose.dev.yml
-environment-variables.env
-React-Build-cesarjaquiery.ch-Frontend_alt.yml
-
-# Frontend
-# dependencies
-/node_modules
-/alt
-/.pnp
-.pnp.js
-.env.development
-.env
-# testing
-/coverage
-
-# production
-/build
+# Dependencies and generated output (all project levels)
+node_modules/
+target/
 dist/
 build/
+coverage/
+.pnp/
+.pnp.js
+*.log
+*.pid
+*.tsbuildinfo
+
+# Private local/server configuration; commit only empty examples
 .env
+.env.*
+*.env
+!*.env.example
+!.env.example
+!**/import.meta.env
+private.env
+stack.env
+release.env
+verify.private.env
+portainer-stack.env
+environment-variables.env
+application-dev.properties
+application-local.properties
+*.private.yaml
+*.private.yml
+*.private.json
+secrets/
+.ssh/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# Local legacy Compose files; reviewed deploy/nas YAML stays versionable
 docker-compose.yml
+docker-compose.dev.yml
 
-# misc
+# Archives/backups are not source; extracted references remain available to tests
+/design/*.zip
+*.tar.gz
+*.archive
+*.archive.gz
+*.bson
+
+# Existing personal/tool exclusions
+/alt/
+/.project-split/
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 TODOS.md
 public/assets/Temp.md
 _context_files.txt
 _context_tree.txt
+React-Build-cesarjaquiery.ch-Frontend_alt.yml
