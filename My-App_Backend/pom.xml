@@ -14,7 +14,7 @@
 	<name>my-app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<jackson.version>2.22.1</jackson.version>
+		<jackson.version>2.22.4</jackson.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -28,6 +28,12 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<!-- Explicit coordinate lets Dependabot locate jackson-core security updates. -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>

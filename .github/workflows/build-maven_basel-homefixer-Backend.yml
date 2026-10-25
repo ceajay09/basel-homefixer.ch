@@ -19,6 +19,7 @@ on:
     paths:
       - 'My-App_Backend/**'
       - '.github/workflows/build-maven_basel-homefixer-Backend.yml'
+      - '.github/scripts/backend-changes.cjs'
       - 'deploy/nas/PrepareJar.java'
       - 'deploy/nas/ValidateRelease.java'
       - 'design/Kundenpaket_20261024/Kundenpaket/assets/**'
@@ -28,17 +29,25 @@ jobs:
     permissions:
       contents: write
       packages: read
+      pull-requests: read
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+    - name: Determine backend changes
+      id: changes
+      run: node .github/scripts/backend-changes.cjs
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
     - name: Set up JDK 17
+      if: steps.changes.outputs.backend == 'true'
       uses: actions/setup-java@v6
       with:
         java-version: '17'
         distribution: 'corretto'
         cache: maven
     - name: Validate package token
+      if: steps.changes.outputs.backend == 'true'
       run: |
         if [ -z "$PACKAGES_TOKEN" ]; then
           echo "PACKAGES_TOKEN is empty or not available to this workflow."
@@ -46,8 +55,9 @@ jobs:
         fi
         echo "PACKAGES_TOKEN is available."
       env:
-        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN || github.token }}
     - name: Configure Maven for GitHub Packages
+      if: steps.changes.outputs.backend == 'true'
       run: |
         mkdir -p ~/.m2
         cat > ~/.m2/settings.xml <<'EOF'
@@ -76,19 +86,22 @@ jobs:
         </settings>
         EOF
       env:
-        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN || github.token }}
     - name: Build Backend with Maven
+      if: steps.changes.outputs.backend == 'true'
       run: |
           cd My-App_Backend
           mvn -B verify --file pom.xml
       env:
-        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+        PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN || github.token }}
     - name: Prepare and validate production Jar
+      if: steps.changes.outputs.backend == 'true'
       run: |
         mkdir -p My-App_Backend/target/release
         java --source 17 deploy/nas/PrepareJar.java My-App_Backend/target/my-app-0.0.1-SNAPSHOT.jar My-App_Backend/target/release/app.jar
         java --source 17 deploy/nas/ValidateRelease.java My-App_Backend/target/release/app.jar
     - name: Archive Backend Jar
+      if: steps.changes.outputs.backend == 'true'
       uses: actions/upload-artifact@v4
       with:
         name: backend-jar
@@ -96,6 +109,7 @@ jobs:
           My-App_Backend/target/release/app.jar
 
     - name: Update dependency graph
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
       with:
         directory: My-App_Backend
