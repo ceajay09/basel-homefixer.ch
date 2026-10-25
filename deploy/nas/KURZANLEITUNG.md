@@ -1,43 +1,31 @@
-> **Für deinen bisherigen Portainer-Webeditor-Stack:** [compose.portainer.yaml](compose.portainer.yaml), [kurze Einfügeschritte](PORTAINER.md). Die ausführliche compose.mvp.yaml bleibt die optionale Betreiber-/Werkzeugvariante.
+# NAS-Betrieb – kurze Checkliste
 
-# NAS-Umstellung – kurze Checkliste
+[README](../../README.md) · [Kundenanleitung](../../design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md) · [Ausführliche Betriebsanleitung](README.md)
 
-**Stand: nur vorbereitet, nichts ausgerollt.** Details, Befehle und Grenzen: [README.md](README.md).
+## Aktueller Stand · 25. Oktober 2026
 
-## Festgelegt
+- Website läuft laut Betreiber im regulären Portainer-Stack; beide Website-Adminzugänge sind eingerichtet und die Projekte veröffentlicht.
+- Datenbank: `basel_homefixer`. Demo und Vorschau bleiben separat.
+- Übernommen: sechs Projekte, drei Blogentwürfe und sechs Medien. Blogveröffentlichung bleibt eine eigene Entscheidung.
+- Aktueller NAS-Content-Mount: `/volume1/webdata/basel-homefixer/data/content` → `/data/content`. Bilder liegen unter `media/` und werden über die Medien-API ausgeliefert. Keine zusätzliche öffentliche statische Freigabe einrichten; tatsächliche Web-Station-Freigaben prüfen.
+- Externe Konfigurationsdatei: `/volume1/docker/basel-homefixer/ops/application-production.properties`.
+- Der Medien-Unterordner ist für Backend UID/GID `10001:10001` eingerichtet. Bei Pfadänderungen Rechte erneut prüfen.
+- SMTP ist laut Betreiber aktiviert; ein echter Testversand ist damit noch nicht nachgewiesen.
 
-- Produktive Datenbank: **basel_homefixer**. Vorschau bleibt separat.
-- Du und Kunde: zwei eigene Website-Konten in basel_homefixer.account, unabhängig vom technischen MongoDB-Zugang. Anleitung: [ADMIN-ZUGANG.md](../../design/Kundenprojekt_PJA/ADMIN-ZUGANG.md).
-- Öffentlicher Weg: bestehendes Cloudflare-HTTPS/Tunnel → Traefik → Frontend und /api auf derselben Domain.
-- Neue Medien privat unter /volume1/docker/basel-homefixer/content/media, nur über die Medien-API.
-- Übertragung: sechs Projekte, drei Blogartikel und sechs Bildquellen, alle zunächst Entwurf. Keine vollständige Vorschaukopie.
-- Bestehende GitHub Actions unverändert. Für diese Umstellung separat bereinigte Release-Images erforderlich.
+## Noch erledigen oder nachweisen
 
-## Vor einer Freigabe abhaken
+- [ ] Beide Sprachversionen, Bilder/Bildrechte und veröffentlichte Inhalte durch den Kunden prüfen.
+- [ ] Blogentwürfe gesondert sichten und nur bewusst veröffentlichen.
+- [ ] Kontaktversand nach ausdrücklicher Freigabe vom NAS testen; Empfang und Reply-To prüfen.
+- [ ] Tatsächliche Proxy-Kette und Cache-Regeln für `/api` und `/admin` prüfen.
+- [ ] Datenbank und Medien zusammen sichern; Wiederherstellung isoliert erproben. Private Konfiguration und stabilen Signaturschlüssel mit sichern.
+- [ ] Sicherstellen, dass der Medienordner nicht durch Web Station oder andere statische Freigaben erreichbar ist.
 
-- [ ] Cloudflare-Service-Ziel und genaue Proxy-Peers bestätigen; /api und /admin nicht öffentlich cachen.
-- [ ] Atlas-Nutzer mit readWrite nur auf basel_homefixer einrichten; eigenen Nutzer für isolierten Integrationstest verwenden.
-- [ ] Private Umgebungsdateien, stabilen JWT-Schlüssel und eingeschränkte NAS-Dateirechte vorbereiten. Mailversand zunächst aus.
-- [ ] Geprüfte Release-Images bauen und per Digest festhalten; kein automatischer Rückgriff auf :dev.
-- [ ] Echten isolierten Container-/MongoDB-/Medientest mit compose.verify.yaml bestehen, einschliesslich Entwurfsschutz und Rücknahme.
-- [ ] Inhalte/Bilder sichten; Übertragungspaket, Zielkollisionen und Dry-Run prüfen.
-- [ ] Wartungsfenster und T0-Sicherung von basel_homefixer, Dateien, Konfiguration und alten Images; isolierte Wiederherstellung erproben.
+## Spätere Softwareupdates
 
-## Erst nach ausdrücklicher Rolloutfreigabe
+1. Geprüften Code nach dem vereinbarten Git-Ablauf übernehmen. Die Pipeline veröffentlicht Images bei Push auf `main`.
+2. In Portainer die `:dev`-Images neu ziehen und den Stack aktualisieren. Ein neues ECR-Image allein ersetzt keinen laufenden Container.
+3. Frontend/Backend-Health, Anmeldung, Projekte, Bilder, Entwurfsschutz und Kontaktstatus prüfen.
+4. Datenbank-/Medienstand vor einer Rücknahme sichern. Nach Inhaltsänderungen nicht blind alte Daten zurückspielen.
 
-1. Alte öffentliche Schreib-/Lesewege im Wartungsfenster sperren; neuen Backendstand mit Entwurfsschutz bereitstellen.
-2. Genehmigte Entwurfsdaten übertragen und zwei Website-Admins interaktiv anlegen. Keine Konten oder Entwürfe unter dem alten Backend anlegen.
-3. Neues Frontend aktivieren, HTTPS, API, Bilder, Anmeldung und Entwurfssperren prüfen.
-4. Projektveröffentlichung separat bestätigen. Blogentwürfe bleiben ohne eigene Freigabe unveröffentlicht.
-5. Wartung aufheben. Gmail-Aktivierung und echter NAS-Testversand separat freigeben.
-
-## Falls etwas fehlschlägt
-
-Wartung beibehalten. Alte Images brauchen ihren passenden alten Stack und Konfiguration. Nach Datenänderungen ist ein blosser Image-Rücksprung wegen fehlendem alten Entwurfsschutz ungeeignet. Vollständige Rücknahme von DB und Dateien nur mit eigener Entscheidung; neuere Kundenänderungen vorher sichern und abgleichen.
-
-## Nachgewiesen / noch offen
-
-Nachgewiesen: lokale Vorlagen-/Policyprüfung, tatsächlicher NAS-Compose-Parser, bereinigtes Release-Archiv und Prüfsummen, Entwurfspaket und isolierter Zielcheck mit Doubles. Workflows unverändert.
-
-Offen: Image-Build und echter Container-/MongoDB-/NAS-Test, Backup/Restore, Cloudflare-Ziel/Proxy-Bestätigung, neue technische DB-Rechte und zwei Konten. Kein Deployment, Import, Mailversand, produktiver Dateieingriff oder öffentliche Veröffentlichung wurde durchgeführt.
-
+Inhaltspflege erfolgt direkt in der Verwaltung; dafür sind weder Import noch neue Images erforderlich. Import bleibt ein Übertragungswerkzeug. Technische Details und Rücknahme: [Betriebsanleitung](README.md), [Pipeline](PIPELINE.md), [Adminzugänge](../../design/Kundenprojekt_PJA/ADMIN-ZUGANG.md).

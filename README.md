@@ -1,34 +1,45 @@
-# basel-homefixer.ch – Einstieg und Initialisierung
+# basel-homefixer.ch
 
-**Stand 25. Oktober 2026:** MVP lokal implementiert; regulärer NAS-Betrieb vorbereitet, noch nicht ausgerollt. Keine produktiven Konten/Daten angelegt oder verändert. [Aktueller Prüfbericht](design/Kundenprojekt_PJA/MVP-ABNAHME.md).
+Website und Inhaltsverwaltung für Basel Homefixer.
 
-## Die wichtigsten Entscheidungen
+**Aktueller Stand · 25. Oktober 2026:** Laut Betreiber läuft die Website auf dem NAS, beide Verwaltungszugänge sind eingerichtet und die Projekte veröffentlicht. Sechs Projekte, drei Blogentwürfe und sechs Bilder wurden in die separate Datenbank `basel_homefixer` übernommen. SMTP ist laut Betreiber aktiviert; ein echter Testversand wurde durch diese Arbeiten nicht nachgewiesen.
 
-- **Datenbankziel: basel_homefixer.** Laut Betreiber bereits samt technischem Nutzer baselhomefixer angelegt; Verbindung noch nicht geprüft. DEMO gehört zur Demo-Website. basel_homefixer_preview war eine isolierte Vorschau mit Test-Veröffentlichungen und bleibt getrennt. Den Produktionscluster bewusst wählen; eine neue Datenbank trennt nicht automatisch die Clusterressourcen. [Details und Atlas-Schritte](deploy/nas/DATENBANK.md).
-- **Zwei Website-Admins**, für dich und den Kunden, mit eigenen E-Mails/Passwörtern in basel_homefixer.account. MongoDB-Zugang ist nur technischer Serverzugang. [Einrichten / Wiederherstellen](design/Kundenprojekt_PJA/ADMIN-ZUGANG.md).
-- **Projekte** dokumentieren konkrete Referenzarbeiten. **Blog** bietet Ratgeber und Erklärungen, auch ohne einzelnen Auftrag. Beide sind dynamisch pflegbar; der Blog bleibt auf Wunsch sichtbar. Artikel müssen keinen Inhalt aus Projekten wiederholen.
-- Inhalte/Bilder werden über /admin gepflegt und benötigen keinen Frontend-Build. Codeänderungen benötigen weiterhin neue Images und Rollout. Keine statische öffentliche NAS-Bilderfreigabe.
+## Für dich als Kunde
 
-## Was du zuerst tun musst
+**[Verwaltung öffnen](https://basel-homefixer.ch/admin)** · **[Website ansehen](https://basel-homefixer.ch)** · **[Kundenanleitung lesen](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md)**
 
-1. **MongoDB-Zugang nachführen:** Datenbank und Nutzer baselhomefixer sind laut Betreiber erstellt. In der neuen Portainer-Vorlage MONGODB_URI privat setzen; Host aus Atlas, URI-Datenbank basel_homefixer. Kein MongoDB-Passwort im Repository/Frontend/CI. [Genaue Stelle und URI-Muster](deploy/nas/DATENBANK.md#zugang-jetzt-hinterlegen). Verbindung/Rollen vor Rollout prüfen; keine Vorschaukopie.
-2. **Release:** bestehende Workflows sind auf bereinigte Images angepasst: Tests/Build, Dockerprüfungen, dev- und Commit-Tags. Images entstehen nur bei Push auf main, nicht beim Push auf basel-homefixer. [Einfacher CI-Ablauf](deploy/nas/PIPELINE.md). Kein automatischer NAS-Rollout; isolierten MongoDB-/Medientest vor Regelbetrieb nachweisen.
-3. **NAS:** privaten Medienordner und externe Konfigurationsdatei mit passenden Rechten vorbereiten, stabilen Signaturschlüssel privat sichern. Cloudflare-Ziel/Proxy-Kette und Cache-Regeln bestätigen.
-4. **Portainer:** [Compose zum vollständigen Kopieren](deploy/nas/compose.portainer.yaml) und [kurze Einfügeanleitung / Variablen](deploy/nas/PORTAINER.md). Wieder drei Dienste wie bisher und stack.env. **Noch nicht Deploy drücken:** zuvor Backup, isolierten Test und Rollout ausdrücklich freigeben.
-5. **Beim genehmigten Rollout:** neuen Backend-Entwurfsschutz bereitstellen, gesichtete Inhalte als Entwürfe übertragen, zwei Admins interaktiv anlegen, Frontend prüfen. Projekte/Artikel separat veröffentlichen.
-6. **Gmail zuletzt:** verfügbares App-Passwort serverseitig eintragen, SMTP bewusst aktivieren und einen Testversand vom NAS gesondert freigeben. Keine automatische Testmail.
-
-## Pflege und Betrieb
-
-| Aufgabe | Anleitung |
+| Was möchtest du tun? | Direkt zur Anleitung |
 | --- | --- |
-| Kunde: Projekte/Blog/Bilder, Startseitenauswahl, Vorschau, Veröffentlichen/Zurückziehen | [Kurze Kundenanleitung](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md) |
-| Erstzugang, vergessenes Passwort, Token/Abmeldung | [Adminzugang](design/Kundenprojekt_PJA/ADMIN-ZUGANG.md), [Authentifizierung](My-App_Backend/AUTH.md) |
-| Datenmodell, Medien, Import/Dry-Run | [CONTENT.md](My-App_Backend/CONTENT.md) |
-| Geschützte API, Uploadgrenzen, Bearbeitungskonflikte | [ADMIN.md](My-App_Backend/ADMIN.md) |
-| SMTP-Variablen, App-Passwort, späterer Testversand | [CONTACT.md](My-App_Backend/CONTACT.md) |
-| Gemeinsames DB-/Medienbackup, Wiederherstellung, Rollout und Rücknahme | [NAS-Betriebsanleitung](deploy/nas/README.md) |
-| Lokales Entwickeln / private NAS-Lesevorschau | [Lokaler Start](LOKALER-START.md), [NAS-VORSCHAU.md](NAS-VORSCHAU.md) |
-| Umfang und Freigaben | [Umsetzungsplan](design/Kundenprojekt_PJA/UMSETZUNGSPLAN.md) |
+| Anmelden oder abmelden | [Zugang](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#anmelden) |
+| Ein Projekt ergänzen oder ändern | [Projekte pflegen](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#projekte-pflegen) |
+| Bilder hochladen und auswählen | [Bilder verwalten](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#bilder-verwalten) |
+| Drei Projekte auf der Startseite auswählen | [Startseitenteaser](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#startseitenteaser) |
+| Einen Ratgeber schreiben | [Blog pflegen](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#blog-pflegen) |
+| Einen Entwurf prüfen und freigeben | [Vorschau und Veröffentlichung](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#vorschau-und-veröffentlichung) |
+| Eine Fehlermeldung verstehen | [Hilfe](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md#wenn-etwas-nicht-klappt) |
 
-Offene Kundensichtung: Bilder/Ausschnitte, finale DE-/EN-Texte, drei Artikelentwürfe, Kontakt-/Antwortzeitangaben und Datenschutzinformation. Öffentliche Veröffentlichung bleibt eine eigene Entscheidung. Details und tatsächlich geprüfte Grenzen stehen im Prüfbericht.
+**Merken:** Speichern → Vorschau prüfen → bewusst veröffentlichen. Änderungen an Projekten, Blogtexten und Bildern benötigen keinen neuen Website-Build. Beide Konten haben dieselben Verwaltungsrechte. Zugangsdaten vertraulich behandeln.
+
+Projekte zeigen konkrete Referenzarbeiten. Der Blog ist für Ratgeber, Tipps und Erklärungen gedacht. Ein neuer Referenzauftrag braucht keinen zusätzlichen Blogartikel. Allgemeine Seiten wie Dienstleistungen, Team und Kontaktdaten werden weiterhin durch den Entwickler angepasst.
+
+## Für den Betreiber und Entwickler
+
+| Thema | Dokumentation |
+| --- | --- |
+| Alle Anleitungen mit Einordnung | [Dokumentationsübersicht](DOKUMENTATION.md) |
+| Konten anlegen oder Passwort zurücksetzen | [Adminzugänge](design/Kundenprojekt_PJA/ADMIN-ZUGANG.md) |
+| Laufender Betrieb, Sicherung, Rollout und Rücknahme | [NAS-Betrieb](deploy/nas/README.md), [aktuelle Kurzcheckliste](deploy/nas/KURZANLEITUNG.md) |
+| Portainer-Stack und Umgebungsvariablen | [Portainer](deploy/nas/PORTAINER.md), [Compose-Vorlage](deploy/nas/compose.portainer.yaml) |
+| Images und GitHub Actions | [Pipeline](deploy/nas/PIPELINE.md), [CI-Fehlerhilfe](.github/CI-TROUBLESHOOTING.md) |
+| Datenbank, Inhalte und Medien | [Datenbank](deploy/nas/DATENBANK.md), [Inhaltsbasis](My-App_Backend/CONTENT.md) |
+| Sicherheit, Verwaltung und E-Mail-Konfiguration | [Anmeldung](My-App_Backend/AUTH.md), [Verwaltungs-API](My-App_Backend/ADMIN.md), [Kontaktversand](My-App_Backend/CONTACT.md) |
+| Lokale Entwicklung | [Lokaler Start](LOKALER-START.md) |
+| Planung und durchgeführte Prüfungen | [Umsetzungsplan](design/Kundenprojekt_PJA/UMSETZUNGSPLAN.md), [Prüfbericht](design/Kundenprojekt_PJA/MVP-ABNAHME.md) |
+
+### Noch prüfen
+
+- Echten Kontaktversand und Antwort an die Besucheradresse bewusst testen; SMTP-Aktivierung allein beweist keine Zustellung.
+- Texte, Bilder/Bildrechte und beide Sprachversionen vom Kunden sichten lassen. Die drei Blogtexte bleiben bis zur Freigabe Entwürfe.
+- Gemeinsame Sicherung und Wiederherstellung von Datenbank und Medien sowie Proxy-Vertrauen und Cache-Regeln betrieblich prüfen.
+
+Produktive Datenbank: `basel_homefixer`. `basel_homefixer_preview` bleibt die getrennte Vorschau, `DEMO` gehört zur Demo-Website. Zugangsdaten gehören ausschliesslich in private Serverkonfiguration.

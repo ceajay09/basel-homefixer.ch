@@ -1,6 +1,8 @@
 # Website-Adminzugänge für dich und den Kunden
 
-Das geplante Ziel für diese Website ist **basel_homefixer**, eine neue, getrennte Datenbank. **Noch nicht angelegt.** Die zuvor beobachtete laufende Konfiguration verweist auf DEMO; sie bleibt unverändert und ist ausdrücklich kein Ziel für neue Website-Konten. DEMO gehört zur Demo-Website. Die private Testumgebung basel_homefixer_preview bleibt separat. Cluster und Datenbank sind verschiedene Ebenen; den vorgesehenen produktiven Cluster bewusst auswählen, siehe [Datenbankentscheidung](../../deploy/nas/DATENBANK.md).
+[README](../../README.md) · [Kundenanleitung](KUNDENANLEITUNG-VERWALTUNG.md) · [Dokumentationsübersicht](../../DOKUMENTATION.md)
+
+**Stand 25. Oktober 2026:** Laut Betreiber sind beide Website-Zugänge eingerichtet und funktionieren. Die laufende Website verwendet `basel_homefixer`. Die folgenden Einrichtungsschritte sind für zusätzliche Konten oder Wiederherstellung gedacht. Bestehende Konten nicht erneut mit create-admin anlegen. `DEMO` und `basel_homefixer_preview` bleiben getrennt.
 
 ## Zwei verschiedene Arten von Zugang
 
@@ -14,7 +16,7 @@ Die beiden Website-Konten liegen getrennt in `basel_homefixer.account`: jeweils 
 
 Eine Kontoanlage erteilt nicht automatisch eine Projekt-/Artikelveröffentlichung. Beide Admins haben derzeit dieselben Verwaltungsrechte; eine feinere Rollenaufteilung und Benutzerverwaltung im Browser sind nicht implementiert. Öffentliche Registrierung bleibt deaktiviert.
 
-## Einrichtung beim später freigegebenen regulären Betrieb
+## Einrichtung weiterer Zugänge über die optionale Werkzeugvorlage
 
 Die vorbereitete NAS-Vorlage enthält `admin-setup` als Werkzeugprofil. Es wird nicht beim normalen Start ausgeführt. Nach Einrichtung des auf basel_homefixer begrenzten technischen Zugangs und Bereitstellung des geprüften neuen Images:
 
@@ -71,7 +73,7 @@ try {
 
 Beide Varianten schreiben in dieselbe Collection und sind Alternativen; nicht doppelt ausführen. Das reguläre Backend muss basel_homefixer und einen stabilen serverseitigen AUTH_JWT_SECRET_BASE64 verwenden. Danach meldet ihr euch jeweils mit eurer Website-E-Mail und eurem eigenen Passwort unter `/admin` an. Nach Neuladen ist eine erneute Anmeldung nötig.
 
-**In diesem Vorbereitungsauftrag wurden keine dauerhaften Konten angelegt, Passwörter zurückgesetzt oder produktiven Daten geändert.** Die reine NAS-Lesevorschau unterstützt weiterhin keine Anmeldung. Betriebsreihenfolge, Sicherung und Rücknahme stehen in `deploy/nas/README.md`.
+Die ursprüngliche Vorbereitung hat keine Konten angelegt. Die anschliessende Einrichtung beider Konten wurde inzwischen vom Betreiber bestätigt. Die reine NAS-Lesevorschau unterstützt weiterhin keine Anmeldung. Betriebsreihenfolge, Sicherung und Rücknahme stehen in `deploy/nas/README.md`.
 
 ## Passwort vergessen / Zugang wiederherstellen
 
