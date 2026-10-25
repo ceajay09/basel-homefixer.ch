@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface AccountRepository extends MongoRepository<Account, String> {
 
 	Account findByEmail(String email);
+	java.util.List<Account> findByEmailIgnoreCase(String email);
 
 	Optional<Account> findById(String id);
 

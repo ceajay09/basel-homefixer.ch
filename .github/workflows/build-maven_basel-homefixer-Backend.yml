@@ -12,23 +12,28 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
     paths:
       - 'My-App_Backend/**'
       - '.github/workflows/build-maven_basel-homefixer-Backend.yml'
+      - 'deploy/nas/PrepareJar.java'
+      - 'deploy/nas/ValidateRelease.java'
+      - 'design/Kundenpaket_20261024/Kundenpaket/assets/**'
 
 jobs:
   build-jar:
-    permissions: write-all
+    permissions:
+      contents: write
+      packages: read
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v6
       with:
         java-version: '17'
         distribution: 'corretto'
@@ -75,15 +80,20 @@ jobs:
     - name: Build Backend with Maven
       run: |
           cd My-App_Backend
-          mvn -B package --file pom.xml
+          mvn -B verify --file pom.xml
       env:
         PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+    - name: Prepare and validate production Jar
+      run: |
+        mkdir -p My-App_Backend/target/release
+        java --source 17 deploy/nas/PrepareJar.java My-App_Backend/target/my-app-0.0.1-SNAPSHOT.jar My-App_Backend/target/release/app.jar
+        java --source 17 deploy/nas/ValidateRelease.java My-App_Backend/target/release/app.jar
     - name: Archive Backend Jar
       uses: actions/upload-artifact@v4
       with:
         name: backend-jar
         path: |
-          My-App_Backend/target/*.jar
+          My-App_Backend/target/release/app.jar
 
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
@@ -91,17 +101,18 @@ jobs:
         directory: My-App_Backend
 
   push-to-aws:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download jar from build-jar job
         uses: actions/download-artifact@v4
         with:
           name: backend-jar
-          path: My-App_Backend/target
+          path: My-App_Backend/target/release
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -122,7 +133,12 @@ jobs:
           REPOSITORY: basel-homefixer-backend
           IMAGE_TAG: dev
         run: |
+          set -euo pipefail
           cd My-App_Backend
-          echo $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          IMAGE="$REGISTRY/$REPOSITORY"
+          COMMIT_TAG="sha-$GITHUB_SHA"
+          docker build -t "$IMAGE:$IMAGE_TAG" -t "$IMAGE:$COMMIT_TAG" .
+          docker run --rm --read-only --tmpfs /tmp:rw,nosuid,noexec,size=32m --entrypoint java "$IMAGE:$COMMIT_TAG" -Djarmode=tools -jar /app/app.jar help
+          docker push "$IMAGE:$COMMIT_TAG"
+          docker push "$IMAGE:$IMAGE_TAG"
+          printf 'Backend image: %s:%s\n' "$IMAGE" "$COMMIT_TAG" >> "$GITHUB_STEP_SUMMARY"

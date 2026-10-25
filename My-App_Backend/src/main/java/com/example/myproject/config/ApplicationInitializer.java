@@ -2,7 +2,7 @@ package com.example.myproject.config;
 
 import com.example.myproject.model.Blogpost;
 import com.example.myproject.repository.BlogRepository;
-import com.example.myproject.service.AccountService;
+
 import com.example.myproject.service.BlogService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,15 +23,15 @@ import java.util.Map;
 public class ApplicationInitializer implements CommandLineRunner {
 
     private final BlogService blogService;
-    private final AccountService accountService;
+
     private static final Logger logger = LogManager.getLogger(ApplicationInitializer.class);
     private final MongoTemplate mongoTemplate;
     private final BlogRepository blogRepository;
 
     @Autowired
-    public ApplicationInitializer(AccountService accountService, BlogService blogService, MongoTemplate mongoTemplate, BlogRepository blogRepository) {
+    public ApplicationInitializer(BlogService blogService, MongoTemplate mongoTemplate, BlogRepository blogRepository) {
         this.blogService = blogService;
-        this.accountService = accountService;
+
         this.mongoTemplate = mongoTemplate;
         this.blogRepository = blogRepository;
     }
@@ -47,7 +47,7 @@ public class ApplicationInitializer implements CommandLineRunner {
         }
 //        createBlogpost();
         this.blogService.getAllBlogposts(true);
-        this.accountService.getAllAccounts();
+        // Account data is loaded only on authenticated requests; no startup account dump.
         logger.info("Application data initialized successfully.");
     }
     

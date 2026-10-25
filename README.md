@@ -1,72 +1,34 @@
-# Demo-Website lokal starten
+# basel-homefixer.ch – Einstieg und Initialisierung
 
-Das Frontend läuft direkt mit Node.js/Vite. Backend und Traefik laufen über eine portable lokale Compose-Datei. Die vorhandenen Backend- und MongoDB-Einstellungen werden weiterverwendet. Es wird keine lokale MongoDB gestartet.
+**Stand 25. Oktober 2026:** MVP lokal implementiert; regulärer NAS-Betrieb vorbereitet, noch nicht ausgerollt. Keine produktiven Konten/Daten angelegt oder verändert. [Aktueller Prüfbericht](design/Kundenprojekt_PJA/MVP-ABNAHME.md).
 
-## Voraussetzungen
+## Die wichtigsten Entscheidungen
 
-- Node.js **22.x** inklusive npm.
-- JDK **17** und korrekt gesetztes `JAVA_HOME` für den vorhandenen Maven-Wrapper.
-- Docker Desktop mit laufender Linux-Engine; unter Windows WSL 2.
-- Vorhandene Backend-Dev-Konfiguration und Zugriff auf den gemeinsamen Maven-Parent (siehe Backend-README).
+- **Datenbankziel: basel_homefixer.** Laut Betreiber bereits samt technischem Nutzer baselhomefixer angelegt; Verbindung noch nicht geprüft. DEMO gehört zur Demo-Website. basel_homefixer_preview war eine isolierte Vorschau mit Test-Veröffentlichungen und bleibt getrennt. Den Produktionscluster bewusst wählen; eine neue Datenbank trennt nicht automatisch die Clusterressourcen. [Details und Atlas-Schritte](deploy/nas/DATENBANK.md).
+- **Zwei Website-Admins**, für dich und den Kunden, mit eigenen E-Mails/Passwörtern in basel_homefixer.account. MongoDB-Zugang ist nur technischer Serverzugang. [Einrichten / Wiederherstellen](design/Kundenprojekt_PJA/ADMIN-ZUGANG.md).
+- **Projekte** dokumentieren konkrete Referenzarbeiten. **Blog** bietet Ratgeber und Erklärungen, auch ohne einzelnen Auftrag. Beide sind dynamisch pflegbar; der Blog bleibt auf Wunsch sichtbar. Artikel müssen keinen Inhalt aus Projekten wiederholen.
+- Inhalte/Bilder werden über /admin gepflegt und benötigen keinen Frontend-Build. Codeänderungen benötigen weiterhin neue Images und Rollout. Keine statische öffentliche NAS-Bilderfreigabe.
 
-Nach einer Installation VS Code und Terminal neu starten, damit Umgebungsvariablen geladen werden.
+## Was du zuerst tun musst
 
-## Frontend
+1. **MongoDB-Zugang nachführen:** Datenbank und Nutzer baselhomefixer sind laut Betreiber erstellt. In der neuen Portainer-Vorlage MONGODB_URI privat setzen; Host aus Atlas, URI-Datenbank basel_homefixer. Kein MongoDB-Passwort im Repository/Frontend/CI. [Genaue Stelle und URI-Muster](deploy/nas/DATENBANK.md#zugang-jetzt-hinterlegen). Verbindung/Rollen vor Rollout prüfen; keine Vorschaukopie.
+2. **Release:** bestehende Workflows sind auf bereinigte Images angepasst: Tests/Build, Dockerprüfungen, dev- und Commit-Tags. Images entstehen nur bei Push auf main, nicht beim Push auf basel-homefixer. [Einfacher CI-Ablauf](deploy/nas/PIPELINE.md). Kein automatischer NAS-Rollout; isolierten MongoDB-/Medientest vor Regelbetrieb nachweisen.
+3. **NAS:** privaten Medienordner und externe Konfigurationsdatei mit passenden Rechten vorbereiten, stabilen Signaturschlüssel privat sichern. Cloudflare-Ziel/Proxy-Kette und Cache-Regeln bestätigen.
+4. **Portainer:** [Compose zum vollständigen Kopieren](deploy/nas/compose.portainer.yaml) und [kurze Einfügeanleitung / Variablen](deploy/nas/PORTAINER.md). Wieder drei Dienste wie bisher und stack.env. **Noch nicht Deploy drücken:** zuvor Backup, isolierten Test und Rollout ausdrücklich freigeben.
+5. **Beim genehmigten Rollout:** neuen Backend-Entwurfsschutz bereitstellen, gesichtete Inhalte als Entwürfe übertragen, zwei Admins interaktiv anlegen, Frontend prüfen. Projekte/Artikel separat veröffentlichen.
+6. **Gmail zuletzt:** verfügbares App-Passwort serverseitig eintragen, SMTP bewusst aktivieren und einen Testversand vom NAS gesondert freigeben. Keine automatische Testmail.
 
-Beim ersten Start im Projekt-Hauptordner:
+## Pflege und Betrieb
 
-```powershell
-npm --prefix My-App_Frontend ci
-npm run start
-```
+| Aufgabe | Anleitung |
+| --- | --- |
+| Kunde: Projekte/Blog/Bilder, Startseitenauswahl, Vorschau, Veröffentlichen/Zurückziehen | [Kurze Kundenanleitung](design/Kundenprojekt_PJA/KUNDENANLEITUNG-VERWALTUNG.md) |
+| Erstzugang, vergessenes Passwort, Token/Abmeldung | [Adminzugang](design/Kundenprojekt_PJA/ADMIN-ZUGANG.md), [Authentifizierung](My-App_Backend/AUTH.md) |
+| Datenmodell, Medien, Import/Dry-Run | [CONTENT.md](My-App_Backend/CONTENT.md) |
+| Geschützte API, Uploadgrenzen, Bearbeitungskonflikte | [ADMIN.md](My-App_Backend/ADMIN.md) |
+| SMTP-Variablen, App-Passwort, späterer Testversand | [CONTACT.md](My-App_Backend/CONTACT.md) |
+| Gemeinsames DB-/Medienbackup, Wiederherstellung, Rollout und Rücknahme | [NAS-Betriebsanleitung](deploy/nas/README.md) |
+| Lokales Entwickeln / private NAS-Lesevorschau | [Lokaler Start](LOKALER-START.md), [NAS-VORSCHAU.md](NAS-VORSCHAU.md) |
+| Umfang und Freigaben | [Umsetzungsplan](design/Kundenprojekt_PJA/UMSETZUNGSPLAN.md) |
 
-Später genügt `npm run start`. Alternativ `start-frontend.bat` doppelklicken. Auch direkt im Frontend-Ordner funktionieren `npm ci` und `npm run start`, wie bisher.
-
-Website: **http://localhost:5173**. Terminal offen lassen; mit **Strg+C** stoppen. Änderungen unter `src` und `public` werden automatisch nachgeladen. Bei einer PowerShell-Sperre für `npm.ps1` stattdessen `npm.cmd` verwenden.
-
-Vite bindet nur an `127.0.0.1`; Zugriff aus dem Netzwerk ist nicht vorgesehen. Eine Unternehmens-Firewallregel wird dadurch nicht verändert.
-
-Die bisherige API-Konfiguration über `VITE_API_URL` bleibt erhalten. Für den lokalen Backend-Zugriff in der ignorierten `My-App_Frontend/.env.development` setzen:
-
-```dotenv
-VITE_API_URL=http://localhost:8081
-```
-
-`npm run dev` verwendet wie bisher diese Datei. Ohne Backend kann die Oberfläche angezeigt werden; API-Funktionen benötigen das Backend.
-
-## Backend und Traefik
-
-`start-backend.bat` im Hauptordner ausführen. Die Datei baut das Backend mit dem bestehenden Maven-Wrapper und startet danach Docker Compose mit dem bestehenden Backend-Dockerfile.
-
-Alternativ:
-
-```powershell
-cd My-App_Backend
-.\mvnw.cmd package
-cd ..
-docker compose -f compose.local.yaml up -d --build backend traefik
-```
-
-Backend direkt: **http://localhost:8081**. API über Traefik: **http://localhost/api/homepage-config**. `http://localhost` leitet zum nativen Frontend auf Port 5173 weiter; die `/api`-Routen gehen zum Backend.
-
-Die Dev-Konfiguration `My-App_Backend/src/main/resources/application-dev.properties` muss lokal vorhanden sein und verweist auf die bestehende externe MongoDB. Sie bleibt von Git ausgeschlossen. Die Anwendung verwendet wieder ihr bisheriges Start- und Fehlerverhalten; ein erfolgreicher Start ohne Datenbank wird nicht garantiert.
-
-```powershell
-docker compose -f compose.local.yaml logs -f backend traefik
-docker compose -f compose.local.yaml stop backend traefik
-```
-
-Die alte lokale MongoDB wird nicht mehr verwendet. Ihr eventuell vorhandenes Docker-Volume wurde nicht gelöscht. Die bisherigen Compose-Dateien in den Unterordnern bleiben unverändert; die neue lokale Compose-Datei enthält keine festen Rechnerpfade oder Zugangsdaten.
-
-## VS Code und Prüfungen
-
-Den gesamten Projektordner öffnen und die empfohlenen Extensions installieren. Java verwendet JDK 17, Maven den vorhandenen Wrapper. Die bisherigen TypeScript-Konfigurationen bleiben erhalten; Vite-Typen und der veraltete Web-Vitals-Aufruf wurden korrigiert.
-
-```powershell
-npm run typecheck
-npm --prefix My-App_Frontend run build
-```
-
-Backend-Prüfung im Backend-Ordner: `mvnw.cmd verify`. Java-Debugging startet wie bisher das Dev-Profil; Chrome-Debugging startet das native Frontend. Ein bereits laufender Vite-Server muss vor einem zweiten Start beendet werden.
-
-Die vorhandenen GitHub-Actions-Workflows und Produktions-Dockerfiles wurden nicht geändert. Details: [Backend](My-App_Backend/README.md), [Frontend](My-App_Frontend/README.md).
+Offene Kundensichtung: Bilder/Ausschnitte, finale DE-/EN-Texte, drei Artikelentwürfe, Kontakt-/Antwortzeitangaben und Datenschutzinformation. Öffentliche Veröffentlichung bleibt eine eigene Entscheidung. Details und tatsächlich geprüfte Grenzen stehen im Prüfbericht.

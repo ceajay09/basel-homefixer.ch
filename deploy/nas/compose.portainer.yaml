@@ -1,0 +1,108 @@
+# Portainer Web editor / Docker Standalone. PREPARED ONLY, not deployed.
+version: '3.1'
+services:
+  backend:
+    image: ${BACKEND_IMAGE:?Geprueften Backend-Commit-Tag oder Digest in Portainer setzen}
+    restart: unless-stopped
+    env_file:
+      - stack.env
+    environment:
+      SPRING_CONFIG_LOCATION: file:/etc/basel-homefixer/application-production.properties
+      SPRING_PROFILES_ACTIVE: production
+      SPRING_DATA_MONGODB_DATABASE: basel_homefixer
+      AUTH_JWT_SECRET_BASE64: ${AUTH_JWT_SECRET_BASE64:?Privaten stabilen Signaturschluessel setzen}
+      MONGODB_URI: ${MONGODB_URI:?Zugang nur zur gewaehlten Datenbank basel_homefixer setzen}
+      AUTH_TOKEN_TTL_SECONDS: '900'
+      AUTH_PUBLIC_REGISTRATION_ENABLED: 'false'
+      CONTENT_MEDIA_ROOT: /data/content/media
+      CONTACT_MAIL_ENABLED: ${CONTACT_MAIL_ENABLED:-false}
+      CONTACT_SMTP_HOST: smtp.gmail.com
+      CONTACT_SMTP_PORT: '587'
+      CONTACT_SMTP_SSL: 'false'
+      ADMIN_MEDIA_MAX_BYTES: '15728640'
+      ADMIN_MEDIA_CONCURRENT_UPLOADS: '1'
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70.0 -Djava.io.tmpdir=/tmp
+    user: '10001:10001'
+    mem_limit: 768m
+    read_only: true
+    tmpfs: ['/tmp:rw,nosuid,noexec,size=128m,mode=1777']
+    volumes:
+      - type: bind
+        source: /volume1/docker/basel-homefixer/content
+        target: /data/content
+        bind: {create_host_path: false}
+      - type: bind
+        source: /volume1/docker/basel-homefixer/ops/application-production.properties
+        target: /etc/basel-homefixer/application-production.properties
+        read_only: true
+        bind: {create_host_path: false}
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=basel-homefixer_portainer_backend'
+      - 'traefik.http.routers.basel-homefixer-backend.rule=Host(`basel-homefixer.ch`) && (Path(`/api`) || PathPrefix(`/api/`))'
+      - 'traefik.http.routers.basel-homefixer-backend.priority=100'
+      - 'traefik.http.services.basel-homefixer-backend.loadbalancer.server.port=8081'
+      - 'traefik.http.routers.basel-homefixer-backend.entrypoints=web'
+    networks: [backend]
+    healthcheck:
+      test: ['CMD', 'curl', '-f', '--max-time', '5', 'http://localhost:8081/actuator/health']
+      interval: 45s
+      timeout: 20s
+      retries: 5
+      start_period: 60s
+  frontend:
+    image: ${FRONTEND_IMAGE:?Geprueften Frontend-Commit-Tag oder Digest in Portainer setzen}
+    restart: unless-stopped
+    user: '101:101'
+    read_only: true
+    tmpfs: ['/tmp:rw,nosuid,noexec,size=32m,mode=1777']
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=basel-homefixer_portainer_frontend'
+      - 'traefik.http.routers.basel-homefixer-frontend.rule=Host(`basel-homefixer.ch`)'
+      - 'traefik.http.routers.basel-homefixer-frontend.priority=10'
+      - 'traefik.http.services.basel-homefixer-frontend.loadbalancer.server.port=8082'
+      - 'traefik.http.routers.basel-homefixer-frontend.entrypoints=web'
+    networks: [frontend]
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8082/']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  traefik:
+    image: traefik@sha256:c8a121e4bb1347e8fd52657fab12f2cb70b68f8a018895e2068f92c9e519b9c2
+    restart: unless-stopped
+    command:
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--entrypoints.web.address=:8095'
+      - '--entrypoints.websecure.address=:8443'
+      - '--entrypoints.web.forwardedHeaders.trustedIPs=${EDGE_TRUSTED_IPS:?Exakten lokalen Tunnel-Peer bestaetigen}'
+      - '--ping'
+      - '--log.level=ERROR'
+      - '--log.format=json'
+      - '--accesslog=true'
+      - '--accesslog.format=json'
+      - '--accesslog.fields.headers.defaultmode=drop'
+    ports:
+      - '192.168.178.38:8444:8443'
+      - '192.168.178.38:8095:8095'
+    volumes: ['/var/run/docker.sock:/var/run/docker.sock:ro']
+    depends_on: [backend, frontend]
+    networks: [traefik, frontend, backend]
+    healthcheck:
+      test: ['CMD', 'traefik', 'healthcheck', '--ping']
+      interval: 45s
+      timeout: 20s
+      retries: 5
+networks:
+  frontend:
+    name: basel-homefixer_portainer_frontend
+    driver: bridge
+  backend:
+    name: basel-homefixer_portainer_backend
+    driver: bridge
+  traefik:
+    name: basel-homefixer_portainer_traefik
+    driver: bridge
+

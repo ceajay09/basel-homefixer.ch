@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="design-source" content="My-App_Frontend/src/home/LatestPosts.tsx">
+    <title>Blog – Basel Home Fixer</title>
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --color-primary: #2d5a3d;
+            --color-primary-light: #3d7a4d;
+            --color-gold: #d4a574;
+            --color-gold-light: #e8c9a0;
+            --color-silver: #c0c0c0;
+            --color-silver-light: #e8e8e8;
+            --color-white: #ffffff;
+            --color-off-white: #f9f8f6;
+            --color-dark-text: #1f1f1f;
+            --color-light-text: #5a5a5a;
+            --color-border: #d9d9d9;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+            --schrift-basis: 16px;
+            --seitenbreite: 1152px;
+            --abstand: 24px;
+            --box-innenabstand: 16px;
+            --rundung: 6px;
+            --radius-lg: 12px;
+        }
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background: var(--color-white);
+            color: var(--color-dark-text);
+            font: var(--schrift-basis)/1.6 var(--font-family);
+        }
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            text-underline-offset: 3px;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            color: var(--color-gold);
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        h1, h2, h3, p {
+            margin-top: 0;
+        }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--color-dark-text);
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--color-primary);
+        }
+        h3 {
+            font-size: 1.2rem;
+            line-height: 1.4;
+            color: var(--color-dark-text);
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-silver-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .header-content {
+            max-width: var(--seitenbreite);
+            margin: 0 auto;
+            padding: var(--abstand);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-height: 78px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .brand {
+            flex: 1;
+            text-align: center;
+            color: inherit;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .language {
+            font-size: 0.85rem;
+            color: var(--color-light-text);
+        }
+        nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        nav a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        nav a[aria-current=page] {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            width: min(var(--seitenbreite), calc(100% - 40px));
+            margin-inline: auto;
+        }
+        main {
+            padding-top: 24px;
+            padding-bottom: 40px;
+        }
+        /* ===== BOXES & SECTIONS ===== */
+        .box {
+            background: var(--color-white);
+            padding: var(--box-innenabstand);
+            border-radius: var(--rundung);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            min-width: 0;
+        }
+        .box h2 {
+            margin-bottom: var(--abstand);
+        }
+        .box p {
+            color: var(--color-light-text);
+            line-height: 1.8;
+        }
+        .stack > * + * {
+            margin-top: var(--abstand);
+        }
+        .contact-box {
+            border: 2px solid var(--color-primary);
+            border-left: 5px solid var(--color-gold);
+        }
+        /* ===== BLOG GRID & CARDS ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: var(--abstand);
+            margin-bottom: var(--abstand);
+        }
+        .blog-card {
+            background: var(--color-off-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            box-shadow: 0 10px 24px rgba(45, 90, 61, 0.12);
+            transform: translateY(-4px);
+        }
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-size: 64px;
+            overflow: hidden;
+        }
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .blog-content {
+            padding: var(--abstand);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .blog-meta {
+            font-size: 0.85rem;
+            color: var(--color-light-text);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .blog-date {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+        .blog-category {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .blog-excerpt {
+            color: var(--color-light-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: var(--abstand);
+            flex: 1;
+        }
+        .blog-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .blog-tag {
+            background-color: var(--color-silver-light);
+            color: var(--color-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .blog-tag:hover {
+            background-color: var(--color-gold);
+            color: var(--color-dark-text);
+        }
+        .blog-read-more {
+            display: inline-block;
+            color: var(--color-primary);
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid var(--color-gold);
+            transition: all 0.3s ease;
+        }
+        .blog-read-more:hover {
+            color: var(--color-gold);
+        }
+        /* ===== FILTER & SEARCH ===== */
+        .blog-controls {
+            background: var(--color-off-white);
+            padding: var(--abstand);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--abstand);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .search-box {
+            margin-bottom: 16px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--rundung);
+            font-size: var(--schrift-basis);
+            font-family: var(--font-family);
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.1);
+        }
+        .category-filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--color-border);
+            background: var(--color-white);
+            color: var(--color-dark-text);
+            border-radius: var(--rundung);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--color-dark-text);
+            color: var(--color-white);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-content {
+            max-width: var(--seitenbreite);
+            margin: 0 auto;
+            padding: 0 var(--abstand);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--abstand);
+            margin-bottom: var(--abstand);
+        }
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: var(--abstand);
+            color: var(--color-gold);
+        }
+        .footer-section p, .footer-section a {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .footer-section a:hover {
+            color: var(--color-gold);
+        }
+        .site-footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .site-footer small {
+            display: block;
+            color: var(--color-light-text);
+            margin-top: 24px;
+        }
+        /* ===== DESIGN TEMPLATE NOTE ===== */
+        .template-note {
+            background: #eef5ff;
+            color: #243f64;
+            border-bottom: 1px solid #cfdef3;
+            padding: 10px 20px;
+            font: 13px/1.5 Arial, sans-serif;
+        }
+        .template-note a {
+            color: inherit;
+        }
+        .content-note {
+            border-left: 3px solid #bd7b00;
+            background: #fff7e5;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .content-note strong {
+            display: block;
+        }
+        .optional {
+            font-size: 0.85rem;
+            color: var(--color-light-text);
+        }
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 899px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .brand-row {
+                min-height: 68px;
+            }
+            .brand {
+                text-align: left;
+                font-size: 1.25rem;
+            }
+            nav {
+                justify-content: flex-start;
+                gap: 12px 20px;
+            }
+            .container {
+                width: calc(100% - 32px);
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .category-filters {
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: calc(100% - 16px);
+                padding: 0 8px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            .box, .blog-controls {
+                padding: var(--abstand);
+            }
+            .blog-image {
+                height: 160px;
+            }
+            .footer-links {
+                gap: 12px;
+            }
+            .category-filters {
+                gap: 8px;
+                flex-direction: column;
+            }
+            .filter-btn {
+                width: 100%;
+            }
+        }
+        @media print {
+            .template-note {
+                display: none;
+            }
+            .box {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== DESIGN NOTE ===== -->
+    <aside class="template-note">
+        Designvorlage · Aktuelle Beiträge (Blog) · <a href="index.html">Zur Übersicht</a> | <a href="ANLEITUNG.html">Anleitung</a><br>
+        Diese Hinweisleiste gehört nicht zum Website-Design.
+    </aside>
+    
+    <!-- ===== HEADER ===== -->
+    <header id="shared-header" data-design-id="shared.header">
+        <div class="container">
+            <div class="brand-row">
+                <a class="brand" href="01-startseite.html">Basel Home Fixer</a>
+                <span class="language">DE / EN · Vorschau DE</span>
+            </div>
+            <nav class="navigation" aria-label="Hauptnavigation" data-design-id="nav-main">
+                <a href="01-startseite.html">Startseite</a>
+                <a href="03-dienstleistungen.html">Dienstleistungen</a>
+                <a href="02-ueber-uns.html">Über uns</a>
+                <a href="04-kontakt.html">Kontakt</a>
+                <a href="05-vermietung.html">Immobilienvermietung</a>
+                <a href="07-blog.html" aria-current="page">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container" id="posts-main" data-design-id="posts.main">
+        <h1>Blog – Tipps & Insights</h1>
+        
+        <div class="stack">
+            <!-- PURPOSE SECTION -->
+            <section id="posts-purpose" data-design-id="posts.purpose" class="box contact-box">
+                <h2>Über unseren Blog</h2>
+                <p>
+                    Willkommen auf unserem Blog! Hier teilen wir praktische Tipps, Renovierungs-Tricks, 
+                    Smart-Home-Insights und Best Practices rund um Wohnungsrenovationen, Immobilienmanagement 
+                    und modernen Wohnkomfort. Erfahren Sie, wie Sie Ihr Zuhause optimieren, Kosten sparen 
+                    und den Wert Ihrer Immobilie erhöhen können.
+                </p>
+            </section>
+
+            <!-- SEARCH & FILTER CONTROLS -->
+            <section id="posts-controls" data-design-id="posts.controls" class="blog-controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Artikel durchsuchen...">
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 12px; font-size: 0.95rem; color: var(--color-light-text);">Nach Kategorie filtern:</h3>
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-category="all">Alle</button>
+                        <button class="filter-btn" data-category="renovierung">🔨 Renovierung</button>
+                        <button class="filter-btn" data-category="smart-home">💡 Smart Home</button>
+                        <button class="filter-btn" data-category="vermietung">🏠 Vermietung</button>
+                        <button class="filter-btn" data-category="tipps">💡 Tipps & Tricks</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BLOG GRID -->
+            <div id="posts-grid" class="blog-grid" data-design-id="posts.grid">
+                <!-- Article 1 -->
+                <article class="blog-card" data-category="renovierung">
+                    <div class="blog-image">🔨</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">15. Nov 2024</span>
+                            <span class="blog-category">Renovierung</span>
+                        </div>
+                        <h3 class="blog-title">Küche renovieren: Von der Planung zur Umsetzung</h3>
+                        <p class="blog-excerpt">
+                            Eine Küchenrenovierung ist eine der wertvollsten Investitionen in Ihre Immobilie. 
+                            Lesen Sie unseren praktischen Guide zu Planung, Budget und professioneller Umsetzung...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Küche</span>
+                            <span class="blog-tag">Budgetplanung</span>
+                            <span class="blog-tag">Planung</span>
+                        </div>
+                        <a href="#article-1" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card" data-category="smart-home">
+                    <div class="blog-image">💡</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">12. Nov 2024</span>
+                            <span class="blog-category">Smart Home</span>
+                        </div>
+                        <h3 class="blog-title">Smart Home für Anfänger: Was Sie wissen sollten</h3>
+                        <p class="blog-excerpt">
+                            Smart Home muss nicht kompliziert sein. Wir zeigen Ihnen, wie Sie Ihre Wohnung 
+                            intelligent ausstatten – von Lichtern über Heizung bis zu Sicherheitssystemen...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Smart Home</span>
+                            <span class="blog-tag">Automatisierung</span>
+                            <span class="blog-tag">Technologie</span>
+                        </div>
+                        <a href="#article-2" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card" data-category="vermietung">
+                    <div class="blog-image">🏠</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">08. Nov 2024</span>
+                            <span class="blog-category">Vermietung</span>
+                        </div>
+                        <h3 class="blog-title">Immobilie vermieten: Rechtliche Anforderungen & Checkliste</h3>
+                        <p class="blog-excerpt">
+                            Was müssen Sie als Vermieter in der Schweiz beachten? Von Mietvertrag bis Nebenkosten – 
+                            hier finden Sie alle wichtigen Infos...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Vermietung</span>
+                            <span class="blog-tag">Recht</span>
+                            <span class="blog-tag">Schweiz</span>
+                        </div>
+                        <a href="#article-3" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card" data-category="tipps">
+                    <div class="blog-image">✨</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">05. Nov 2024</span>
+                            <span class="blog-category">Tipps & Tricks</span>
+                        </div>
+                        <h3 class="blog-title">Bad renovieren: 5 Tipps für maximalen Komfort</h3>
+                        <p class="blog-excerpt">
+                            Das Badezimmer ist Ihre private Wellness-Oase. Entdecken Sie, wie Sie mit smarter 
+                            Planung und modernen Materialien den perfekten Bad-Look schaffen...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Bad</span>
+                            <span class="blog-tag">Design</span>
+                            <span class="blog-tag">Wellness</span>
+                        </div>
+                        <a href="#article-4" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card" data-category="renovierung">
+                    <div class="blog-image">🪟</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">01. Nov 2024</span>
+                            <span class="blog-category">Renovierung</span>
+                        </div>
+                        <h3 class="blog-title">Fenster und Türen: Was beim Austausch zu beachten ist</h3>
+                        <p class="blog-excerpt">
+                            Neue Fenster sparen Heizkosten und verbessern die Ästhetik. Alles, was Sie über 
+                            Materialien, Preise und die Installation wissen müssen...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Fenster</span>
+                            <span class="blog-tag">Energieeffizienz</span>
+                            <span class="blog-tag">Kosten</span>
+                        </div>
+                        <a href="#article-5" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card" data-category="smart-home">
+                    <div class="blog-image">🔌</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">28. Oct 2024</span>
+                            <span class="blog-category">Smart Home</span>
+                        </div>
+                        <h3 class="blog-title">Elektroinstallationen: Modern und sicher in Ihr Zuhause</h3>
+                        <p class="blog-excerpt">
+                            Moderne Stromleitungen sind nicht nur sicherer, sondern auch flexibler. 
+                            Erfahren Sie, wann eine Elektrorenovation sinnvoll ist...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Elektrik</span>
+                            <span class="blog-tag">Sicherheit</span>
+                            <span class="blog-tag">Modern</span>
+                        </div>
+                        <a href="#article-6" class="blog-read-more">Artikel lesen →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- INFORMATION SECTION -->
+            <section id="posts-information" data-design-id="posts.information" class="box contact-box">
+                <h2>Kontaktinformationen</h2>
+                <dl>
+                    <dt>Herausgeber</dt>
+                    <dd>Pascal Jaquiéry & Divine Mon</dd>
+                    <dt>Basel Home Fixer</dt>
+                    <dd>Projektmanagement & Renovationsberatung</dd>
+                    <dt>E-Mail</dt>
+                    <dd><a href="mailto:baselhomefixer@gmail.com">baselhomefixer@gmail.com</a></dd>
+                    <dt>Telefon</dt>
+                    <dd><a href="tel:+41762059285">+41 76 205 92 85</a></dd>
+                </dl>
+            </section>
+
+            <!-- DISCLAIMER SECTION -->
+            <section id="posts-disclaimer" data-design-id="posts.disclaimer" class="box contact-box">
+                <h2>Rechtlicher Hinweis</h2>
+                <p>
+                    Die Informationen auf dieser Website werden regelmäßig überprüft und aktualisiert. 
+                    Vollständigkeit, Genauigkeit und Aktualität können jedoch nicht garantiert werden. 
+                    Alle Angaben ohne Gewähr. Die in unseren Blogartikeln gegebenen Tipps sollen als 
+                    allgemeine Hinweise verstanden werden – für professionelle Beratung kontaktieren Sie uns direkt.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="shared-footer" data-design-id="shared.footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Basel Home Fixer</h3>
+                <p><strong>Projektmanager & Zertifizierter Elektroinstallateur</strong></p>
+                <p>16 Jahre Erfahrung in Wohnungsrenovationen</p>
+                <p style="margin-top: var(--abstand);">Ihr Partner für professionelle Renovationen & Smart-Living</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <p><strong>Pascal Jaquiéry</strong></p>
+                <p><strong>Divine Mon</strong></p>
+                <p>📧 <a href="mailto:baselhomefixer@gmail.com">baselhomefixer@gmail.com</a></p>
+                <p>📱 <a href="tel:+41762059285">+41 76 205 92 85</a></p>
+                <p>📍 Basel, Schweiz</p>
+            </div>
+            <div class="footer-section">
+                <h3>Folgen Sie uns</h3>
+                <p><a href="#instagram">Instagram: @basel-homefixer</a></p>
+                <p><a href="#website">🌐 www.basel-homefixer.ch</a></p>
+            </div>
+        </div>
+        <div style="border-top: 1px solid #444; padding-top: var(--abstand); text-align: center; font-size: 0.85rem; color: #999;">
+            <p>&copy; 2026 Basel Home Fixer. Alle Rechte vorbehalten. | <a href="#privacy" style="color: #999;">Datenschutz</a> | <a href="#imprint" style="color: #999;">Impressum</a></p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT FUNCTIONALITY ===== -->
+    <script>
+        // Filter & Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        let currentCategory = 'all';
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterCards(searchTerm, currentCategory);
+        });
+
+        // Filter by category
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentCategory = button.getAttribute('data-category');
+                filterCards(searchInput.value.toLowerCase(), currentCategory);
+            });
+        });
+
+        // Filter cards based on search & category
+        function filterCards(searchTerm, category) {
+            blogCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                const tags = card.querySelectorAll('.blog-tag');
+                const tagTexts = Array.from(tags).map(tag => tag.textContent.toLowerCase()).join(' ');
+
+                const matchesCategory = category === 'all' || cardCategory === category;
+                const matchesSearch = title.includes(searchTerm) || 
+                                    excerpt.includes(searchTerm) || 
+                                    tagTexts.includes(searchTerm);
+
+                card.style.display = (matchesCategory && matchesSearch) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

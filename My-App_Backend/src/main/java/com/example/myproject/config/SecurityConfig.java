@@ -1,92 +1,78 @@
 package com.example.myproject.config;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-// import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.example.myproject.auth.*;
+import com.example.myproject.contact.ContactConfiguration;
+import com.example.myproject.content.ContentConfiguration;
+import com.example.myproject.repository.AccountRepository;
+import com.example.myproject.service.TokenService;
+import jakarta.servlet.DispatcherType;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.*;
+import java.util.List;
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import java.util.List;
-
-/**
- * Configures security settings for the application, including HTTP security,
- * request authorization, and password encoding. It defines a security filter
- * chain
- * that applies various security measures such as authentication and
- * authorization
- * for HTTP requests.
- */
 @Configuration
 @EnableWebSecurity
+@Import(AuthenticationConfiguration.class)
 public class SecurityConfig {
-
-    private static final Logger logger = LogManager.getLogger(SecurityConfig.class);
-
-    /**
-     * Defines the security filter chain that applies security configurations to
-     * HTTP requests.
-     * This method configures endpoint access permissions, requiring authentication
-     * for most requests
-     * while allowing unrestricted access to specified public endpoints. It sets up
-     * basic authentication,
-     * disables CSRF protection for API compatibility, and enforces stateless
-     * session management.
-     *
-     * @param http HttpSecurity configuration object used to customize security
-     *             configurations.
-     * @return The configured SecurityFilterChain.
-     * @throws Exception If an error occurs during configuration.
-     */
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, TokenService tokens,
+            ObjectProvider<AccountRepository> repositories) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
-                .cors(withDefaults())
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .formLogin(f -> f.disable())
-                .logout(l -> l.disable())
-                .httpBasic(withDefaults())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("/actuator/health", "/actuator/info").permitAll()
-                        .requestMatchers("/actuator/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .build();
+            // Authentication is exclusively an explicit Authorization header, not a browser cookie or Basic auth.
+            .csrf(csrf -> csrf.disable())
+            .cors(withDefaults())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .formLogin(form -> form.disable())
+            .logout(logout -> logout.disable())
+            .httpBasic(basic -> basic.disable())
+            .addFilterBefore(new BearerAuthenticationFilter(tokens, repositories), UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling(errors -> errors
+                .authenticationEntryPoint((request, response, failure) -> AuthResponses.unauthorized(response))
+                .accessDeniedHandler((request, response, failure) -> AuthResponses.write(response, 403, "forbidden")))
+            .authorizeHttpRequests(auth -> auth
+                // Preserve controller 400/404 responses during Spring Boot error dispatch.
+                .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+                .requestMatchers("/api/admin", "/api/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/login", "/api/register").permitAll()
+                .requestMatchers("/api/login", "/api/register").denyAll()
+                .requestMatchers(HttpMethod.POST, "/api/logout").authenticated()
+                .requestMatchers("/api/logout").denyAll()
+                .requestMatchers(HttpMethod.GET, "/api/account/**", "/api/dashboard").authenticated()
+                .requestMatchers(HttpMethod.HEAD, "/api/account/**", "/api/dashboard").authenticated()
+                .requestMatchers("/api/account/**", "/api/dashboard").denyAll()
+                .requestMatchers(HttpMethod.GET, "/api/projects/**", "/api/blog/**", "/api/media/**", "/api/content/**").permitAll()
+                .requestMatchers(HttpMethod.HEAD, "/api/projects/**", "/api/blog/**", "/api/media/**", "/api/content/**").permitAll()
+                .requestMatchers("/api/projects/**", "/api/blog/**", "/api/media/**", "/api/content/**").denyAll()
+                .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+                .requestMatchers("/actuator/**").hasRole("ADMIN")
+                .anyRequest().authenticated())
+            .build();
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000", "https://basel-homefixer.ch"));
-        cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        cfg.setAllowedHeaders(List.of("*"));
-        cfg.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", cfg);
+        CorsConfiguration legacy = new CorsConfiguration();
+        legacy.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000", "https://basel-homefixer.ch"));
+        legacy.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        legacy.setAllowedHeaders(List.of("*"));
+        legacy.setAllowCredentials(true);
+        var source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/contact", ContactConfiguration.cors());
+        source.registerCorsConfiguration("/api/contact/status", ContactConfiguration.cors());
+        for (String path : ContentConfiguration.PATHS) source.registerCorsConfiguration(path, ContentConfiguration.cors());
+        for (String path : AuthenticationConfiguration.PATHS) source.registerCorsConfiguration(path, AuthenticationConfiguration.cors());
+        source.registerCorsConfiguration("/**", legacy);
         return source;
     }
-
-    /**
-     * Creates a bean for encoding passwords using the BCrypt hashing algorithm.
-     * This encoder is used throughout the application for password encryption and
-     * verification.
-     *
-     * @return A PasswordEncoder instance using BCrypt hashing.
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Bean public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(12); }
 }

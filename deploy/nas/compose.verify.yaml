@@ -1,0 +1,47 @@
+# Separate isolated pre-release stack. NOT an override for the live Portainer stack.
+name: basel-homefixer-releasecheck
+services:
+  backend:
+    image: ${BACKEND_IMAGE:?Set candidate commit tag or digest}
+    user: "10001:10001"
+    read_only: true
+    tmpfs: ["/tmp:rw,nosuid,noexec,size=128m,mode=1777"]
+    environment:
+      SPRING_CONFIG_LOCATION: file:/etc/basel-homefixer/application-production.properties
+      SPRING_PROFILES_ACTIVE: production
+      SPRING_DATA_MONGODB_DATABASE: basel_homefixer_releasecheck
+      MONGODB_URI: ${VERIFY_MONGODB_URI:?Use a different user restricted to basel_homefixer_releasecheck}
+      AUTH_JWT_SECRET_BASE64: ${VERIFY_AUTH_JWT_SECRET_BASE64:?Use an independent staging signing key}
+      AUTH_PUBLIC_REGISTRATION_ENABLED: "false"
+      CONTENT_MEDIA_ROOT: /data/content/media
+      CONTACT_MAIL_ENABLED: "false"
+      ADMIN_MEDIA_CONCURRENT_UPLOADS: "1"
+    volumes:
+      - type: bind
+        source: ${OPS_RELEASE_DIR:?Set private candidate config directory}/application-production.properties
+        target: /etc/basel-homefixer/application-production.properties
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${VERIFY_CONTENT_ROOT:?Use separate empty staging content directory}
+        target: /data/content
+        bind: {create_host_path: false}
+    networks: [check]
+    labels: {traefik.enable: "false"}
+  frontend:
+    image: ${FRONTEND_IMAGE:?Set candidate commit tag or digest}
+    user: "101:101"
+    read_only: true
+    tmpfs: ["/tmp:rw,nosuid,noexec,size=32m,mode=1777"]
+    ports: ["${VERIFY_BIND_IP:-127.0.0.1}:38082:8082"]
+    volumes:
+      - type: bind
+        source: ${OPS_RELEASE_DIR:?Set private candidate config directory}/nginx.verify.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+        bind: {create_host_path: false}
+    networks: [check]
+    labels: {traefik.enable: "false"}
+networks:
+  check: {}
+

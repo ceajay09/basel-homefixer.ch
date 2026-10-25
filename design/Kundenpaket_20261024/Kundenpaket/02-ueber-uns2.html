@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über Uns – Basel Home Fixer</title>
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --color-primary: #2d5a3d;
+            --color-primary-light: #3d7a4d;
+            --color-gold: #d4a574;
+            --color-gold-light: #e8c9a0;
+            --color-silver: #c0c0c0;
+            --color-silver-light: #e8e8e8;
+            --color-white: #ffffff;
+            --color-off-white: #f9f8f6;
+            --color-dark-text: #1f1f1f;
+            --color-light-text: #5a5a5a;
+            --color-border: #d9d9d9;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+            --font-size-h1: 48px;
+            --font-size-h2: 32px;
+            --font-size-h3: 24px;
+            --font-size-body: 16px;
+            --font-size-small: 14px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 56px;
+            --spacing-xl: 80px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --max-width: 1200px;
+            --transition: all 0.3s ease;
+        }
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-body);
+            line-height: 1.7;
+            color: var(--color-dark-text);
+            background-color: var(--color-white);
+        }
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        a:hover {
+            color: var(--color-gold);
+        }
+        /* ===== UTILITY CLASSES ===== */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-body);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: var(--color-primary-light);
+            box-shadow: 0 6px 20px rgba(45, 90, 61, 0.25);
+            transform: translateY(-2px);
+        }
+        .section-title {
+            font-size: var(--font-size-h2);
+            font-weight: 700;
+            color: var(--color-dark-text);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            line-height: 1.3;
+        }
+        .section-title-accent {
+            color: var(--color-primary);
+        }
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-silver-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .header-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        nav {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        nav a {
+            font-weight: 500;
+            color: var(--color-dark-text);
+            font-size: var(--font-size-small);
+            transition: var(--transition);
+        }
+        nav a:hover {
+            color: var(--color-gold);
+        }
+        .lang-switch {
+            color: var(--color-light-text);
+            font-size: var(--font-size-small);
+            border-left: 1px solid var(--color-border);
+            padding-left: var(--spacing-md);
+        }
+        .lang-switch a {
+            margin: 0 var(--spacing-xs);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 3px;
+            background-color: var(--color-dark-text);
+            border-radius: 2px;
+        }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: var(--font-size-h1);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 0;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        /* ===== TEAM INTRO SECTION ===== */
+        .team-intro-section {
+            background-color: var(--color-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        .team-intro-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        .team-intro-image {
+            width: 100%;
+            height: 520px;
+            background-color: var(--color-silver-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .team-intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 35%;
+        }
+        .team-intro-text h2 {
+            font-size: var(--font-size-h2);
+            color: var(--color-dark-text);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
+        .team-intro-text p {
+            color: var(--color-light-text);
+            line-height: 1.9;
+            margin-bottom: var(--spacing-lg);
+            font-size: 16px;
+        }
+        .team-quote {
+            background-color: var(--color-off-white);
+            border-left: 5px solid var(--color-gold);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-top: var(--spacing-lg);
+        }
+        .team-quote p {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+        /* ===== TEAM SECTION ===== */
+        .team-section {
+            background-color: var(--color-off-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        .team-grid {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        .team-card {
+            background-color: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+        }
+        .team-card:hover {
+            box-shadow: 0 14px 32px rgba(45, 90, 61, 0.12);
+            transform: translateY(-6px);
+        }
+        .team-image {
+            width: 100%;
+            height: 340px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-size: var(--font-size-small);
+            overflow: hidden;
+        }
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .team-image.placeholder {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        }
+        .team-content {
+            padding: var(--spacing-lg);
+        }
+        .team-content h3 {
+            font-size: var(--font-size-h2);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        .team-role {
+            font-size: var(--font-size-body);
+            font-weight: 600;
+            color: var(--color-gold);
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .team-bio {
+            color: var(--color-light-text);
+            line-height: 1.9;
+            margin-bottom: var(--spacing-md);
+            font-size: 15px;
+        }
+        .team-expertise {
+            margin-bottom: var(--spacing-md);
+        }
+        .team-expertise-title {
+            font-size: var(--font-size-small);
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: var(--spacing-sm);
+        }
+        .expertise-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-sm);
+        }
+        .expertise-list li {
+            font-size: var(--font-size-small);
+            color: var(--color-light-text);
+            padding-left: 24px;
+            position: relative;
+        }
+        .expertise-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-gold);
+            font-weight: bold;
+        }
+        /* ===== VISION SECTION ===== */
+        .vision-section {
+            background-color: var(--color-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        .vision-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .vision-box {
+            background-color: var(--color-off-white);
+            border-left: 5px solid var(--color-gold);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        .vision-box h3 {
+            font-size: var(--font-size-h3);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        .vision-box p {
+            color: var(--color-light-text);
+            line-height: 1.9;
+        }
+        /* ===== VALUES SECTION ===== */
+        .values-section {
+            background-color: var(--color-off-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        .values-grid {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        .value-card {
+            background-color: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        .value-card:hover {
+            box-shadow: 0 10px 24px rgba(45, 90, 61, 0.1);
+            transform: translateY(-4px);
+            border-top: 3px solid var(--color-gold);
+        }
+        .value-icon {
+            font-size: 52px;
+            margin-bottom: var(--spacing-md);
+        }
+        .value-card h3 {
+            font-size: var(--font-size-h3);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        .value-card p {
+            color: var(--color-light-text);
+            font-size: var(--font-size-small);
+            line-height: 1.8;
+        }
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+        }
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .cta-section h2 {
+            font-size: var(--font-size-h2);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        .cta-button {
+            background-color: var(--color-gold);
+            color: var(--color-dark-text);
+            font-weight: 700;
+            font-size: 18px;
+            padding: 18px 56px;
+        }
+        .cta-button:hover {
+            background-color: var(--color-gold-light);
+            color: var(--color-dark-text);
+            transform: translateY(-2px);
+        }
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--color-dark-text);
+            color: var(--color-white);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        .footer-section h3 {
+            font-size: var(--font-size-h3);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-gold);
+        }
+        .footer-section p, .footer-section a {
+            color: #cccccc;
+            font-size: var(--font-size-small);
+            line-height: 1.9;
+        }
+        .footer-section a:hover {
+            color: var(--color-gold);
+        }
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: var(--spacing-lg);
+            text-align: center;
+            font-size: var(--font-size-small);
+            color: #999;
+        }
+        /* ===== DESIGN TEMPLATE NOTE ===== */
+        .design-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-small);
+            color: #856404;
+        }
+        .design-note a {
+            color: #856404;
+            text-decoration: underline;
+        }
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 768px) {
+            :root {
+                --font-size-h1: 32px;
+                --font-size-h2: 24px;
+                --font-size-h3: 18px;
+                --spacing-xl: 56px;
+                --spacing-lg: 40px;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                padding: var(--spacing-sm);
+            }
+            nav {
+                display: none;
+                gap: var(--spacing-sm);
+                width: 100%;
+                flex-direction: column;
+            }
+            nav.mobile-open {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .team-intro-content {
+                grid-template-columns: 1fr;
+            }
+            .team-intro-image {
+                height: 380px;
+            }
+            .team-quote p {
+                font-size: 20px;
+            }
+            .team-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            .expertise-list {
+                grid-template-columns: 1fr;
+            }
+            .team-image {
+                height: 280px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            .header-content {
+                padding: var(--spacing-sm);
+            }
+            .hero {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+            .hero h1 {
+                font-size: 24px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .team-content,
+            .vision-box,
+            .value-card {
+                padding: var(--spacing-md);
+            }
+            .btn {
+                padding: 14px 32px;
+                font-size: 14px;
+            }
+            .team-intro-text h2 {
+                font-size: 24px;
+            }
+            .team-quote p {
+                font-size: 18px;
+            }
+            .team-intro-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== DESIGN NOTE ===== -->
+    <div class="design-note">
+        <strong>Designvorlage – Über Uns:</strong> Diese Hinweisleiste gehört nicht zum Website-Design.
+        <a href="#overview">Zur Übersicht</a> | <a href="#guide">Anleitung</a>
+    </div>
+    <!-- ===== HEADER ===== -->
+    <header data-design-id="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>Basel Home Fixer</span>
+            </div>
+            <nav data-design-id="nav-main">
+                <a href="01-startseite.html">Startseite</a>
+                <a href="02-ueber-uns.html">Über Uns</a>
+                <a href="#dienstleistungen">Dienstleistungen</a>
+                <a href="#projekte">Projekte</a>
+                <a href="#blog">Blog</a>
+                <a href="#kontakt">Kontakt</a>
+                <span class="lang-switch">
+                    <a href="#de">DE</a> / <a href="#en">EN</a>
+                </span>
+            </nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" data-design-id="hero">
+        <div class="container">
+            <h1>Das Team hinter Basel Home Fixer</h1>
+            <p>Expertise, Partnerschaft und Leidenschaft für intelligente Wohnungslösungen</p>
+        </div>
+    </section>
+    <!-- ===== TEAM INTRO SECTION ===== -->
+    <section class="team-intro-section" data-design-id="team-intro">
+        <div class="container">
+            <h2 class="section-title">Wer wir <span class="section-title-accent">sind</span></h2>
+            <div class="team-intro-content">
+                <div class="team-intro-image">
+                    <img src="assets/Portrait.jpg" alt="Pascal Jaquiéry & Divine Mon - Basel Home Fixer Team">
+                </div>
+                <div class="team-intro-text">
+                    <p>
+                        Pascal und Divine sind mehr als Partner – sie sind Visionäre, die an eine einfache Wahrheit glauben: Renovierung sollte nicht stressig sein, sondern eine Freude. Mit über 16 Jahren kombinierter Erfahrung in Projektmanagement, Real-Estate, Renovationen und Unternehmertum bringen sie eine einzigartige Perspektive mit.
+                    </p>
+                    <p>
+                        Was uns ausmacht, ist nicht nur unsere technische Expertise, sondern die Art, wie wir arbeiten – mit offener Kommunikation, echter Sorge um Ihre Zufriedenheit und der Überzeugung, dass gute Arbeit freundlich, persönlich und vertrauensvoll sein kann.
+                    </p>
+                    <div class="team-quote">
+                        <p>"Living starts at home"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== TEAM SECTION ===== -->
+    <section class="team-section" data-design-id="team">
+        <div class="container">
+            <h2 class="section-title">Unsere <span class="section-title-accent">Partner</span></h2>
+            <div class="team-grid">
+                <!-- Pascal Jaquiéry -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="assets/Pascal.jpg" alt="Pascal Jaquiéry - Partner & Projektleiter">
+                    </div>
+                    <div class="team-content">
+                        <h3>Pascal Jaquiéry</h3>
+                        <div class="team-role">Partner & Projektleiter</div>
+                        <p class="team-bio">
+                            Projektmanager und zertifizierter Elektroinstallateur mit 16 Jahren praktischer Erfahrung in Wohnungsrenovationen. Pascal leitet alle technischen und koordinatorischen Aspekte und stellt sicher, dass jedes Projekt mit Exzellenz und Präzision ausgeführt wird.
+                        </p>
+                        <div class="team-expertise">
+                            <div class="team-expertise-title">Spezialgebiete</div>
+                            <ul class="expertise-list">
+                                <li>Projektmanagement (End-to-End)</li>
+                                <li>Elektroarbeiten & Zertifikationen</li>
+                                <li>Heizsystemdesign</li>
+                                <li>Küchen- & Badezimmerrenovation</li>
+                                <li>Bodenbelag-Spezialist</li>
+                                <li>Smart-Home-Integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Divine Mon -->
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="assets/Divine.jpg" alt="Divine Mon - Partner Marketing, Contracting & Administration">
+                    </div>
+                    <div class="team-content">
+                        <h3>Divine Mon</h3>
+                        <div class="team-role">Partner – Marketing, Contracting & Administration</div>
+                        <p class="team-bio">
+                            Mit Erfahrung in Projektmanagement, Unternehmertum und Immobilien, verantwortet Divine die Geschäftsentwicklung, Marketing und Administrative Operationen. Divine stellt sicher, dass Basel Home Fixer als vertrauensvoller, professioneller Partner wahrgenommen wird.
+                        </p>
+                        <div class="team-expertise">
+                            <div class="team-expertise-title">Spezialgebiete</div>
+                            <ul class="expertise-list">
+                                <li>Projektmanagement</li>
+                                <li>Unternehmertum</li>
+                                <li>Immobilienmarkt</li>
+                                <li>Marketing & Branding</li>
+                                <li>Kundenbeziehungen</li>
+                                <li>Geschäftsadministration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== VISION SECTION ===== -->
+    <section class="vision-section" data-design-id="vision">
+        <div class="container">
+            <div class="vision-content">
+                <h2 class="section-title">Unsere <span class="section-title-accent">Vision</span></h2>
+
+                <div class="vision-box">
+                    <h3>🎯 Mission</h3>
+                    <p>
+                        Basel Home Fixer schliesst eine kritische Lücke für Auswanderer und Hausbesitzer in Basel. Wir kombinieren praktische Ausführung mit fachkundigem Consulting, um nicht nur Häuser zu renovieren, sondern Lebensräume zu transformieren – intelligent, kosteneffektiv und stressfrei.
+                    </p>
+                </div>
+                <div class="vision-box">
+                    <h3>🌟 Was uns auszeichnet</h3>
+                    <p>
+                        Während andere Standard-Lösungen anbieten, liefern wir <strong>intelligente, massgeschneiderte Lösungen</strong>. Unser 16 Jahre gesammeltes Fachwissen, kombiniert mit unternehmerischem Denken, ermöglicht es uns, Probleme zu erkennen, bevor sie entstehen – und Chancen zu nutzen, die andere übersehen.
+                    </p>
+                </div>
+                <div class="vision-box">
+                    <h3>🚀 Unsere Ziele</h3>
+                    <p>
+                        Wir möchten Basel Home Fixer als den vertrauenswürdigsten Advisor für Wohnungsrenovationen etablieren. Durch ein Netzwerk zuverlässiger Spezialisten, technische Excellence und echte Kundenorientierung wollen wir jede Renovation zu einem stressfreien, zufriedenstellenden Erlebnis machen.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== VALUES SECTION ===== -->
+    <section class="values-section" data-design-id="values">
+        <div class="container">
+            <h2 class="section-title">Unsere <span class="section-title-accent">Werte</span></h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Transparenz</h3>
+                    <p>Klare Kommunikation, ehrliche Preise, keine versteckten Überraschungen. Sie wissen immer, woran Sie sind.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🏆</div>
+                    <h3>Exzellenz</h3>
+                    <p>Technische Präzision, intelligente Lösungen, Qualität in jedem Detail. Wir liefern nicht Standard – wir liefern beste Ergebnisse.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Partnerschaft</h3>
+                    <p>Wir sind Ihr Partner, nicht nur Ihr Dienstleister. Ihr Erfolg ist unser Erfolg.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Innovation</h3>
+                    <p>Neueste Technologien, intelligente Systeme, zukunftssichere Lösungen. Wir bleiben am Puls der Zeit.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">😌</div>
+                    <h3>Stressfreiheit</h3>
+                    <p>End-to-End-Koordination bedeutet: Sie entspannen sich, während wir alles handhaben.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3>Inklusion</h3>
+                    <p>Spezialisiert auf Expats & Auswanderer. Deutsch & Englisch, spezialisiert auf Ihre Bedürfnisse.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section" data-design-id="cta">
+        <div class="cta-content">
+            <h2>Lassen Sie uns Ihre Wohnung transformieren</h2>
+            <p>Eine kostenlose, personalisierte Erstberatung – unverbindlich, ohne versteckte Kosten.</p>
+            <button class="btn cta-button">Kostenlose Erstberatung buchen</button>
+        </div>
+    </section>
+    <!-- ===== FOOTER ===== -->
+    <footer data-design-id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Basel Home Fixer</h3>
+                <p><strong>Projektmanager & Zertifizierter Elektroinstallateur</strong></p>
+                <p>16 Jahre Erfahrung in Wohnungsrenovationen</p>
+                <p style="margin-top: var(--spacing-md);">Spezialgebiete: Heizsysteme, Küchen, Bodenbeläge, Badezimmer, Smart Home</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <p><strong>Pascal Jaquiéry</strong></p>
+                <p><strong>Divine Mon</strong></p>
+                <p>📧 <a href="mailto:baselhomefixer@gmail.com">baselhomefixer@gmail.com</a></p>
+                <p>📱 <a href="tel:+41762059285">+41 76 205 92 85</a></p>
+                <p>📍 Basel, Schweiz</p>
+            </div>
+            <div class="footer-section">
+                <h3>Folgen Sie uns</h3>
+                <p><a href="#instagram">Instagram: @basel-homefixer</a></p>
+                <p><a href="#website">🌐 www.basel-homefixer.ch</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Basel Home Fixer. Alle Rechte vorbehalten. | <a href="#privacy" style="color: #999;">Datenschutz</a> | <a href="#imprint" style="color: #999;">Impressum</a></p>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav[data-design-id="nav-main"]');
+        hamburger.addEventListener('click', function() {
+            nav.classList.toggle('mobile-open');
+        });
+        // Close menu when link is clicked
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('mobile-open');
+            });
+        });
+    </script>
+</body>
+</html>

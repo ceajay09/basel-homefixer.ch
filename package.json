@@ -4,5 +4,6 @@
     "start": "npm --prefix My-App_Frontend run start",
     "dev": "npm --prefix My-App_Frontend run start",
     "typecheck": "npm --prefix My-App_Frontend run typecheck"
-  }
+  },
+  "name": "basel-homefixer.ch"
 }

@@ -1,0 +1,415 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "kitchen",
+      "dates": [
+        "2026-06"
+      ],
+      "areaM2": 25,
+      "duration": {
+        "min": 4,
+        "max": 6,
+        "unit": "months"
+      },
+      "investmentChf": 37000,
+      "complexity": 5,
+      "slug": "kitchen",
+      "categories": [
+        "kitchen"
+      ],
+      "title": {
+        "de": "Küchenmodernisierung – Gas zu Elektrizität",
+        "en": "Kitchen modernisation – From gas to electricity"
+      },
+      "excerpt": {
+        "de": "Renovierung einer älteren Wohnungsküche bei Umstellung von Gas auf Elektrizität.",
+        "en": "Renovating an older kitchen while converting its infrastructure from gas to electricity."
+      },
+      "description": {
+        "de": "Komplette Renovierung einer {{area}} m² Küche mit Umstellung von Gas auf Elektrizität. Neue Elektroinstallation, Wasseranschlüsse und aufwendige Gips-Schlitzarbeiten. Die Küche mit zwei Bereichen (4,5 Meter) wurde mit elegantem schwarzem Stein optimiert, um maximale Funktionalität in einem engen Raum zu erreichen.",
+        "en": "Complete renovation of a {{area}} m² kitchen, converting from gas to electricity. New electrical installation, water connections and extensive plaster chasing work. The kitchen’s two sections (4.5 metres) were finished with elegant black stone to maximise functionality in a confined space."
+      },
+      "location": {
+        "de": "Unteres Birstal (Baselland)",
+        "en": "Lower Birs Valley (Basel-Landschaft)"
+      },
+      "challenge": {
+        "de": "Renovierung einer älteren Wohnungsküche bei Umstellung von Gas auf Elektrizität.",
+        "en": "Renovating an older kitchen while converting its infrastructure from gas to electricity."
+      },
+      "result": {
+        "de": "Vollständig moderne, energieeffiziente Küche – {{investment}} Investition.",
+        "en": "A fully modern, energy-efficient kitchen – {{investment}} investment."
+      },
+      "tags": {
+        "de": [
+          "Küche",
+          "Licht",
+          "Design",
+          "Elektrik"
+        ],
+        "en": [
+          "Kitchen",
+          "Lighting",
+          "Design",
+          "Electrical"
+        ]
+      },
+      "coverAlt": {
+        "de": "Modernisierte Küche mit neuer Ausstattung",
+        "en": "Modernised kitchen with new fittings"
+      },
+      "coverImageId": "kitchen-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": 1
+    },
+    {
+      "id": "balcony",
+      "dates": [
+        "2023-08"
+      ],
+      "areaM2": 12,
+      "duration": {
+        "min": 2,
+        "max": 4,
+        "unit": "months"
+      },
+      "investmentChf": 12000,
+      "complexity": 3,
+      "slug": "balcony",
+      "categories": [
+        "balcony"
+      ],
+      "title": {
+        "de": "Balkonverglasung – Nahtlose Ausführung",
+        "en": "Balcony glazing – Seamless execution"
+      },
+      "excerpt": {
+        "de": "Umwandlung eines offenen Balkons in einen wettergeschützten Raum.",
+        "en": "Converting an open balcony into a weather-protected space."
+      },
+      "description": {
+        "de": "Umwandlung eines offenen Balkons in einen wettergeschützten Raum. Falt-/Slap Schiebebalkonglas mit 8mm Extrastärke aufgrund der windexponierten Fläche. Fliesenboden mit 40mm XPS-Isolation. Gesamtkonzept und Projektplanung in Zusammenarbeit mit Hersteller in Riga, Lettland. Vergrösserter nutzbarer Wohnraum mit professionellen Ergebnissen.",
+        "en": "Conversion of an open balcony into a weather-protected space. Folding/sliding balcony glazing with extra-thick 8 mm glass for the wind-exposed location. Tiled floor with 40 mm XPS insulation. Overall concept and project planning in cooperation with a manufacturer in Riga, Latvia. More usable living space with professional results."
+      },
+      "location": {
+        "de": "Allschwil (Baselland)",
+        "en": "Allschwil (Basel-Landschaft)"
+      },
+      "challenge": {
+        "de": "Umwandlung eines offenen Balkons in einen wettergeschützten Raum.",
+        "en": "Converting an open balcony into a weather-protected space."
+      },
+      "result": {
+        "de": "Vergrösserter nutzbarer Wohnraum mit professionellen Ergebnissen – {{investment}}.",
+        "en": "More usable living space with professional results – {{investment}}."
+      },
+      "tags": {
+        "de": [
+          "Balkon",
+          "Fenster",
+          "Design",
+          "Erweiterung"
+        ],
+        "en": [
+          "Balcony",
+          "Windows",
+          "Design",
+          "Extension"
+        ]
+      },
+      "coverAlt": {
+        "de": "Verglaster Balkon mit wettergeschütztem Wohnraum",
+        "en": "Glazed balcony providing weather-protected living space"
+      },
+      "coverImageId": "balcony-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": 2
+    },
+    {
+      "id": "heating",
+      "dates": [
+        "2024-09"
+      ],
+      "apartments": 18,
+      "duration": {
+        "min": 4,
+        "max": 8,
+        "unit": "months"
+      },
+      "investmentChf": 60000,
+      "complexity": 5,
+      "slug": "heating",
+      "categories": [
+        "heating"
+      ],
+      "title": {
+        "de": "Heizsystemmodernisierung – Technische Exzellenz",
+        "en": "Heating modernisation – Technical excellence"
+      },
+      "excerpt": {
+        "de": "Upgrade über 2 Wohnhäuser ({{apartments}} Einheiten) mit kritischen Details.",
+        "en": "Upgrading two residential buildings ({{apartments}} units), with close attention to critical details."
+      },
+      "description": {
+        "de": "Umfassende Modernisierung der Heizsysteme über 2 Wohnhäuser mit insgesamt {{apartments}} Wohnungen. Ersatz alter Heizsysteme durch moderne Wärmepumpen mit Wärmespeicher und Heizverteilern. Nachrüstung von Wärmezählern in allen Wohnungen für Abrechnung nach dem Verursacherprinzip. Spezielle technische Herausforderungen durch Wärmemängebedarfs-Kalkulation für Warmwasser gelöst. Komplexe Mehrfamilienhaus-Koordination mit STWEG-Verwaltung.",
+        "en": "Comprehensive heating modernisation across two residential buildings with a total of {{apartments}} apartments. Old heating systems replaced by modern heat pumps with thermal storage and distribution manifolds. Heat meters retrofitted in every apartment for consumption-based billing. Specific technical challenges resolved through calculations of hot water heat demand. Complex coordination with the condominium owners’ association management."
+      },
+      "location": {
+        "de": "Allschwil (Baselland)",
+        "en": "Allschwil (Basel-Landschaft)"
+      },
+      "challenge": {
+        "de": "Upgrade über 2 Wohnhäuser ({{apartments}} Einheiten) mit kritischen Details.",
+        "en": "Upgrading two residential buildings ({{apartments}} units), with close attention to critical details."
+      },
+      "result": {
+        "de": "Energieeffiziente Heizung mit Kostentransparenz – {{investment}} Investition.",
+        "en": "Energy-efficient heating with transparent costs – {{investment}} investment."
+      },
+      "tags": {
+        "de": [
+          "Heizung",
+          "Energie",
+          "Mehrfamilienhaus",
+          "Modernisierung"
+        ],
+        "en": [
+          "Heating",
+          "Energy",
+          "Apartment building",
+          "Modernisation"
+        ]
+      },
+      "coverAlt": {
+        "de": "Modernisierte Heizungsanlage mit Rohrleitungen",
+        "en": "Modernised heating system with pipework"
+      },
+      "coverImageId": "heating-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": 3
+    },
+    {
+      "id": "electrical",
+      "dates": [
+        "2022-01"
+      ],
+      "areaM2": 80,
+      "investmentChf": 15000,
+      "slug": "electrical",
+      "categories": [
+        "electrical"
+      ],
+      "title": {
+        "de": "Komplette Elektrorenovation + Smart Home",
+        "en": "Complete electrical renovation + smart home"
+      },
+      "excerpt": {
+        "de": "Vollständige Erneuerung der Elektroinstallation in einer {{area}} m² Wohnung mit modernem Smart-Home-System. Neue hochwertige Elektroverteilung, intelligente Schalter (Feller Edizio Due), Lichtsteuersystem und Smart-Home-Integration. Alle Steckdosen auf Doppeldosen aufgespritzt. Zusätzliche Nachrüstung von elektrischen Raumthermostaten für zimmerindividuelle Steuerung. Bewältigung der erhöhten Anforderungen moderner Elektroinstallationen (deutlich mehr Kabel als früher erforderlich).",
+        "en": "Complete replacement of the electrical installation in an {{area}} m² apartment with a modern smart home system. New high-quality distribution board, intelligent switches (Feller Edizio Due), lighting control and smart home integration. All sockets upgraded to double sockets. Electrical room thermostats also retrofitted for individual room control. Addressed the increased demands of modern electrical installations, which require significantly more cabling than older systems."
+      },
+      "description": {
+        "de": "Vollständige Erneuerung der Elektroinstallation in einer {{area}} m² Wohnung mit modernem Smart-Home-System. Neue hochwertige Elektroverteilung, intelligente Schalter (Feller Edizio Due), Lichtsteuersystem und Smart-Home-Integration. Alle Steckdosen auf Doppeldosen aufgespritzt. Zusätzliche Nachrüstung von elektrischen Raumthermostaten für zimmerindividuelle Steuerung. Bewältigung der erhöhten Anforderungen moderner Elektroinstallationen (deutlich mehr Kabel als früher erforderlich).",
+        "en": "Complete replacement of the electrical installation in an {{area}} m² apartment with a modern smart home system. New high-quality distribution board, intelligent switches (Feller Edizio Due), lighting control and smart home integration. All sockets upgraded to double sockets. Electrical room thermostats also retrofitted for individual room control. Addressed the increased demands of modern electrical installations, which require significantly more cabling than older systems."
+      },
+      "location": {
+        "de": "Allschwil (Baselland)",
+        "en": "Allschwil (Basel-Landschaft)"
+      },
+      "challenge": {},
+      "result": {},
+      "tags": {
+        "de": [
+          "Elektrik",
+          "Smart Home",
+          "Modernisierung",
+          "Umbau"
+        ],
+        "en": [
+          "Electrical",
+          "Smart home",
+          "Modernisation",
+          "Conversion"
+        ]
+      },
+      "coverAlt": {
+        "de": "Neue Elektroverteilung mit Schutzschaltern und Verkabelung",
+        "en": "New electrical distribution board with circuit breakers and wiring"
+      },
+      "coverImageId": "electrical-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": null
+    },
+    {
+      "id": "entrance-door",
+      "dates": [
+        "2022-03"
+      ],
+      "doors": 1,
+      "duration": {
+        "min": 6,
+        "max": 6,
+        "unit": "weeks"
+      },
+      "slug": "entrance-door",
+      "categories": [
+        "windows"
+      ],
+      "title": {
+        "de": "Energiesparende Hauseingangs-Türen",
+        "en": "Energy-efficient entrance doors"
+      },
+      "excerpt": {
+        "de": "Einbau einer 3-fach verglasten Eingangstür in einer denkmalgeschützten Altbauwohnung. Bezug direkt beim Hersteller für optimale Anpassung. Einbau in massive Steinwand unter Berücksichtigung der Denkmalschutz-Anforderungen. Moderne Energieeffizienz trifft auf historische Architektur – eine anspruchsvolle Kombination, die erfolgreich bewältigt wurde.",
+        "en": "Installation of a triple-glazed entrance door in a listed period apartment. Sourced directly from the manufacturer for an optimal fit. Installed in a solid stone wall while taking heritage requirements into account. Modern energy efficiency combined with historic architecture – a demanding project successfully completed."
+      },
+      "description": {
+        "de": "Einbau einer 3-fach verglasten Eingangstür in einer denkmalgeschützten Altbauwohnung. Bezug direkt beim Hersteller für optimale Anpassung. Einbau in massive Steinwand unter Berücksichtigung der Denkmalschutz-Anforderungen. Moderne Energieeffizienz trifft auf historische Architektur – eine anspruchsvolle Kombination, die erfolgreich bewältigt wurde.",
+        "en": "Installation of a triple-glazed entrance door in a listed period apartment. Sourced directly from the manufacturer for an optimal fit. Installed in a solid stone wall while taking heritage requirements into account. Modern energy efficiency combined with historic architecture – a demanding project successfully completed."
+      },
+      "location": {
+        "de": "Münchenstein (Baselland)",
+        "en": "Münchenstein (Basel-Landschaft)"
+      },
+      "challenge": {},
+      "result": {},
+      "tags": {
+        "de": [
+          "Fenster",
+          "Türen",
+          "Energiesparen",
+          "Altbau",
+          "Denkmalschutz"
+        ],
+        "en": [
+          "Windows",
+          "Doors",
+          "Energy saving",
+          "Period building",
+          "Heritage"
+        ]
+      },
+      "coverAlt": {
+        "de": "Verglaste Eingangstür in einer bestehenden Steinöffnung",
+        "en": "Glazed entrance door installed in an existing stone doorway"
+      },
+      "coverImageId": "entrance-door-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": null
+    },
+    {
+      "id": "thermostats",
+      "dates": [
+        "2026-02",
+        "2024-04"
+      ],
+      "thermostats": 15,
+      "investmentChf": 1600,
+      "slug": "thermostats",
+      "categories": [
+        "heating"
+      ],
+      "title": {
+        "de": "Nachrüsten Raumthermostate für Bodenheizung + Smart Home",
+        "en": "Retrofitting underfloor heating room thermostats + smart home"
+      },
+      "excerpt": {
+        "de": "Nachrüstung von {{thermostats}} Funk-Raumthermostaten mit Smart-Home-Schnittstelle über zwei Objekte: Objekt 1 (Haus mit 2 Stockwerken, 2 Heizverteiler, 9 Heizkreisläufe) und Objekt 2 (Wohnung mit 6 Heizkreisläufen). Stromanschluss für Heizverteiler unterputz ohne sichtbare Kabel installiert – eine anspruchsvolle Herausforderung. Smart-Home-Integration bietet hohen Mehrwert durch Automatisierung und Vernetzung mit anderen Smart-Home-Systemen. Zimmerindividuelle Temperatursteuerung für optimale Energieeffizienz.",
+        "en": "Retrofitting {{thermostats}} wireless room thermostats with a smart home interface across two properties: a two-storey house with two heating manifolds and nine heating circuits, and an apartment with six heating circuits. Concealed power connections for the heating manifolds were installed without visible cabling – a demanding task. Smart home integration adds value through automation and connections to other smart home systems. Individual room temperature control supports energy efficiency."
+      },
+      "description": {
+        "de": "Nachrüstung von {{thermostats}} Funk-Raumthermostaten mit Smart-Home-Schnittstelle über zwei Objekte: Objekt 1 (Haus mit 2 Stockwerken, 2 Heizverteiler, 9 Heizkreisläufe) und Objekt 2 (Wohnung mit 6 Heizkreisläufen). Stromanschluss für Heizverteiler unterputz ohne sichtbare Kabel installiert – eine anspruchsvolle Herausforderung. Smart-Home-Integration bietet hohen Mehrwert durch Automatisierung und Vernetzung mit anderen Smart-Home-Systemen. Zimmerindividuelle Temperatursteuerung für optimale Energieeffizienz.",
+        "en": "Retrofitting {{thermostats}} wireless room thermostats with a smart home interface across two properties: a two-storey house with two heating manifolds and nine heating circuits, and an apartment with six heating circuits. Concealed power connections for the heating manifolds were installed without visible cabling – a demanding task. Smart home integration adds value through automation and connections to other smart home systems. Individual room temperature control supports energy efficiency."
+      },
+      "location": {
+        "de": "Binningen & Allschwil (Baselland)",
+        "en": "Binningen & Allschwil (Basel-Landschaft)"
+      },
+      "challenge": {},
+      "result": {},
+      "tags": {
+        "de": [
+          "Heizung",
+          "Raumthermostat",
+          "Bodenheizung",
+          "Smart Home",
+          "Energiesparen",
+          "Modernisierung"
+        ],
+        "en": [
+          "Heating",
+          "Room thermostat",
+          "Underfloor heating",
+          "Smart home",
+          "Energy saving",
+          "Modernisation"
+        ]
+      },
+      "coverAlt": {
+        "de": "Heizverteiler der Bodenheizung mit Stellgliedern und Steuerung",
+        "en": "Underfloor heating manifold with actuators and smart control equipment"
+      },
+      "coverImageId": "thermostats-cover",
+      "mediaIds": [],
+      "status": "draft",
+      "publishedAt": null,
+      "homeOrder": null
+    }
+  ],
+  "blogs": [],
+  "media": {
+    "kitchen-cover": {
+      "filename": "Küche.jpg",
+      "alt": {
+        "de": "Modernisierte Küche mit neuer Ausstattung",
+        "en": "Modernised kitchen with new fittings"
+      }
+    },
+    "balcony-cover": {
+      "filename": "Balcony.jpg",
+      "alt": {
+        "de": "Verglaster Balkon mit wettergeschütztem Wohnraum",
+        "en": "Glazed balcony providing weather-protected living space"
+      }
+    },
+    "heating-cover": {
+      "filename": "Moderne_Heizung.jpg",
+      "alt": {
+        "de": "Modernisierte Heizungsanlage mit Rohrleitungen",
+        "en": "Modernised heating system with pipework"
+      }
+    },
+    "electrical-cover": {
+      "filename": "Elektro.jpg",
+      "alt": {
+        "de": "Neue Elektroverteilung mit Schutzschaltern und Verkabelung",
+        "en": "New electrical distribution board with circuit breakers and wiring"
+      }
+    },
+    "entrance-door-cover": {
+      "filename": "Haustüre.jpg",
+      "alt": {
+        "de": "Verglaste Eingangstür in einer bestehenden Steinöffnung",
+        "en": "Glazed entrance door installed in an existing stone doorway"
+      }
+    },
+    "thermostats-cover": {
+      "filename": "Bodenheizung.jpg",
+      "alt": {
+        "de": "Heizverteiler der Bodenheizung mit Stellgliedern und Steuerung",
+        "en": "Underfloor heating manifold with actuators and smart control equipment"
+      }
+    }
+  }
+}

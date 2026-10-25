@@ -1,0 +1,6 @@
+Hier eigene Bilder und Logos ablegen.
+Einfache Dateinamen verwenden, z. B. kueche.jpg oder logo.svg.
+Der HTML-Pfad dazu lautet assets/kueche.jpg.
+Beim KI-Chat dieselben Bilder anhängen und ihren Dateinamen angeben.
+Die mitgelieferten Platzhalter kannst du ersetzen.
+Die beiden drawio.svg-Dateien stammen aus der bisherigen technischen Informationsseite.

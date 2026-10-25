@@ -1,6 +1,6 @@
 {
   "aboutUs": {
-    "title": "About Us",
+    "title": "The team behind Basel Home Fixer",
     "contactDetails": "Contact details",
     "qualification": "Qualification:",
     "qualificationDetail": "Project Manager, Certified Electrician | 16 years experience | Specialties: Heating Systems, Kitchens, Flooring, Bathrooms, Smart Home",
@@ -30,7 +30,91 @@
     "practicalProject": "Balcony Glazing – Seamless Project Execution",
     "practicalProjectDetail": "Transform an open balcony into an enclosed, weather-protected space through complete planning, measurement, production coordination, and installation.\n\nCHF 12,000 investment | Expanded usable living space with professional results\n\nEnd-to-end management removes stress from the customer. We handle every phase so you enjoy the result.",
     "practicalProjectTasks": "Detailed planning and precise measurements, Production coordination with reliable partners, Professional installation ensuring structural integrity and weatherproofing",
-    "moreDetails": "More details..."
+    "moreDetails": "More details...",
+    "subtitle": "Expertise, partnership and a passion for smart home solutions",
+    "introTitle": "Who we are",
+    "teamImageAlt": "Pascal Jaquiéry and Divine Mon together – the Basel Home Fixer team",
+    "introParagraphs": [
+      "Pascal and Divine are more than partners – they are visionaries who believe in a simple truth: renovation should be a pleasure rather than a source of stress. With over 16 years of combined experience in project management, real estate, renovations and entrepreneurship, they bring a unique perspective.",
+      "What sets us apart is both our technical expertise and the way we work: open communication, genuine care for your satisfaction and the belief that good work can be friendly, personal and built on trust."
+    ],
+    "quote": "Living starts at home",
+    "partnersTitle": "Our partners",
+    "expertiseLabel": "Areas of expertise",
+    "members": {
+      "pascal": {
+        "name": "Pascal Jaquiéry",
+        "role": "Partner & project lead",
+        "imageAlt": "Portrait of Pascal Jaquiéry",
+        "bio": "A project manager and certified electrician with 16 years of practical experience in home renovations. Pascal leads all technical and coordination aspects, ensuring that each project is delivered with excellence and precision.",
+        "expertise": [
+          "End-to-end project management",
+          "Electrical work & certifications",
+          "Heating system design",
+          "Kitchen & bathroom renovation",
+          "Flooring specialist",
+          "Smart home integration"
+        ]
+      },
+      "divine": {
+        "name": "Divine Mon",
+        "role": "Partner – marketing, contracting & administration",
+        "imageAlt": "Portrait of Divine Mon",
+        "bio": "With experience in project management, entrepreneurship and real estate, Divine is responsible for business development, marketing and administrative operations. Divine ensures that Basel Home Fixer is seen as a trusted, professional partner.",
+        "expertise": [
+          "Project management",
+          "Entrepreneurship",
+          "Real estate market",
+          "Marketing & branding",
+          "Customer relationships",
+          "Business administration"
+        ]
+      }
+    },
+    "visionTitle": "Our vision",
+    "vision": [
+      {
+        "title": "Mission",
+        "description": "Basel Home Fixer fills a critical gap for expats and homeowners in Basel. We combine practical delivery with expert consulting to transform living spaces through smart, cost-effective and stress-free renovations."
+      },
+      {
+        "title": "What sets us apart",
+        "description": "We deliver intelligent, tailored solutions. Our expertise gathered over 16 years, combined with entrepreneurial thinking, helps us identify problems before they arise and recognise opportunities others overlook."
+      },
+      {
+        "title": "Our goals",
+        "description": "We aim to establish Basel Home Fixer as the most trusted adviser for home renovations. Through a network of reliable specialists, technical excellence and a strong customer focus, we want to make every renovation a stress-free, satisfying experience."
+      }
+    ],
+    "valuesTitle": "Our values",
+    "values": [
+      {
+        "title": "Transparency",
+        "description": "Clear communication, honest prices and no hidden surprises. You always know where you stand."
+      },
+      {
+        "title": "Excellence",
+        "description": "Technical precision, smart solutions and quality in every detail. We aim to deliver the best results."
+      },
+      {
+        "title": "Partnership",
+        "description": "We are your partner as well as your service provider. Your success is our success."
+      },
+      {
+        "title": "Innovation",
+        "description": "The latest technologies, intelligent systems and solutions built for the future. We keep up with developments."
+      },
+      {
+        "title": "Peace of mind",
+        "description": "End-to-end coordination means you can relax while we take care of everything."
+      },
+      {
+        "title": "Inclusion",
+        "description": "Specialising in expats and newcomers. German and English, with a focus on your needs."
+      }
+    ],
+    "ctaTitle": "Let’s transform your home",
+    "ctaDescription": "A free, personalised initial consultation – no obligation, no hidden costs."
   },
   "blog": {
     "mainFeaturedPost": {
@@ -69,7 +153,7 @@
     "outroText": "✓ Transparent Pricing – No surprises, clear breakdowns | ✓ Expert Solutions – Right-sized, intelligent approach (not oversized or standard) | ✓ Trusted Partners – Reliable suppliers and specialists | ✓ Your Advocate – We negotiate on your behalf | ✓ Seamless Execution – End-to-end coordination so you don't have to | ✓ German & English – Clear communication throughout"
   },
   "services": {
-    "title": "About this website",
+    "title": "Our services – specialist solutions for your home",
     "introduction": {
       "title": "Introduction",
       "text": "This personal webpage serves as a platform to introduce myself and provide a detailed overview of the technologies and methodologies used in its development. It reflects my technical prowess in web development, illustrating a proficient use of various tools from front to back end. For additional details, please see the GitHub account linked in the footer."
@@ -118,7 +202,514 @@
     "summary": {
       "title": "Summary",
       "text": "Designed for robustness, security, and responsiveness, this webpage leverages state-of-the-art technology in software development. It embodies my capability as a software developer, prepared to address professional challenges in the technology sector."
-    }
+    },
+    "subtitle": "From essential repairs to intelligent renovations – we provide tailored solutions for every project.",
+    "introTitle": "What we offer",
+    "introDescription": "Basel Home Fixer specialises in complete renovations and intelligent upgrades. With over 16 years of experience, we combine technical expertise with personal advice to transform your home.",
+    "catalogTitle": "Our core services",
+    "featuresLabel": "What is included",
+    "moreButton": "Learn more",
+    "consultationButton": "Book a free consultation",
+    "freeConsultation": "Free initial consultation",
+    "processTitle": "Our process",
+    "faqTitle": "Frequently asked questions",
+    "ctaTitle": "Ready for your next project?",
+    "ctaDescription": "Contact us for a free, personalised consultation – without obligation or hidden costs.",
+    "catalog": [
+      {
+        "id": "kitchen",
+        "title": "Kitchen renovation & modernisation",
+        "description": "Complete kitchen renovations with infrastructure upgrades, modern systems and layouts tailored to your needs.",
+        "features": [
+          "Layout design & advice",
+          "System upgrades (gas to electric)",
+          "Modern lighting",
+          "Tiles & quality finishes"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment",
+            "items": [
+              "Define your preferred design, scope and budget",
+              "Technical assessment of water, power and lighting connections",
+              "Measure the room and document its existing condition"
+            ]
+          },
+          {
+            "title": "2. Planning",
+            "items": [
+              "Select suppliers and support you in working with them",
+              "Guide you through the planning process",
+              "3D visualisation and design concept"
+            ]
+          },
+          {
+            "title": "3. Quotation",
+            "items": [
+              "Establish prices and negotiate with suppliers",
+              "Detailed project planning and timeline",
+              "Transparent cost breakdown"
+            ]
+          },
+          {
+            "title": "4. Trade coordination",
+            "items": [
+              "Bring in the trades needed for delivery",
+              "Define assignments and plan costs",
+              "Coordinate all partners involved"
+            ]
+          },
+          {
+            "title": "5. Delivery",
+            "items": [
+              "Schedule trades and carry out installation",
+              "Quality checks throughout the work",
+              "Professional inspection and acceptance"
+            ]
+          },
+          {
+            "title": "6. Completion",
+            "items": [
+              "Final invoice and cost reconciliation",
+              "Additional work, where required",
+              "Final project completion and handover"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bathroom",
+        "title": "Bathroom renovations",
+        "description": "Comfortable, functional bathroom renovations with modern materials, efficient water systems and quality design.",
+        "features": [
+          "Complete design & planning",
+          "Water systems & plumbing",
+          "Modern lighting & ventilation",
+          "Tiles & quality materials"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment & design preferences",
+            "items": [
+              "Assess the existing bathroom",
+              "Record design preferences and style ideas",
+              "Recommended features: concealed cistern, walk-in shower and rain shower head",
+              "Thermostatically controlled tap and modern large-format tiles",
+              "Suspended ceiling with recessed LED spotlights",
+              "Clarify the budget and offer initial recommendations"
+            ]
+          },
+          {
+            "title": "2. Project scoping & design proposals",
+            "items": [
+              "Define the project scope in detail",
+              "Room measurements and 3D visualisation",
+              "Two to three design options using different materials",
+              "Initial cost estimates for each option",
+              "Confirm the assignment after the design is selected"
+            ]
+          },
+          {
+            "title": "3. Contract award & trade involvement",
+            "items": [
+              "Select suitable plumbing and electrical contractors",
+              "Obtain detailed quotations",
+              "Professional price negotiations",
+              "Coordinate all trades involved",
+              "Project plan and scheduling"
+            ]
+          },
+          {
+            "title": "4. Project delivery",
+            "items": [
+              "Professional installation and delivery",
+              "Regular on-site quality inspections",
+              "Check material quality and workmanship",
+              "Professional inspection and acceptance of all work",
+              "Remedial work where required"
+            ]
+          },
+          {
+            "title": "5. Completion",
+            "items": [
+              "Final invoice and cost reconciliation",
+              "Document any additional work required",
+              "Final project completion and handover",
+              "Warranty documents and operating instructions"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heating",
+        "title": "Heating systems – design & installation",
+        "description": "Modern heating systems with transparent costs, reliable partner coordination and long-term efficiency.",
+        "features": [
+          "System design & advice",
+          "Professional installation",
+          "Heat meter integration",
+          "Apartment building coordination"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment",
+            "items": [
+              "Assess the current heating and hot water systems",
+              "Discuss your preferred system",
+              "Check technical feasibility",
+              "Define the preferred energy source: gas, electricity, heat pump, solar or others",
+              "Record budget expectations"
+            ]
+          },
+          {
+            "title": "2. Planning & system design",
+            "items": [
+              "Calculate heating demand",
+              "Recalculate requirements when upgrading technology, for example from gas to a heat pump",
+              "Propose two to three options with indicative costs",
+              "Select the most suitable system",
+              "Detailed cost estimate",
+              "Optional smart home control"
+            ]
+          },
+          {
+            "title": "3. Supplier selection & quotations",
+            "items": [
+              "Select suitable suppliers and specialists",
+              "Obtain quotations and negotiate prices",
+              "Award contracts and involve the trades",
+              "Detailed project planning and scheduling",
+              "Coordinate all partners involved"
+            ]
+          },
+          {
+            "title": "4. Project delivery",
+            "items": [
+              "Schedule trades and carry out installation",
+              "Regular on-site inspections and walkthroughs",
+              "Quality assurance throughout the work",
+              "Professional final inspection and commissioning"
+            ]
+          },
+          {
+            "title": "5. Completion",
+            "items": [
+              "Final invoice and cost reconciliation",
+              "Additional work, where required",
+              "Final project completion and handover",
+              "Documentation and warranty papers"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "windows-doors",
+        "title": "Windows & doors",
+        "description": "High-quality windows and doors with thermal and sound insulation. Direct access to the manufacturer for high quality at competitive prices.",
+        "features": [
+          "Energy efficiency assessment",
+          "Material selection: wood, metal or plastic",
+          "Professional installation",
+          "Sound insulation solutions"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment",
+            "items": [
+              "Assess existing windows and doors",
+              "Energy efficiency assessment: U-values and heat losses",
+              "Assess condition and wear",
+              "Record requirements and customer preferences",
+              "Material options: wood, metal, plastic or plastic-metal combinations",
+              "Benefit: direct manufacturer access offers high quality at competitive prices"
+            ]
+          },
+          {
+            "title": "2. Planning & design",
+            "items": [
+              "Select suitable window types and materials",
+              "Optimise thermal insulation with modern insulated glazing",
+              "Sound insulation solution where needed",
+              "3D visualisation and design proposals",
+              "Detailed project planning",
+              "Coordinate window installers and, where needed, masonry and electrical trades"
+            ]
+          },
+          {
+            "title": "3. Quotation & supplier selection",
+            "items": [
+              "Select the most suitable window system",
+              "Work directly with manufacturers for competitive prices",
+              "Professional price negotiations",
+              "Detailed quotation with all specifications",
+              "Clarify delivery dates"
+            ]
+          },
+          {
+            "title": "4. Project delivery",
+            "items": [
+              "Professional removal of old windows and doors",
+              "Professional installation of new windows and doors",
+              "High-quality sealing and thermal insulation",
+              "Regular on-site quality checks",
+              "Check all connections and seals",
+              "Final inspection and functional testing"
+            ]
+          },
+          {
+            "title": "5. Completion",
+            "items": [
+              "Final invoice and cost reconciliation",
+              "Warranty and guarantee documents",
+              "Operating instructions for windows and doors",
+              "Document any additional work required",
+              "Final project completion and handover"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "electrical",
+        "title": "Electrical planning and installation",
+        "description": "Modern electrical installations and planning to Swiss standards, with new distribution boards, residual-current devices and professional wiring.",
+        "features": [
+          "Electrical planning to standards",
+          "New distribution board & RCD",
+          "Professional wiring",
+          "Socket design & USB integration"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment",
+            "items": [
+              "Assess the existing electrical installation",
+              "Safety checks and documentation of defects",
+              "Walk through the property with the customer to identify needs",
+              "Record requirements such as sockets, USB connections and special appliances",
+              "Clarify budget expectations",
+              "Present initial recommendations"
+            ]
+          },
+          {
+            "title": "2. Planning & design",
+            "items": [
+              "Prepare detailed electrical plans",
+              "Modern standards in accordance with Swiss NIN regulations (VSEI)",
+              "Optimise cabling and cable routing",
+              "Socket design and placement, including USB and special-purpose sockets",
+              "Lighting plan and switch concept",
+              "Project planning and scheduling",
+              "Coordinate electricians and, where needed, kitchen fitters and masonry trades"
+            ]
+          },
+          {
+            "title": "3. Quotation & supplier selection",
+            "items": [
+              "Select high-quality materials and components",
+              "Involve qualified specialist contractors",
+              "Detailed quotation",
+              "Professional price negotiations",
+              "Coordinate delivery dates"
+            ]
+          },
+          {
+            "title": "4. Project delivery",
+            "items": [
+              "Preparatory work: channels, wall chases and fixings",
+              "Professional wiring according to the plan",
+              "Install a new distribution board with modern residual-current devices (RCDs)",
+              "Circuit breakers and overcurrent protection",
+              "Regular quality checks throughout the work",
+              "Testing in accordance with Swiss standards"
+            ]
+          },
+          {
+            "title": "5. Completion",
+            "items": [
+              "Electrical safety certificate and inspection records",
+              "Official acceptance by the responsible authorities",
+              "Final invoice and cost reconciliation",
+              "Document any additional work required",
+              "Documentation and warranty papers",
+              "Handover and customer instruction"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "smart-home",
+        "title": "Smart home integration",
+        "description": "Smart home solutions for everyday use – practical benefits with a clear return on investment.",
+        "features": [
+          "Smart home design & advice",
+          "Wi-Fi optimisation & networking",
+          "Smart lighting & automation",
+          "Voice control setup"
+        ],
+        "details": [
+          {
+            "title": "1. Identify applications",
+            "items": [
+              "Heating control: room thermostats with remote access and automation",
+              "Shading and climate: blind control for summer shading and additional cooling",
+              "Lighting control: intelligent lighting with automation and scenes",
+              "System integration: heating, solar PV, battery storage and smart meters",
+              "Energy optimisation: control energy-intensive appliances",
+              "Indoor climate: ventilation and air conditioning",
+              "Voice control: integrate connected household devices through Home Assistant, Alexa or Google Home"
+            ]
+          },
+          {
+            "title": "2. Project scope & customer requirements",
+            "items": [
+              "Carry out a detailed needs assessment",
+              "Record customer priorities and preferences",
+              "Set realistic expectations",
+              "Define usage scenarios"
+            ]
+          },
+          {
+            "title": "3. System selection & data privacy",
+            "items": [
+              "Select suitable smart home platforms",
+              "Evaluate data protection and cybersecurity",
+              "Check compatibility with existing systems",
+              "Communicate transparently about data processing",
+              "Compliance with Swiss data protection requirements"
+            ]
+          },
+          {
+            "title": "4. Quotation & implementation",
+            "items": [
+              "Detailed quotation covering all components",
+              "Professional installation by recognised specialists",
+              "Optimise cabling and network setup",
+              "Test and commission all systems",
+              "Train the customer to use the systems"
+            ]
+          },
+          {
+            "title": "5. Maintenance & support",
+            "items": [
+              "Offer support and maintenance agreements",
+              "Regular updates and security patches",
+              "Troubleshooting and technical support",
+              "Ongoing support for system extensions"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "energy",
+        "title": "Energy renovation & efficiency",
+        "description": "Intelligent energy advice and solutions that pay for themselves through savings and increase the value of your property.",
+        "features": [
+          "Energy assessment",
+          "Heating optimisation",
+          "Insulation improvements",
+          "ROI analysis & planning"
+        ],
+        "details": [
+          {
+            "title": "1. Initial assessment",
+            "items": [
+              "Assess the property’s energy use",
+              "Review heating, ventilation, indoor climate and insulation",
+              "Evaluate energy consumption and existing systems"
+            ]
+          },
+          {
+            "title": "2. Energy concept",
+            "items": [
+              "Define and prioritise areas for action",
+              "Possible measures:",
+              "Modern heating systems: from gas to electricity or heat pumps",
+              "External wall and roof insulation",
+              "Upgrade windows and doors",
+              "Solar PV systems with battery storage",
+              "Intelligent control through smart home systems",
+              "Optimise ventilation systems"
+            ]
+          },
+          {
+            "title": "3. Action plan & ROI analysis",
+            "items": [
+              "Detailed action plan with potential savings",
+              "Cost-benefit analysis for each measure",
+              "Prioritise measures by economic value",
+              "Identify funding programmes and subsidies",
+              "Calculate realistic payback periods"
+            ]
+          },
+          {
+            "title": "4. Implementation planning",
+            "items": [
+              "Phased implementation is possible",
+              "Coordinate energy consultants and contractors",
+              "Monitor and review results after implementation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "consulting",
+        "title": "Project management & consulting",
+        "description": "End-to-end project management from concept to completion, without the stress.",
+        "features": [
+          "Project planning & scoping",
+          "Trade & supplier coordination",
+          "Budget & schedule management",
+          "Swiss engineering compliance"
+        ],
+        "details": []
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "How much does an initial consultation cost?",
+        "answer": "The initial consultation is completely free and without obligation. We discuss your needs, answer questions and offer first recommendations – with no hidden costs."
+      },
+      {
+        "question": "How long does a typical project take?",
+        "answer": "This depends on the scope. Smaller renovations take 2–4 weeks, medium projects 6–10 weeks. We provide a realistic timeline during the initial consultation."
+      },
+      {
+        "question": "Do you also speak English?",
+        "answer": "Yes, we speak German and English fluently. Basel Home Fixer specialises in supporting expats and newcomers in Basel."
+      },
+      {
+        "question": "Is all work insured?",
+        "answer": "Yes, all our partners and specialists are fully insured. We work to Swiss standards (SIA) and ensure compliance with applicable requirements."
+      },
+      {
+        "question": "Can you also help with apartment buildings?",
+        "answer": "Yes, we have extensive experience with apartment buildings, coordination with property management teams and complex renovations across multiple units."
+      },
+      {
+        "question": "What warranty do you offer?",
+        "answer": "All work comes with a 2–5 year warranty. Our partners are reliable, and we stand for quality and customer service."
+      }
+    ],
+    "processSteps": [
+      {
+        "title": "Free consultation",
+        "description": "We discuss your needs and develop initial ideas, without obligation."
+      },
+      {
+        "title": "Planning & design",
+        "description": "A detailed concept, materials, timeline and transparent costs."
+      },
+      {
+        "title": "Coordination & delivery",
+        "description": "We coordinate all trades and monitor quality throughout the project."
+      },
+      {
+        "title": "Handover & support",
+        "description": "Final inspection, handover and long-term after-sales support."
+      }
+    ],
+    "lessButton": "Show less",
+    "adviceButton": "Discuss this service"
   },
   "realEstateForRent": {
     "title": "Contact information",
@@ -139,22 +730,38 @@
     }
   },
   "layout": {
-    "headerTitle": "basel-homefixer",
+    "headerTitle": "Basel Home Fixer",
     "sections": {
       "home": "Home",
-      "aboutUs": "About Us",
+      "aboutUs": "About us",
       "services": "Services",
       "realEstateForRent": "Property rental",
-      "contactUs": "Contact us"
+      "contactUs": "Contact",
+      "projects": "Projects",
+      "blog": "Blog"
     },
     "footer": {
       "title": "Contact",
-      "description": "I'm just a message away."
+      "description": "Pascal Jaquiéry · Divine Mon",
+      "companyDescription": "Renovations and expert advice in Basel. Your partner for heating, kitchens, flooring, bathrooms and smart homes.",
+      "location": "Basel, Switzerland",
+      "copyright": "© {{year}} Basel Home Fixer. All rights reserved.",
+      "qualification": "Project manager & certified electrician",
+      "experience": "16 years of experience in home renovations",
+      "specialties": "Specialties: heating systems, kitchens, flooring, bathrooms, smart homes",
+      "followUs": "Follow us",
+      "instagram": "Instagram: @basel-homefixer"
     },
     "socialLinks": {
       "github": "GitHub",
       "linkedin": "LinkedIn"
-    }
+    },
+    "navigation": "Navigation",
+    "language": "Choose language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content",
+    "newWindow": "opens in a new tab"
   },
   "featuredPost": {
     "linkText": "Learn more..."
@@ -254,5 +861,284 @@
       "blog.featuredPost2.topics": "Expat-focused advice, local market knowledge, practical guidance, reducing stress",
       "footer.phone": "0762059285"
     }
+  },
+  "home": {
+    "title": "Basel Home Fixer – Renovations and expert advice in Basel.",
+    "subtitle": "Your home in good hands. Transparent prices, smart solutions, reliable partnership.",
+    "projectsButton": "View projects",
+    "promiseTitle": "Why Basel Home Fixer?",
+    "logoAlt": "Basel Home Fixer logo",
+    "servicesTitle": "Our services",
+    "allServicesButton": "View all services",
+    "projectsTitle": "Our projects",
+    "projectsIntro": "Beyond standard solutions – real projects showing how smart planning and expertise can transform your home.",
+    "challengeLabel": "Challenge:",
+    "resultLabel": "Result:",
+    "complexity": "Complexity: {{count}} out of 5",
+    "durationLabel": "Duration:",
+    "ctaTitle": "Ready to transform your home?",
+    "ctaDescription": "A free, personalised initial consultation – no obligation, no hidden costs.",
+    "promises": [
+      {
+        "title": "Transparent pricing",
+        "description": "No surprises, clear breakdowns and honest communication from the start."
+      },
+      {
+        "title": "Expert solutions",
+        "description": "Smart solutions sized for your needs, avoiding oversized or generic approaches."
+      },
+      {
+        "title": "Trusted partners",
+        "description": "Reliable suppliers and specialists whom we personally know and recommend."
+      },
+      {
+        "title": "Seamless execution",
+        "description": "End-to-end coordination so you can relax without managing everything yourself."
+      },
+      {
+        "title": "Clear communication throughout",
+        "description": "Designed with newcomers to Basel in mind."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "From planning to completion – we bring your home ideas to life with craftsmanship and innovation.",
+    "introTitle": "About our projects",
+    "intro": "Here is a selection of our most successful renovation and property management projects. From modern kitchen renovations to intelligent smart home integrations, discover how we turn home ideas into reality. Each project tells a story of craftsmanship, planning and our commitment to quality.",
+    "selectionTitle": "Our projects",
+    "filterTitle": "Filter by category:",
+    "categories": {
+      "all": "All",
+      "kitchen": "Kitchens",
+      "electrical": "Electrical",
+      "windows": "Windows",
+      "balcony": "Balcony",
+      "heating": "Heating"
+    },
+    "resultCount_one": "{{count}} project shown",
+    "resultCount_other": "{{count}} projects shown",
+    "areaLabel": "Area",
+    "apartmentsLabel": "Apartments",
+    "thermostatsLabel": "Room thermostats",
+    "glazingLabel": "Triple glazed",
+    "doorCount_one": "{{count}} door",
+    "doorCount_other": "{{count}} doors",
+    "totalDurationLabel": "Total project duration",
+    "investmentLabel": "Investment",
+    "duration": {
+      "months": "{{range}} months",
+      "weeks": "{{range}} weeks"
+    },
+    "tagsLabel": "Tags",
+    "readProject": "View this project",
+    "allProjects": "View all projects",
+    "statsTitle": "Facts & achievements",
+    "completedLabel": "Projects completed",
+    "customersLabel": "Satisfied customers",
+    "experienceLabel": "Years of experience",
+    "ctaTitle": "Ready for your next project?",
+    "ctaDescription": "Contact us for a free, personalised consultation – no obligation, no hidden costs.",
+    "durationLabel": "Duration",
+    "loading": "Loading projects …",
+    "loadError": "Projects are currently unavailable. Please try again later.",
+    "empty": "There are currently no published projects.",
+    "retry": "Try again",
+    "anchorMissing": "The linked project is unavailable.",
+    "previous": "Previous",
+    "next": "Next",
+    "pageLabel": "Page {{page}} of {{pages}}",
+    "noImage": "No project image available"
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have a question about our services? We are just a message away.",
+    "infoTitle": "How to reach us",
+    "emailTitle": "Email",
+    "emailDescription": "Send us an email and we will reply within 24 hours.",
+    "phoneTitle": "Phone",
+    "phoneDescription": "Call us directly – we look forward to speaking with you.",
+    "locationTitle": "Location",
+    "locationDescription": "We are based in Basel and serve the surrounding region.",
+    "hours": "Availability: Monday to Friday, 8 am–6 pm",
+    "formTitle": "Contact form",
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone number (optional)",
+    "service": "Service of interest",
+    "noService": "No selection / general enquiry",
+    "message": "Your message",
+    "messageHint": "10 to 5000 characters",
+    "consent": "I agree that my details may be used to process my enquiry and contact me.",
+    "send": "Send message",
+    "sending": "Sending …",
+    "checking": "Checking sending availability …",
+    "unavailable": "Online sending is currently unavailable. Please contact us by email or phone.",
+    "retryAvailability": "Check again",
+    "accepted": "The mail server has accepted your message for sending. This does not confirm delivery to the inbox.",
+    "validation": {
+      "required": "Please complete this field.",
+      "length": "Please use the allowed length: name 2–100, message 10–5000 characters.",
+      "email": "Please enter a valid email address (maximum 254 characters).",
+      "phone": "Use only numbers, +, spaces, brackets, dots or hyphens (maximum 40 characters).",
+      "service": "Please select an offered service or no selection.",
+      "consent": "Please consent to being contacted.",
+      "server": "Please check your input."
+    },
+    "status": {
+      "invalid_request": "Please check your input. No message was sent.",
+      "send_failed": "Sending could not be confirmed. Please contact us by email or phone.",
+      "network_error": "The connection was interrupted or timed out. Sending status is uncertain. Please contact us directly before sending again.",
+      "rate_limited": "Too many requests in a short time. Please try later or contact us directly."
+    }
+  },
+  "admin": {
+    "heading": "Content administration",
+    "projects": "Projects",
+    "blog": "Blog posts",
+    "media": "Images",
+    "homepage": "Homepage teasers",
+    "website": "View website",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "loginHelp": "Sign in with your approved administrator account. Reloading the page requires a new sign-in.",
+    "sessionHelp": "Your sign-in is time-limited and only kept in this tab. Save your changes regularly.",
+    "expired": "Your session has expired. Sign in again. Open text changes are retained.",
+    "loggedOut": "You are signed out.",
+    "create": "Create draft",
+    "edit": "Open / Edit",
+    "status": "Status",
+    "draft": "Draft",
+    "published": "Published",
+    "legacy": "Legacy – not published",
+    "all": "All",
+    "empty": "No entries yet.",
+    "loading": "Loading …",
+    "loadError": "The data could not be loaded.",
+    "retry": "Try again",
+    "previous": "Previous",
+    "next": "Next",
+    "back": "Back to list",
+    "title": "Title",
+    "excerpt": "Summary",
+    "description": "Description / article text",
+    "coverAlt": "Cover image alternative text",
+    "slug": "URL name",
+    "slugHelp": "Lowercase letters, digits and hyphens. Changing this changes the article address.",
+    "categories": "Categories",
+    "location": "Location",
+    "challenge": "Initial situation",
+    "result": "Result",
+    "tags": "Tags",
+    "commaHelp": "Separate with commas; empty entries are removed when saving.",
+    "dates": "Project dates",
+    "datesHelp": "Months as YYYY-MM, separated by commas (e.g. 2026-04, 2026-10).",
+    "duration": "Total project duration (optional)",
+    "unit": "Time unit",
+    "unspecified": "Not specified",
+    "months": "Months",
+    "weeks": "Weeks",
+    "min": "From",
+    "max": "To",
+    "facts": "Figures (optional – leave blank if unknown)",
+    "investmentChf": "Investment in CHF",
+    "areaM2": "Area in m²",
+    "apartments": "Apartments",
+    "thermostats": "Thermostats",
+    "doors": "Doors",
+    "complexity": "Complexity (0–5)",
+    "cover": "Cover image",
+    "noCover": "No cover image selected.",
+    "removeCover": "Remove cover image assignment",
+    "noAlt": "Alternative text missing",
+    "upload": "Upload image",
+    "uploadAlt": "New image alternative text",
+    "uploadHelp": "JPEG or PNG, up to 15 MiB and 25 million pixels. Smartphone photos are rotated automatically. Export HEIC as JPEG first. Uploading does not publish the image.",
+    "useCover": "Use as cover",
+    "associate": "Assign as additional image",
+    "editAlt": "Edit image alternative text",
+    "saveAlt": "Save image alternative text",
+    "imageError": "This protected image could not be loaded.",
+    "save": "Save draft",
+    "saved": "Saved.",
+    "preview": "Protected preview",
+    "previewSaved": "This is the last saved version. This preview requires sign-in.",
+    "publish": "Publish",
+    "withdraw": "Withdraw publication",
+    "withdrawHelp": "Withdraw before editing. The content will be hidden publicly until you publish it again.",
+    "publishConfirm": "Make this saved content public now? Check text, images and approvals in both languages first.",
+    "withdrawConfirm": "Hide this content publicly? Shared images may remain visible through other published content.",
+    "confirm": "Yes, continue",
+    "cancel": "Cancel",
+    "close": "Close",
+    "leave": "Leave",
+    "unsaved": "Unsaved changes",
+    "discard": "Discard unsaved changes and continue?",
+    "missing": "Please complete before publication:",
+    "serverValidation": "The server validates everything again. Initial situation and result are needed for homepage teasers.",
+    "markdownHelp": "Markdown: ## Subheading, **bold**, - List item, [Link](https://…). No embedded HTML. Upload images first, assign as additional images and insert into the text below.",
+    "markdownPreview": "Text preview (unsaved)",
+    "insertImageHelp": "Insert an image into the selected language. Replace the placeholder with a meaningful image description.",
+    "insertImage": "Insert image into text",
+    "replaceAlt": "Add image description here",
+    "selectionHelp": "Select up to three projects and reorder with Up/Down. Drafts only appear on the homepage after publication.",
+    "up": "Up",
+    "down": "Down",
+    "remove": "Remove from selection",
+    "add": "Select",
+    "validationError": "Check required fields, categories, image assignments, numbers and dates. Your inputs are retained.",
+    "requestError": "The action failed. Your inputs are retained. Please try again.",
+    "errors": {
+      "network": "The connection failed. Your inputs are retained.",
+      "invalid_credentials": "Sign-in failed. Check your email and password.",
+      "forbidden": "This account does not have administrator permission.",
+      "rate_limited": "Too many sign-in attempts. Please wait before trying again.",
+      "authentication_unavailable": "Sign-in is not available yet. Please contact the operator.",
+      "version_conflict": "This version has changed in the meantime. Your inputs are retained. Copy your changes and reopen the entry before merging them deliberately.",
+      "slug_conflict": "This URL name is already in use. Please choose another.",
+      "withdraw_before_editing": "The content is published. Withdraw it before editing.",
+      "upload_busy": "Image processing is busy. Please try again shortly.",
+      "upload_too_large": "The image is too large. Please reduce its size.",
+      "unavailable": "The service is temporarily unavailable.",
+      "not_found": "The entry no longer exists or is not accessible.",
+      "image_too_large": "The image is too large. Please reduce its size.",
+      "image_too_large_or_empty": "The image is too large. Please reduce its size.",
+      "invalid_image": "This image is invalid or unsupported. Choose a JPEG or PNG.",
+      "media_storage_unavailable": "Image storage is temporarily unavailable. Your inputs are retained."
+    },
+    "validationField": "Check “{{field}}” for missing or invalid information. Your inputs are retained.",
+    "chooseFile": "Choose image file"
+  },
+  "publicBlog": {
+    "title": "Blog – Tips & insights",
+    "subtitle": "Insights into renovation projects, building services and smart living.",
+    "aboutTitle": "About our blog",
+    "about": "We share insights from our projects and topics around renovations and modern building services. For your own project, we are happy to provide individual advice.",
+    "articles": "Latest articles",
+    "filter": "Filter articles by category",
+    "all": "All",
+    "loading": "Loading articles …",
+    "error": "The articles could not be loaded. Please try again.",
+    "retry": "Try again",
+    "reset": "Show all articles",
+    "empty": "There are no published articles yet. Please check back later.",
+    "emptyCategory": "There are no published articles in this category yet.",
+    "emptyPage": "There are no articles on this page.",
+    "read": "Read article",
+    "readNamed": "Read article: {{title}}",
+    "noImage": "Image currently unavailable",
+    "pagination": "Blog pages",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{page}} of {{pages}}",
+    "publisherTitle": "Published by",
+    "notice": "Articles provide general information. They do not replace an assessment and advice for your specific project.",
+    "ctaTitle": "Questions about your project?",
+    "cta": "Let’s discuss your renovation plans in person.",
+    "back": "Back to blog",
+    "notFound": "Article not found",
+    "notFoundText": "This article is not available. The overview contains the published articles."
   }
 }

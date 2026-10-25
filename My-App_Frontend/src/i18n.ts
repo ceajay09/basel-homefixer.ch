@@ -8,9 +8,11 @@ import HttpBackend from 'i18next-http-backend';
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'en',
+    supportedLngs: ['de', 'en'],
+    load: 'languageOnly',
+    detection: { order: ['localStorage', 'navigator', 'htmlTag'], caches: ['localStorage'] },
     fallbackLng: 'en',
-    debug: true,
+    debug: import.meta.env.DEV,
     backend: {
       loadPath: '/locales/{{lng}}/{{lng}}.json'
     },
